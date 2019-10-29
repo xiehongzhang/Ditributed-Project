@@ -1,0 +1,27 @@
+{
+  "hints": [],
+  "groups": [
+    {
+      "sourceType": "com.imooc.config.ResourceProp",
+      "name": "imooc.config",
+      "type": "com.imooc.config.ResourceProp"
+    }
+  ],
+  "properties": [
+    {
+      "sourceType": "com.imooc.config.ResourceProp",
+      "name": "imooc.config.download-namespace",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "com.imooc.config.ResourceProp",
+      "name": "imooc.config.upload-namespace",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "com.imooc.config.ResourceProp",
+      "name": "imooc.config.zookeeper-server",
+      "type": "java.lang.String"
+    }
+  ]
+}

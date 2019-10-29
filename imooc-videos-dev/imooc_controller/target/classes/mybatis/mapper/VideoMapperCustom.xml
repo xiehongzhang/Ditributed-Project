@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.imooc.dao.VideoMapperCustom" >
+  <resultMap id="BaseResultMap" type="com.imooc.pojo.vo.VideoVO" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="user_id" property="userId" jdbcType="VARCHAR" />
+    <result column="audio_id" property="audioId" jdbcType="VARCHAR" />
+    <result column="video_desc" property="videoDesc" jdbcType="VARCHAR" />
+    <result column="video_seconds" property="videoSeconds" jdbcType="REAL" />
+    <result column="video_width" property="videoWidth" jdbcType="INTEGER" />
+    <result column="video_height" property="videoHeight" jdbcType="INTEGER" />
+    <result column="video_path" property="videoPath" jdbcType="VARCHAR" />
+    <result column="cover_path" property="coverPath" jdbcType="VARCHAR" />
+    <result column="like_counts" property="likeCounts" jdbcType="BIGINT" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="face_image" property="faceImage" jdbcType="VARCHAR" />
+    <result column="nickname" property="nickname" jdbcType="VARCHAR" />
+  </resultMap>
+  <select id="queryAllVideo" resultMap="BaseResultMap" parameterType="String">
+  	select v.*, u.face_image as face_image, u.nickname as nickname 
+  	from video v
+  	left join  users u on v.user_id = u.id
+  	where 
+  	    1=1 
+  	    <if test="videoDesc != null and videoDesc != ' '">
+  	    	and videoDesc 
+  	    	like "%${videoDesc}%"
+  	    </if>
+  	    <if test="userId != null and userId != ' '">
+  	    	and userId = #{userId}
+  	    </if>
+  	    and status=1
+  	order by v.create_time desc 
+  </select>
+  <!--视频的点赞数加一 -->
+  <update id="addLikeCount" parameterType="String">
+  	update video 
+  	set like_counts=like_counts+1 
+  	where id=#{videoId}
+  </update>
+  <!--视频的点赞数减一 -->
+  <update id="reduceLikeCount" parameterType="String">
+  	update video 
+  	set like_counts=like_counts-1 
+  	where id=#{videoId}
+  </update>
+  <!-- 查询用户收藏过的视频 -->
+  <select id="queryLikeVideoByUserId" parameterType="String" resultMap="BaseResultMap">
+  	select v.*, u.face_image as face_image, u.nickname as nickname
+  	from video v
+  	left join users u
+  	on v.user_id = u.id
+  	where v.id
+  	in (select video_id as video_id from users_like_videos ulv where ulv.user_id=#{userId})
+  	and status=1
+  	order by create_time desc
+  </select>
+  
+</mapper>
