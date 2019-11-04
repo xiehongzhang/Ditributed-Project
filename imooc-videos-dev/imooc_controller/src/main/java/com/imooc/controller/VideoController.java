@@ -25,7 +25,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -207,7 +206,7 @@ public class VideoController extends BasicController{
 	}
 	
 	/**
-	 * @name showAllVideo
+	 * @name showAll
 	 * @Description 查询所有视频，当isSaveRecord为1：保存查询的的内容导数据库中；为0则不保存
 	 * @param video
 	 * @param isSaveRecord
@@ -220,8 +219,8 @@ public class VideoController extends BasicController{
 		@ApiImplicitParam(value="是否保存记录", name="isSaveRecord", paramType="query", dataType="String", required=true),
 		@ApiImplicitParam(value="当前页页数", name="pageNum", paramType="query", dataType="String", required=true)
 	})
-	@PostMapping("/showAllVideo")
-	public JsonResult showAllVideo(@RequestParam(name="video") Video video, Integer isSaveRecord, Integer pageNum, Integer pageSize){
+	@PostMapping("/showAll")
+	public JsonResult showAll(@RequestBody Video video, Integer isSaveRecord, Integer pageNum, Integer pageSize){
 		if (pageNum == null) {
 			pageNum=1;
 		}

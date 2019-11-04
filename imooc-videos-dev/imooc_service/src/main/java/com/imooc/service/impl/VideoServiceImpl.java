@@ -101,11 +101,10 @@ public class VideoServiceImpl implements VideoService{
 		PageInfo<VideoVO> pageInfo =new PageInfo<>(listVideoVO);
 		//实例化一个PageResult对象
 		PageResult pageResult=new PageResult();
-		pageResult.setList(listVideoVO);
-		pageResult.setPageNum(pageNum);
-		pageResult.setPageSize(pageInfo.getPageSize());
-		pageResult.setPages(pageInfo.getPages());
-		pageResult.setSizes(pageInfo.getSize());
+		pageResult.setRows(listVideoVO);
+		pageResult.setPage(pageNum);
+		pageResult.setRecords(pageInfo.getPages());
+		pageResult.setTotal(pageInfo.getSize());
 		return pageResult;
 	}
 
@@ -173,11 +172,10 @@ public class VideoServiceImpl implements VideoService{
 		List<CommentsVO> commentslist=commentsCustomMapper.queryAllComments(videoId);
 		PageInfo<CommentsVO> pageInfo=new PageInfo<CommentsVO>(commentslist);
 		PageResult pageResult=new PageResult();
-		pageResult.setPageNum(pageNum);
-		pageResult.setPageSize(pageSize);
-		pageResult.setPages(pageInfo.getPages());
-		pageResult.setSizes((int)pageInfo.getTotal());
-		pageResult.setList(commentslist);
+		pageResult.setPage(pageNum);
+		pageResult.setRecords(pageInfo.getPages());
+		pageResult.setTotal((int)pageInfo.getTotal());
+		pageResult.setRows(commentslist);
 		return pageResult;
 	}
 

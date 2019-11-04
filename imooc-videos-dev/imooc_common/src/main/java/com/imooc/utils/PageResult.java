@@ -19,46 +19,47 @@ import java.util.List;
  */
 public class PageResult {
 	//当前页页数
-	private int pageNum;
-	//当前页显示的行数
-	private int pageSize;
+	private int page;
 	//总的页数
-	private int pages;
+	private int total;
 	//总的记录数
-	private int sizes;
+	private long records;
 	//每条记录要显示的内容，即查询的每个对象
-	private List<?> list;
+	private List<?> rows;
 	
 	public PageResult() {
 	}
-	public int getPageNum() {
-		return pageNum;
+
+	public int getPage() {
+		return page;
 	}
-	public void setPageNum(int pageNum) {
-		this.pageNum = pageNum;
+
+	public void setPage(int page) {
+		this.page = page;
 	}
-	public int getPageSize() {
-		return pageSize;
+
+	public int getTotal() {
+		return total;
 	}
-	public void setPageSize(int pageSize) {
-		this.pageSize = pageSize;
+
+	public void setTotal(int total) {
+		this.total = total;
 	}
-	public int getPages() {
-		return pages;
+
+	public long getRecords() {
+		return records;
 	}
-	public void setPages(int pages) {
-		this.pages = pages;
+
+	public void setRecords(long records) {
+		this.records = records;
 	}
-	public int getSizes() {
-		return sizes;
+
+	public List<?> getRows() {
+		return rows;
 	}
-	public void setSizes(int sizes) {
-		this.sizes = sizes;
+
+	public void setRows(List<?> rows) {
+		this.rows = rows;
 	}
-	public List<?> getList() {
-		return list;
-	}
-	public void setList(List<?> list) {
-		this.list = list;
-	}
+	
 }
