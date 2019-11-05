@@ -8,7 +8,7 @@ import org.springframework.context.annotation.ComponentScan;
 
 /**
  * @author xhz
- * @description 作为工程的主启动类
+ * @description 作为工程的启动类
  */
 @SpringBootApplication
 // @EnableAutoConfiguration+@ComponentScan+@Configuration可替代@SpringBootApplication
