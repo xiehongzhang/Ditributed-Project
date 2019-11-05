@@ -1,0 +1,64 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>com.xhz</groupId>
+    <artifactId>imooc_video_admin</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+  </parent>
+  <artifactId>imooc_video_admin_mapper</artifactId>
+  <name>数据库方位层</name>
+  <description>数据库访问接口</description>
+  <dependencies>
+	<dependency>
+		<groupId>com.xhz</groupId>
+		<artifactId>imooc_video_admin_pojo</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+	</dependency>
+	
+  	<!-- Mybatis -->
+	<dependency>
+		<groupId>org.mybatis</groupId>
+		<artifactId>mybatis</artifactId>
+	</dependency>
+	<dependency>
+		<groupId>org.mybatis</groupId>
+		<artifactId>mybatis-spring</artifactId>
+	</dependency>
+	<dependency>
+		<groupId>com.github.miemiedev</groupId>
+		<artifactId>mybatis-paginator</artifactId>
+	</dependency>
+	<dependency>
+		<groupId>com.github.pagehelper</groupId>
+		<artifactId>pagehelper</artifactId>
+	</dependency>
+	
+	<!-- MySql -->
+	<dependency>
+		<groupId>mysql</groupId>
+		<artifactId>mysql-connector-java</artifactId>
+	</dependency>
+
+	<!-- 连接池 阿里巴巴数据源 全世界最牛逼的data source 没有之一 -->
+	<dependency>
+		<groupId>com.alibaba</groupId>
+		<artifactId>druid</artifactId>
+	</dependency>
+
+  </dependencies>
+  
+  <!-- 配置mapper的xml打包后的存放位置 -->
+  <build>
+  	<!-- 配置将 src/min/java下的文件打包到resources中-->
+  	<resources>
+  		<resource>
+  			<directory>src/main/java</directory>
+  			<includes>
+  				<include>**/*.propertis</include>
+  				<include>**/*.xml</include>
+  			</includes>
+  			<filtering>false</filtering>
+  		</resource>
+  	</resources>
+  </build>
+</project>

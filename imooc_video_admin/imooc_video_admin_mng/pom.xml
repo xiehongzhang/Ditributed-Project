@@ -1,0 +1,115 @@
+<?xml version="1.0"?>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>com.xhz</groupId>
+    <artifactId>imooc_video_admin</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+  </parent>
+  <artifactId>imooc_video_admin_mng</artifactId>
+  <packaging>war</packaging>
+  <name>imooc_video_admin_mng Maven Webapp</name>
+  <url>http://maven.apache.org</url>
+  <dependencies>
+  	<dependency>
+  		<groupId>com.xhz</groupId>
+  		<artifactId>imooc_video_admin_service</artifactId>
+  		<version>0.0.1-SNAPSHOT</version>
+  	</dependency>
+  	<!-- JSP相关 -->
+	<dependency>
+		<groupId>jstl</groupId>
+		<artifactId>jstl</artifactId>
+	</dependency>
+	<dependency>
+		<groupId>javax.servlet</groupId>
+		<artifactId>javax.servlet-api</artifactId>
+		<scope>provided</scope>
+	</dependency>
+	<dependency>
+		<groupId>javax.servlet</groupId>
+		<artifactId>jsp-api</artifactId>
+		<scope>provided</scope>
+	</dependency>
+	
+	<!-- 文件上传组件 -->
+	<dependency>
+		<groupId>commons-fileupload</groupId>
+		<artifactId>commons-fileupload</artifactId>
+	</dependency>
+	
+	<!-- Redis客户端 -->
+	<dependency>
+		<groupId>redis.clients</groupId>
+		<artifactId>jedis</artifactId>
+	</dependency>
+	
+	<!-- 用于jedis-spring-data redisTemplate -->
+	<dependency>
+		<groupId>org.apache.commons</groupId>
+		<artifactId>commons-pool2</artifactId>
+	</dependency>
+	<dependency>
+		<groupId>org.springframework.data</groupId>
+		<artifactId>spring-data-redis</artifactId>
+	</dependency>
+	
+	<!-- junit4 -->
+	<dependency>
+		<groupId>org.springframework</groupId>
+		<artifactId>spring-test</artifactId>
+	</dependency>
+	<dependency>
+		<groupId>junit</groupId>
+		<artifactId>junit</artifactId>
+	</dependency>
+  </dependencies>
+  <build>
+  	<plugins>
+        <!-- 配置apache的Tomcat7插件 -->
+  		<plugin>
+  			<groupId>org.apache.tomcat.maven</groupId>
+  			<artifactId>tomcat7-maven-plugin</artifactId>
+  			<configuration>
+  				<port>8080</port>
+  				<server>tomcat7</server>
+  				<path>/</path>
+  				<useBodyEncodingForURI>true</useBodyEncodingForURI>
+  				<uriEncoding>UTF-8</uriEncoding>
+  			</configuration>
+  		</plugin>
+  		<plugin>
+			<artifactId>maven-eclipse-plugin</artifactId>
+			<configuration>
+				<additionalProjectnatures>
+					<projectnature>org.springframework.ide.eclipse.core.springnature</projectnature>
+				</additionalProjectnatures>
+				<additionalBuildcommands>
+					<buildcommand>org.springframework.ide.eclipse.core.springbuilder</buildcommand>
+				</additionalBuildcommands>
+				<downloadSources>true</downloadSources>
+				<downloadJavadocs>true</downloadJavadocs>
+			</configuration>
+		</plugin>
+		<!-- maven插件，在进行maven install的时候遇到test代码，则跳过 ；注意（maven install的时候会执行测试代码，加上则不会）-->
+		<plugin>  
+	        <groupId>org.apache.maven.plugins</groupId>  
+	        <artifactId>maven-surefire-plugin</artifactId>  
+	        <configuration>  
+	          <skipTests>true</skipTests>  
+	        </configuration>  
+        </plugin>  
+		<!-- 在war包打包的时候，将war打包成jar包 -->
+		<!-- <plugin>
+			<groupId>org.apache.maven.plugins</groupId>
+			<artifactId>maven-war-plugin</artifactId>
+			<configuration>
+				注意增加这两行，在打包时相关的类会被独立打成jar
+				<attachClasses>true</attachClasses>
+				<classesClassifier>api</classesClassifier>
+			</configuration>
+		</plugin> -->
+  	</plugins>
+  </build>
+</project>
