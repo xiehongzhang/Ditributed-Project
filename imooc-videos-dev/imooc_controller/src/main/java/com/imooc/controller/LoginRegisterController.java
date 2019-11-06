@@ -39,7 +39,6 @@ import io.swagger.annotations.ApiOperation;
  */
 @Api(value = "注册，登录和注销接口", tags = { "注册，登录和注销等操作接口" })
 @RestController
-@RequestMapping("/loginRegister")
 public class LoginRegisterController extends BasicController{
 
 	@Autowired
@@ -55,8 +54,8 @@ public class LoginRegisterController extends BasicController{
 	@ApiImplicitParams({
 			@ApiImplicitParam(value = "用户名", name = "username", paramType = "query", dataType = "String", required = true),
 			@ApiImplicitParam(value = "密码", name = "password", paramType = "query", dataType = "String", required = true) })
-	@PostMapping("/register")
-	public JsonResult register(@RequestBody Users users) {
+	@PostMapping("/regist")
+	public JsonResult regist(@RequestBody Users users) {
 		// 判断用户名和密码是否为空
 		if (StringUtils.isBlank(users.getUsername()) || StringUtils.isBlank(users.getPassword())) {
 			return JsonResult.errorMsg("请输入用户和密码");
@@ -81,7 +80,7 @@ public class LoginRegisterController extends BasicController{
 			e.printStackTrace();
 		}
 		users.setPassword("");
-		UsersVO usersVO=setUsersRedisSession(users,-1);
+		UsersVO usersVO=setUsersRedisSession(users);
 		// 返回操作结果
 		return JsonResult.ok(usersVO);
 	}
@@ -112,7 +111,7 @@ public class LoginRegisterController extends BasicController{
 		// 3：判断用户名和密码是否正确
 		if(null != usersResult){
 			usersResult.setPassword("");
-			UsersVO usersVO=setUsersRedisSession(usersResult,30*60*1000);
+			UsersVO usersVO=setUsersRedisSession(usersResult);
 			return JsonResult.ok(usersVO);
 		}else {
 			return JsonResult.errorMsg("用户名和密码不正确，请重新输入");
@@ -148,16 +147,12 @@ public class LoginRegisterController extends BasicController{
 	 * @param users
 	 * @return UserVO
 	 */
-	public UsersVO setUsersRedisSession(Users users, long timeout){
-		String userSession=UUID.randomUUID().toString();
-		if (timeout == -1) {
-			redisUtils.set(REDIS_USER_SESSION+":"+users.getId(), userSession);
-		}else{
-			redisUtils.set(REDIS_USER_SESSION+":"+users.getId(), userSession, timeout);
-		}
+	public UsersVO setUsersRedisSession(Users users){
+		String userToken=UUID.randomUUID().toString();
+		redisUtils.set(REDIS_USER_SESSION+":"+users.getId(), userToken);
 		UsersVO usersVO=new UsersVO();
 		BeanUtils.copyProperties(users, usersVO);
-		usersVO.setUserSession(userSession);
+		usersVO.setUserToken(userToken);
 		return usersVO;
 	}
 	}

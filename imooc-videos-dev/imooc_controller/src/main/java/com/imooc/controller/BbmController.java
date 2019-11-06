@@ -43,8 +43,8 @@ public class BbmController {
 	 * @return 
 	 */
 	@ApiOperation(value="查询bgm列表",notes="查询BGM列表操作")
-	@PostMapping("/queryBgmList")
-	public JsonResult queryBgmList(){
+	@PostMapping("/list")
+	public JsonResult list(){
 		List<Bgm> bgm=bgmService.queryBgmList();
 		return JsonResult.ok(bgm);
 	}

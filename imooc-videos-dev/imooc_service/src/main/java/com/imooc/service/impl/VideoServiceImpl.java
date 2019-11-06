@@ -103,8 +103,8 @@ public class VideoServiceImpl implements VideoService{
 		PageResult pageResult=new PageResult();
 		pageResult.setRows(listVideoVO);
 		pageResult.setPage(pageNum);
-		pageResult.setRecords(pageInfo.getPages());
-		pageResult.setTotal(pageInfo.getSize());
+		pageResult.setRecords(pageInfo.getTotal());
+		pageResult.setTotal(pageInfo.getPages());
 		return pageResult;
 	}
 

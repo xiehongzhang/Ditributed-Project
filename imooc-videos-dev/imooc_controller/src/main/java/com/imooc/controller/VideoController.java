@@ -215,9 +215,9 @@ public class VideoController extends BasicController{
 	 */
 	@ApiOperation(value="查询所有视频", notes="查询所有视频")
 	@ApiImplicitParams({
-		@ApiImplicitParam(value="查询的内容", name="video", paramType="query", dataType="String", required=true),
-		@ApiImplicitParam(value="是否保存记录", name="isSaveRecord", paramType="query", dataType="String", required=true),
-		@ApiImplicitParam(value="当前页页数", name="pageNum", paramType="query", dataType="String", required=true)
+		@ApiImplicitParam(value="是否保存记录", name="isSaveRecord", paramType="query", dataType="int", required=true),
+		@ApiImplicitParam(value="当前页页数", name="pageNum", paramType="query", dataType="int", required=false),
+		@ApiImplicitParam(value="每页显示数", name="pageSize", paramType="query", dataType="int", required=false)
 	})
 	@PostMapping("/showAll")
 	public JsonResult showAll(@RequestBody Video video, Integer isSaveRecord, Integer pageNum, Integer pageSize){
@@ -227,7 +227,7 @@ public class VideoController extends BasicController{
 		if (pageSize == null) {
 			pageSize = PAGE_SIZE;
 		}
-		PageResult pageResult=videoService.queryAllVideo(video, isSaveRecord, pageNum, pageNum);
+		PageResult pageResult=videoService.queryAllVideo(video, isSaveRecord, pageNum, pageSize);
 		return JsonResult.ok(pageResult);
 	}
 	
@@ -257,8 +257,8 @@ public class VideoController extends BasicController{
 		@ApiImplicitParam(value="视频id", name="videoId", paramType="query", dataType="String", required=true ),
 		@ApiImplicitParam(value="视频发布者id", name="videoOwnerId", paramType="query", dataType="String", required=true ),
 	})
-	@PostMapping("/likeVideo")
-	public JsonResult likeVideo(String userId, String videoId, String videoOwnerId){
+	@PostMapping("/userLike")
+	public JsonResult userLike(String userId, String videoId, String videoOwnerId){
 		videoService.saveLikeVideo(userId, videoId, videoOwnerId);
 		return JsonResult.ok();
 	}
@@ -277,14 +277,14 @@ public class VideoController extends BasicController{
 		@ApiImplicitParam(value="视频id", name="videoId", paramType="query", dataType="String", required=true ),
 		@ApiImplicitParam(value="视频发布者id", name="videoOwnerId", paramType="query", dataType="String", required=true ),
 	})
-	@PostMapping("/unlikeVideo")
-	public JsonResult unlikeVideo(String userId, String videoId, String videoOwnerId){
+	@PostMapping("/userUnLike")
+	public JsonResult userUnLike(String userId, String videoId, String videoOwnerId){
 		videoService.saveUnlikeVideo(userId, videoId, videoOwnerId);
 		return JsonResult.ok();
 	}
 	
 	/**
-	 * @name showLikeVideo
+	 * @name showMyLike
 	 * @Description 按条件查询用户收藏的视频
 	 * @param userId
 	 * @param pageNum
@@ -297,8 +297,8 @@ public class VideoController extends BasicController{
 		@ApiImplicitParam(value="当前页页数", name="pageNum", paramType="query", dataType="String", required=false),
 		@ApiImplicitParam(value="每页显示的记录数", name="pageSize", paramType="query", dataType="String", required=false)
 	})
-	@PostMapping("/showLikeVideo")
-	public JsonResult showLikeVideo(String userId, Integer pageNum, Integer pageSize){
+	@PostMapping("/showMyLike")
+	public JsonResult showMyLike(String userId, Integer pageNum, Integer pageSize){
 		if (pageNum == null) {
 			pageNum=1;
 		}
@@ -310,21 +310,21 @@ public class VideoController extends BasicController{
 	}
 	
 	/**
-	 * @name showFollowVideo
+	 * @name showMyFollow
 	 * @Description 按条件查询用户关注过的所有用户
 	 * @param userId
 	 * @param pageNum
 	 * @param pageSize
 	 * @return 
 	 */
-	@ApiOperation(value="查询关注的用户", notes="查询关注的所有用户")
+	@ApiOperation(value="查询关注的用户发的视频", notes="查询关注的所有用户发的视频")
 	@ApiImplicitParams({
 		@ApiImplicitParam(value="用户id", name="userId", paramType="query", dataType="String", required=true),
 		@ApiImplicitParam(value="当前页页数", name="pageNum", paramType="query", dataType="String", required=false),
 		@ApiImplicitParam(value="每页显示的记录数", name="pageSize", paramType="query", dataType="String", required=false)
 	})
-	@PostMapping("/showFollowUser")
-	public JsonResult showFollowUser(String userId, Integer pageNum, Integer pageSize){
+	@PostMapping("/showMyFollow")
+	public JsonResult showMyFollow(String userId, Integer pageNum, Integer pageSize){
 		if (pageNum == null) {
 			pageNum=1;
 		}
@@ -355,8 +355,8 @@ public class VideoController extends BasicController{
 	 * @return List<CommentsVO>
 	 */
 	@ApiOperation(value="评论视频", notes="用户进行评论视频")
-	@PostMapping("/commentVideo")
-	public JsonResult commentVideo(@RequestBody Comments comments){
+	@PostMapping("/saveComment")
+	public JsonResult saveComment(@RequestBody Comments comments){
 		videoService.saveComments(comments);
 		return JsonResult.ok();
 	}
@@ -375,8 +375,8 @@ public class VideoController extends BasicController{
 		@ApiImplicitParam(value="当前页码", name="pageNum", paramType="query", dataType="String", required=false),
 		@ApiImplicitParam(value="每页显示的记录数", name="pageSize", paramType="query", dataType="String", required=false)
 	})
-	@PostMapping("/showAllComments")
-	public JsonResult showAllComments(String videoId, Integer pageNum, Integer pageSize){
+	@PostMapping("/getVideoComments")
+	public JsonResult getVideoComments(String videoId, Integer pageNum, Integer pageSize){
 		if(StringUtils.isBlank(videoId)){
 			return JsonResult.errorMsg("视频id为空");
 		}

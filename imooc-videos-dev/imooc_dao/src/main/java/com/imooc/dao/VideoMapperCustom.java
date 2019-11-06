@@ -13,7 +13,7 @@ public interface VideoMapperCustom {
     /**
      * @Description 查询所有的视频和有关用户的信息
      */
-    List<VideoVO> queryAllVideo(@Param(value = "videoDesc") String videoDesc, @Param("userId") String userId);
+    List<VideoVO> queryAllVideo(@Param(value="videoDesc") String videoDesc, @Param("userId") String userId);
     
     /**
      * @Description 视频的点赞数加一

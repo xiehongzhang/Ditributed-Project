@@ -15,18 +15,19 @@ package com.imooc.pojo.vo;
  * @description 
  */
 public class UsersVideoVO {
-	private UsersVO usersVO;//用户显示层实体类
-	private Boolean isLike;//用户和视频的点赞关系
-	public UsersVO getUsersVO() {
-		return usersVO;
+	private UsersVO publisher;//用户显示层实体类
+	private boolean userLikeVideo;//用户和视频的点赞关系
+	
+	public UsersVO getPublisher() {
+		return publisher;
 	}
-	public void setUsersVO(UsersVO usersVO) {
-		this.usersVO = usersVO;
+	public void setPublisher(UsersVO publisher) {
+		this.publisher = publisher;
 	}
-	public Boolean getIsLike() {
-		return isLike;
+	public Boolean getUserLikeVideo() {
+		return userLikeVideo;
 	}
-	public void setIsLike(Boolean isLike) {
-		this.isLike = isLike;
+	public void setUserLikeVideo(Boolean userLikeVideo) {
+		this.userLikeVideo = userLikeVideo;
 	}
 }

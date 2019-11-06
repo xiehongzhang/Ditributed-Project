@@ -22,7 +22,7 @@ import io.swagger.annotations.ApiModelProperty;
 @ApiModel(value="用户数据层实体类",description="用于数据层显示")
 public class UsersVO {
 	@ApiModelProperty(hidden=true)
-	private String userSession;//用户session
+	private String userToken;//用户userToken
 	
 	@ApiModelProperty(hidden=true)
     private String id;//users表id
@@ -100,11 +100,12 @@ public class UsersVO {
 	public void setReceiveLikeCounts(Integer receiveLikeCounts) {
 		this.receiveLikeCounts = receiveLikeCounts;
 	}
-	public String getUserSession() {
-		return userSession;
+	
+	public String getUserToken() {
+		return userToken;
 	}
-	public void setUserSession(String userSession) {
-		this.userSession = userSession;
+	public void setUserToken(String userToken) {
+		this.userToken = userToken;
 	}
 	public Boolean getIsFollow() {
 		return isFollow;

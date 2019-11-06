@@ -52,7 +52,7 @@ public class UserController extends BasicController{
 	private UsersService usersService;
 	
 	/**
-	 * @name queryUserInfo
+	 * @name query
 	 * @Description 通过前端传来的userId和followedUserId进行查询,如果followedUserId有值；则表示查询视频发布者的信息，否则查询用户本身信息；
 	 * @param userId
 	 * @return 
@@ -62,8 +62,8 @@ public class UserController extends BasicController{
 		@ApiImplicitParam(value="用户id", name="userId", paramType="query", dataType="String", required=true),
 		@ApiImplicitParam(value="关注者", name="followerId", paramType="query", dataType="String", required=false)
 	})
-	@PostMapping("/queryUserInfo")
-	public JsonResult queryUserInfo(String userId, String followerId){
+	@PostMapping("/query")
+	public JsonResult query(String userId, String followerId){
 		if (StringUtils.isBlank(userId)) {
 			return JsonResult.errorMsg("用户id不能为空");
 		}
@@ -79,7 +79,7 @@ public class UserController extends BasicController{
 	}
 
 	/**
-	 * @name uploadFaceImage 
+	 * @name uploadFace 
 	 * @Description 用户进行头像上传操作
 	 * @param 用户id
 	 * @param file
@@ -88,8 +88,8 @@ public class UserController extends BasicController{
 	 */
 	@ApiOperation(value="头像上传", notes="用户进行头像上传操作")
 	@ApiImplicitParam(value="用户id", name="userId", paramType="query", dataType="String", required=true)
-	@PostMapping(value="/uploadFaceImage" , headers="content-type=multipart/form-data")
-	public JsonResult uploadFaceImage(String userId, @RequestParam("file") MultipartFile[] file){
+	@PostMapping(value="/uploadFace" , headers="content-type=multipart/form-data")
+	public JsonResult uploadFace(String userId, @RequestParam("file") MultipartFile[] file){
 		//判断用户id是否为空
 		if (StringUtils.isBlank(userId)) {
 			return JsonResult.errorMsg("用户为空!");
@@ -161,17 +161,16 @@ public class UserController extends BasicController{
 		//将用户记录查询出来
 		Users user1=usersService.selectByPrimaryKey(users.getId());
 		//查询用户对应的redis session
-		String userSession=redisUtils.get("redis_user_session"+":"+user1.getId());
-		System.out.println(userSession);
+		String userToken=redisUtils.get("redis_user_session"+":"+user1.getId());
 		UsersVO usersVO=new UsersVO();
 		BeanUtils.copyProperties(users, usersVO);
-		usersVO.setUserSession(userSession);
+		usersVO.setUserToken(userToken);
 		
 		return JsonResult.ok(usersVO);
 	}
 	
 	/**
-	 * @name queryPublisherInfo
+	 * @name queryPublisher
 	 * @Description 用户查看视频发布者的信息，将发布者的信息和用户和视频的是否点赞关系返回给前端 
 	 * @param userId
 	 * @param videoId
@@ -184,26 +183,26 @@ public class UserController extends BasicController{
 		@ApiImplicitParam(value="视频id", name="videoId", paramType="query", dataType="String", required=true),
 		@ApiImplicitParam(value="发布者id", name="publisherId", paramType="query", dataType="String", required=true),
 	})
-	@PostMapping("/queryPublishInfo")
-	public JsonResult queryPublishInfo(String userId, String videoId, String publisherId){
+	@PostMapping("/queryPublisher")
+	public JsonResult queryPublisher(String userId, String videoId, String publisherId){
 		//判断发布者的id是否为空
-		if (StringUtils.isBlank(publisherId) || StringUtils.isBlank(videoId)) {
+		if (StringUtils.isBlank(publisherId) || StringUtils.isBlank(videoId) || StringUtils.isBlank(publisherId)) {
 			return JsonResult.errorMsg("");
 		}
 		//将user用户信息和用户和视频的关系查询出来，封装成新的对象，返回给前端
 		Users users=usersService.queryUserInfo(publisherId);
-		UsersVO usersVO=new UsersVO();
-		BeanUtils.copyProperties(users, usersVO);
+		UsersVO publisher=new UsersVO();
+		BeanUtils.copyProperties(users, publisher);
 		Boolean isLike=usersService.isLike(userId, videoId);
 		UsersVideoVO usersVideoVO=new UsersVideoVO();
-		usersVideoVO.setUsersVO(usersVO);
-		usersVideoVO.setIsLike(isLike);
+		usersVideoVO.setPublisher(publisher);
+		usersVideoVO.setUserLikeVideo(isLike);
 		
 		return JsonResult.ok(usersVideoVO);
 	}
 	
 	/**
-	 * @name followUsers
+	 * @name beyourfans
 	 * @Description 用户进行关注其他用户
 	 * @param userId
 	 * @param followedUserId
@@ -214,8 +213,8 @@ public class UserController extends BasicController{
 		@ApiImplicitParam(value="用户id", name="userId", paramType="query", dataType="String", required=true),
 		@ApiImplicitParam(value="被关注者id", name="followedUserId", paramType="query", dataType="String", required=true)
 	})
-	@PostMapping("/followUsers")
-	public JsonResult followUsers(String userId, String followedUserId){
+	@PostMapping("/beyourfans")
+	public JsonResult beyourfans(String userId, String followedUserId){
 		if (StringUtils.isBlank(userId) || StringUtils.isBlank(followedUserId)) {
 			return JsonResult.errorMsg("");
 		}
@@ -224,7 +223,7 @@ public class UserController extends BasicController{
 	}
 	
 	/**
-	 * @name unfollowUsers
+	 * @name dontbeyourfans
 	 * @Description 用户进行取消关注其他用户
 	 * @param userId
 	 * @param followedUserId
@@ -235,8 +234,8 @@ public class UserController extends BasicController{
 		@ApiImplicitParam(value="用户id", name="userId", paramType="query", dataType="String", required=true),
 		@ApiImplicitParam(value="被关注者id", name="followedUserId", paramType="query", dataType="String", required=true)
 	})
-	@PostMapping("/unfollowUsers")
-	public JsonResult unfollowUsers(String userId, String followedUserId){
+	@PostMapping("/dontbeyourfans")
+	public JsonResult dontbeyourfans(String userId, String followedUserId){
 		if (StringUtils.isBlank(userId) || StringUtils.isBlank(followedUserId)) {
 			return JsonResult.errorMsg("");
 		}
