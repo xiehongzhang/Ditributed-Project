@@ -75,10 +75,10 @@ public class VideoController extends BasicController{
 	private UsersService usersService;
 	
 	/**
-	 * @name uploadVideo
+	 * @name upload
 	 * @Description 用户上传video文件,保存到数据库中去
 	 * @param userId
-	 * @param files
+	 * @param file
 	 * @param bgmId
 	 * @param desc
 	 * @param videoSeconds
@@ -90,14 +90,14 @@ public class VideoController extends BasicController{
 	@ApiOperation(value="上传视频",notes="用户上传视频操作")
 	@ApiImplicitParams({
 		@ApiImplicitParam(value="用户id", name="userId", paramType="query", dataType="String", required=true),
-		@ApiImplicitParam(value="背景音乐id", name="audioId", paramType="query", dataType="String", required=false),
+		@ApiImplicitParam(value="背景音乐id", name="bgmId", paramType="query", dataType="String", required=false),
 		@ApiImplicitParam(value="视频描述", name="desc", paramType="query", dataType="String", required=false),
 		@ApiImplicitParam(value="秒数", name="videoSeconds", paramType="query", dataType="String", required=true),
 		@ApiImplicitParam(value="长度", name="videoWidth", paramType="query", dataType="String", required=true),
 		@ApiImplicitParam(value="高度", name="videoHeight", paramType="query", dataType="String", required=true),
 	})
-	@PostMapping(value="/uploadVideo", headers="content-type=multipart/form-data")
-	public JsonResult uploadVideo(String userId, String audioId, @ApiParam(value="file",allowEmptyValue=false) MultipartFile files, 
+	@PostMapping(value="/upload", headers="content-type=multipart/form-data")
+	public JsonResult upload(String userId, String bgmId, @ApiParam(value="file",allowEmptyValue=false) MultipartFile file, 
 								  String desc, float videoSeconds, 
 								  int videoWidth, int videoHeight) throws IOException{
 		//判断用户id是否为空
@@ -122,9 +122,9 @@ public class VideoController extends BasicController{
 		BufferedOutputStream bufferedOutputStream=null;
 		//判断文件是否为空
 		try {
-			if (files != null) {
+			if (file != null) {
 				//获取文件名称
-				fileName=files.getOriginalFilename();
+				fileName=file.getOriginalFilename();
 				//判断文件名是否为空，文件大小是否大于0
 				if (StringUtils.isNotEmpty(fileName)) {
 					//拼接字符串
@@ -140,7 +140,7 @@ public class VideoController extends BasicController{
 						outFile.getParentFile().mkdirs();
 					}
 					//获取文件输入流
-					bufferedInputStream=new BufferedInputStream(files.getInputStream());
+					bufferedInputStream=new BufferedInputStream(file.getInputStream());
 					//获取文件输出流
 					bufferedOutputStream=new BufferedOutputStream(new FileOutputStream(outFile));
 					//复制文件
@@ -175,9 +175,9 @@ public class VideoController extends BasicController{
 		//截取视频封面
 		FFMpegUtils.fetchVideoCover(filePath, coverTarget);
 		//判断audioId是否为空，
-		if (StringUtils.isNotEmpty(audioId)) {
+		if (StringUtils.isNotEmpty(bgmId)) {
 			//查询背景音乐的所有信息
-			Bgm bgm=bgmService.queryBgmById(audioId);
+			Bgm bgm=bgmService.queryBgmById(bgmId);
 			String videoSource=filePath;
 			String audioSource=FILE_NAMESPACE+bgm.getPath();
 			String target=FILE_NAMESPACE+fileDBPath+"/"+"new"+"/"+fileName;
@@ -190,7 +190,7 @@ public class VideoController extends BasicController{
 		Video video = new Video();
 		video.setId(id);
 		video.setUserId(userId);
-		video.setAudioId(audioId);
+		video.setAudioId(bgmId);
 		video.setVideoDesc(desc);
 		video.setVideoSeconds(videoSeconds);
 		video.setVideoWidth(videoWidth);
@@ -305,7 +305,7 @@ public class VideoController extends BasicController{
 		if (pageSize == null) {
 			pageSize=PAGE_SIZE;
 		}
-		List<VideoVO> videoVOList=videoService.queryLikeVideo(userId, page, pageSize);
+		PageResult videoVOList=videoService.queryLikeVideo(userId, page, pageSize);
 		return JsonResult.ok(videoVOList);
 	}
 	
@@ -325,14 +325,17 @@ public class VideoController extends BasicController{
 	})
 	@PostMapping("/showMyFollow")
 	public JsonResult showMyFollow(String userId, Integer page, Integer pageSize){
+		if(StringUtils.isBlank(userId)) {
+			return JsonResult.errorMsg("用户ID为空" );
+		}
 		if (page == null) {
 			page=1;
 		}
 		if (pageSize == null) {
 			pageSize=PAGE_SIZE;
 		}
-		List<Users> userList=usersService.queryFollowUser(userId, page, pageSize);
-		return JsonResult.ok(userList);
+		PageResult videoList=videoService.queryMyFollowVideos(userId, page, pageSize);
+		return JsonResult.ok(videoList);
 	}
 	
 	

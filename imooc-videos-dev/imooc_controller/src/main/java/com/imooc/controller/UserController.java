@@ -187,8 +187,8 @@ public class UserController extends BasicController{
 	})
 	@PostMapping("/queryPublisher")
 	public JsonResult queryPublisher(String loginUserId, String videoId, String publishUserId){
-		//判断发布者的id是否为空
-		if (StringUtils.isBlank(loginUserId) || StringUtils.isBlank(videoId) || StringUtils.isBlank(publishUserId)) {
+		//判断发布者的id和视频ID是否为空
+		if (StringUtils.isBlank(videoId) || StringUtils.isBlank(publishUserId)) {
 			return JsonResult.errorMsg("");
 		}
 		//将user用户信息和用户和视频的关系查询出来，封装成新的对象，返回给前端

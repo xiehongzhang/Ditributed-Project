@@ -29,4 +29,10 @@ public interface VideoMapperCustom {
 	 * @Description 查询用户点赞过的所有视频
 	 */
 	List<VideoVO> queryLikeVideoByUserId(String userId);
+
+	
+	/**
+	 * @Description 查询我关注人发的视频
+	 */
+	List<VideoVO> queryMyFollowVideos(String userId);
 }

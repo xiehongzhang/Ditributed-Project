@@ -1,6 +1,6 @@
-com\imooc\test\TestUserController.class
 com\imooc\test\TestJsonUtil.class
 com\imooc\test\TestTimeStringUtils.class
 com\imooc\test\TestJson.class
-com\imooc\test\TestFile.class
 com\imooc\test\TestMD5.class
+com\imooc\test\TestUserController.class
+com\imooc\test\TestFile.class

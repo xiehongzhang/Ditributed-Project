@@ -147,11 +147,17 @@ public class VideoServiceImpl implements VideoService{
 
 	@Transactional(propagation=Propagation.SUPPORTS)
 	@Override
-	public List<VideoVO> queryLikeVideo(String userId, Integer pageNum, Integer pageSize) {
+	public PageResult queryLikeVideo(String userId, Integer pageNum, Integer pageSize) {
 		PageHelper.startPage(pageNum, pageSize);
 		//查询点赞过的视频
 		List<VideoVO> videoVOList=videoMapperCustom.queryLikeVideoByUserId(userId);
-		return videoVOList;
+		PageInfo<VideoVO> pageInfo=new PageInfo<VideoVO>();
+		PageResult pageResult=new PageResult();
+		pageResult.setRows(videoVOList);
+		pageResult.setPage(pageNum);
+		pageResult.setRecords(pageInfo.getTotal());
+		pageResult.setTotal(pageInfo.getPages());
+		return pageResult;
 	}
 
 	@Transactional(propagation=Propagation.REQUIRED)
@@ -177,6 +183,22 @@ public class VideoServiceImpl implements VideoService{
 		pageResult.setTotal((int)pageInfo.getTotal());
 		pageResult.setRows(commentslist);
 		return pageResult;
+	}
+
+	@Override
+	public PageResult queryMyFollowVideos(String userId, Integer page, Integer pageSize) {
+		PageHelper.startPage(page, pageSize);
+		List<VideoVO> videolist = videoMapperCustom.queryMyFollowVideos(userId);
+				
+		PageInfo<VideoVO> pageInfo = new PageInfo<>(videolist);
+		
+		PageResult pagedResult = new PageResult();
+		pagedResult.setTotal(pageInfo.getPages());
+		pagedResult.setRows(videolist);
+		pagedResult.setPage(page);
+		pagedResult.setRecords(pageInfo.getTotal());
+		
+		return pagedResult;
 	}
 
 

@@ -51,7 +51,7 @@ public interface VideoService {
 	/**
 	 * @Description 查询用户收藏的视频（即点赞过的视频）
 	 */
-	List<VideoVO> queryLikeVideo(String userId, Integer pageNum, Integer pageSize);
+	PageResult queryLikeVideo(String userId, Integer pageNum, Integer pageSize);
 
 	/**
 	 * @Description 保存用户评论视频的信息
@@ -62,5 +62,10 @@ public interface VideoService {
 	 * @Description 查询所有的评论
 	 */
 	PageResult queryAllComments(String videoId, Integer pageNum, Integer pageSize);
+
+	/**
+	 * @Description 查询我关注人发的视频
+	 */
+	PageResult queryMyFollowVideos(String userId, Integer page, Integer pageSize);
 
 }

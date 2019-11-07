@@ -113,7 +113,7 @@ public class UsersSeriveceImpl implements UsersService {
 	@Transactional(propagation=Propagation.SUPPORTS)
 	@Override
 	public Boolean isLike(String userId, String videoId) {
-		if (StringUtils.isBlank(userId) || StringUtils.isBlank(videoId)) {
+		if (StringUtils.isBlank(videoId)) {
 			return false;
 		}
 		//根据用户id和视频id查询是否存在关系
