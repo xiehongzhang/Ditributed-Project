@@ -50,7 +50,7 @@ public class UsersVO {
     private Integer receiveLikeCounts;//用户的接受点赞的数量
     
     @ApiModelProperty(hidden=false)
-    private Boolean isFollow;//是否关注
+    private Boolean follow;//是否关注
     
 	public String getId() {
 		return id;
@@ -107,11 +107,11 @@ public class UsersVO {
 	public void setUserToken(String userToken) {
 		this.userToken = userToken;
 	}
-	public Boolean getIsFollow() {
-		return isFollow;
+	public Boolean getFollow() {
+		return follow;
 	}
-	public void setIsFollow(Boolean isFollow) {
-		this.isFollow = isFollow;
+	public void setFollow(Boolean follow) {
+		this.follow = follow;
 	}
 
 }

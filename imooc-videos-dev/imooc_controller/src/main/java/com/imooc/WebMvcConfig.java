@@ -69,10 +69,9 @@ public class WebMvcConfig extends WebMvcConfigurationSupport{
 	@Override
 	protected void addInterceptors(InterceptorRegistry registry) {
 		registry.addInterceptor(firstInterceptor())
-		.addPathPatterns("/video/upload", "/video/uploadCover",
+		.addPathPatterns("/user/**", "/video/upload", "/video/uploadCover",
 	   					"/video/userLike", "/video/userUnLike",
-	   					"/video/saveComment")
-		.addPathPatterns("/bgm/**")
+	   					"/video/saveComment","/bgm/**")
 		.excludePathPatterns("/user/queryPublisher");
 		super.addInterceptors(registry);
 	}

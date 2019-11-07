@@ -23,14 +23,14 @@
   	left join  users u on v.user_id = u.id
   	where 
   	    1=1 
-  	    <if test="videoDesc != null and videoDesc != ' '">
-  	    	and v.videoDesc 
-  	    	like '%${videoDesc}%'
+  	    <if test="videoDesc != null and videoDesc != ''">
+  	    	and v.video_desc 
+  	    	like "%${videoDesc}%"
   	    </if>
-  	    <if test="userId != null and userId != ' '">
-  	    	and u.userId = #{userId}
+  	    <if test="userId != null and userId != ''">
+  	    	and u.id = #{userId}
   	    </if>
-  	    and status=1
+  	    and v.status = 1
   	order by v.create_time desc 
   </select>
   <!--视频的点赞数加一 -->
