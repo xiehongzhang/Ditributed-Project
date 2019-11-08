@@ -151,7 +151,7 @@ public class VideoServiceImpl implements VideoService{
 		PageHelper.startPage(pageNum, pageSize);
 		//查询点赞过的视频
 		List<VideoVO> videoVOList=videoMapperCustom.queryLikeVideoByUserId(userId);
-		PageInfo<VideoVO> pageInfo=new PageInfo<VideoVO>();
+		PageInfo<VideoVO> pageInfo=new PageInfo<>(videoVOList);
 		PageResult pageResult=new PageResult();
 		pageResult.setRows(videoVOList);
 		pageResult.setPage(pageNum);

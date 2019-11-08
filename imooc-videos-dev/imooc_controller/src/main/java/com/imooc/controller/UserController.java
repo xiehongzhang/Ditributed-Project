@@ -168,7 +168,7 @@ public class UserController extends BasicController{
 		BeanUtils.copyProperties(users, usersVO);
 		usersVO.setUserToken(userToken);
 		
-		return JsonResult.ok(usersVO);
+		return JsonResult.ok(fileDBPath);
 	}
 	
 	/**

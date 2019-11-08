@@ -16,7 +16,6 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Date;
-import java.util.List;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.StringUtils;
@@ -32,14 +31,12 @@ import com.imooc.BasicController;
 import com.imooc.enums.VideoStatuEnum;
 import com.imooc.pojo.Bgm;
 import com.imooc.pojo.Comments;
-import com.imooc.pojo.UserReport;
-import com.imooc.pojo.Users;
 import com.imooc.pojo.Video;
-import com.imooc.pojo.vo.VideoVO;
 import com.imooc.service.BgmService;
 import com.imooc.service.UsersService;
 import com.imooc.service.VideoService;
 import com.imooc.utils.FFMpegUtils;
+import com.imooc.utils.FileStringUtils;
 import com.imooc.utils.JsonResult;
 import com.imooc.utils.PageResult;
 
@@ -129,7 +126,8 @@ public class VideoController extends BasicController{
 				if (StringUtils.isNotEmpty(fileName)) {
 					//拼接字符串
 					filePath=FILE_NAMESPACE+fileDBPath+"/"+fileName;
-					String coverNamePrefix=fileName.split("\\.")[0];
+					//获取文件名前缀
+					String coverNamePrefix=FileStringUtils.getFileName(fileName);
 					coverName=coverNamePrefix + ".jpg";
 					coverDBPath=fileDBPath+"/"+coverName;
 					coverTarget=FILE_NAMESPACE+coverDBPath;

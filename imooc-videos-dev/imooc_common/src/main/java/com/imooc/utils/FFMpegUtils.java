@@ -52,7 +52,7 @@ public class FFMpegUtils{
 		command.add("-i");
 		command.add(source);
 		command.add("-ss");
-		command.add("00:00:10");
+		command.add("00:00:01");
 		command.add("-y");
 		command.add("-r");
 		command.add("1");

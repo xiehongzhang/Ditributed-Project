@@ -1,29 +1,31 @@
-E:\EclipseSpring\imooc-videos-dev\imooc_common\src\main\java\org\n3r\idworker\strategy\DefaultWorkerIdStrategy.java
-E:\EclipseSpring\imooc-videos-dev\imooc_common\src\main\java\org\n3r\idworker\utils\IPv4Utils.java
-E:\EclipseSpring\imooc-videos-dev\imooc_common\src\main\java\org\n3r\idworker\utils\Serializes.java
-E:\EclipseSpring\imooc-videos-dev\imooc_common\src\main\java\com\imooc\enums\BGMOperatorEnum.java
-E:\EclipseSpring\imooc-videos-dev\imooc_common\src\main\java\com\imooc\utils\FFMpegUtils.java
-E:\EclipseSpring\imooc-videos-dev\imooc_common\src\main\java\com\imooc\utils\PageResult.java
-E:\EclipseSpring\imooc-videos-dev\imooc_common\src\main\java\org\n3r\idworker\strategy\DayPrefixRandomCodeStrategy.java
-E:\EclipseSpring\imooc-videos-dev\imooc_common\src\main\java\org\n3r\idworker\RandomCodeStrategy.java
-E:\EclipseSpring\imooc-videos-dev\imooc_common\src\main\java\org\n3r\idworker\Sid.java
-E:\EclipseSpring\imooc-videos-dev\imooc_common\src\main\java\com\imooc\utils\JsonResult.java
-E:\EclipseSpring\imooc-videos-dev\imooc_common\src\main\java\org\n3r\idworker\utils\Utils.java
-E:\EclipseSpring\imooc-videos-dev\imooc_common\src\main\java\com\imooc\utils\MD5Util.java
-E:\EclipseSpring\imooc-videos-dev\imooc_common\src\main\java\org\n3r\idworker\DayCode.java
-E:\EclipseSpring\imooc-videos-dev\imooc_common\src\main\java\org\n3r\idworker\Code.java
-E:\EclipseSpring\imooc-videos-dev\imooc_common\src\main\java\org\n3r\idworker\IdWorker.java
-E:\EclipseSpring\imooc-videos-dev\imooc_common\src\main\java\org\n3r\idworker\utils\Props.java
-E:\EclipseSpring\imooc-videos-dev\imooc_common\src\main\java\org\n3r\idworker\WorkerIdStrategy.java
-E:\EclipseSpring\imooc-videos-dev\imooc_common\src\main\java\org\n3r\idworker\strategy\DefaultRandomCodeStrategy.java
-E:\EclipseSpring\imooc-videos-dev\imooc_common\src\main\java\com\imooc\utils\MultipartFileConfig.java
-E:\EclipseSpring\imooc-videos-dev\imooc_common\src\main\java\org\n3r\idworker\Id.java
-E:\EclipseSpring\imooc-videos-dev\imooc_common\src\main\java\com\imooc\utils\RedisUtils.java
-E:\EclipseSpring\imooc-videos-dev\imooc_common\src\main\java\com\imooc\utils\TimeStringUtils.java
-E:\EclipseSpring\imooc-videos-dev\imooc_common\src\main\java\com\imooc\utils\JsonUtils.java
-E:\EclipseSpring\imooc-videos-dev\imooc_common\src\main\java\org\n3r\idworker\InvalidSystemClock.java
-E:\EclipseSpring\imooc-videos-dev\imooc_common\src\main\java\org\n3r\idworker\strategy\FileLock.java
-E:\EclipseSpring\imooc-videos-dev\imooc_common\src\main\java\com\imooc\enums\VideoStatuEnum.java
-E:\EclipseSpring\imooc-videos-dev\imooc_common\src\main\java\org\n3r\idworker\utils\HttpReq.java
-E:\EclipseSpring\imooc-videos-dev\imooc_common\src\main\java\org\n3r\idworker\utils\Ip.java
-E:\EclipseSpring\imooc-videos-dev\imooc_common\src\main\java\org\n3r\idworker\Test.java
+C:\eclipse project\eclipse workspace\imooc-videos-dev\imooc_common\src\main\java\org\n3r\idworker\utils\Ip.java
+C:\eclipse project\eclipse workspace\imooc-videos-dev\imooc_common\src\main\java\com\imooc\utils\MultipartFileConfig.java
+C:\eclipse project\eclipse workspace\imooc-videos-dev\imooc_common\src\main\java\org\n3r\idworker\strategy\DayPrefixRandomCodeStrategy.java
+C:\eclipse project\eclipse workspace\imooc-videos-dev\imooc_common\src\main\java\org\n3r\idworker\utils\HttpReq.java
+C:\eclipse project\eclipse workspace\imooc-videos-dev\imooc_common\src\main\java\org\n3r\idworker\utils\IPv4Utils.java
+C:\eclipse project\eclipse workspace\imooc-videos-dev\imooc_common\src\main\java\com\imooc\utils\FetchVideoCover.java
+C:\eclipse project\eclipse workspace\imooc-videos-dev\imooc_common\src\main\java\org\n3r\idworker\Code.java
+C:\eclipse project\eclipse workspace\imooc-videos-dev\imooc_common\src\main\java\org\n3r\idworker\WorkerIdStrategy.java
+C:\eclipse project\eclipse workspace\imooc-videos-dev\imooc_common\src\main\java\org\n3r\idworker\Id.java
+C:\eclipse project\eclipse workspace\imooc-videos-dev\imooc_common\src\main\java\com\imooc\utils\JsonUtils.java
+C:\eclipse project\eclipse workspace\imooc-videos-dev\imooc_common\src\main\java\com\imooc\utils\FFMpegUtils.java
+C:\eclipse project\eclipse workspace\imooc-videos-dev\imooc_common\src\main\java\org\n3r\idworker\RandomCodeStrategy.java
+C:\eclipse project\eclipse workspace\imooc-videos-dev\imooc_common\src\main\java\com\imooc\enums\BGMOperatorEnum.java
+C:\eclipse project\eclipse workspace\imooc-videos-dev\imooc_common\src\main\java\com\imooc\enums\VideoStatuEnum.java
+C:\eclipse project\eclipse workspace\imooc-videos-dev\imooc_common\src\main\java\org\n3r\idworker\IdWorker.java
+C:\eclipse project\eclipse workspace\imooc-videos-dev\imooc_common\src\main\java\org\n3r\idworker\DayCode.java
+C:\eclipse project\eclipse workspace\imooc-videos-dev\imooc_common\src\main\java\org\n3r\idworker\Sid.java
+C:\eclipse project\eclipse workspace\imooc-videos-dev\imooc_common\src\main\java\com\imooc\utils\RedisUtils.java
+C:\eclipse project\eclipse workspace\imooc-videos-dev\imooc_common\src\main\java\org\n3r\idworker\utils\Serializes.java
+C:\eclipse project\eclipse workspace\imooc-videos-dev\imooc_common\src\main\java\com\imooc\utils\PageResult.java
+C:\eclipse project\eclipse workspace\imooc-videos-dev\imooc_common\src\main\java\org\n3r\idworker\utils\Utils.java
+C:\eclipse project\eclipse workspace\imooc-videos-dev\imooc_common\src\main\java\org\n3r\idworker\InvalidSystemClock.java
+C:\eclipse project\eclipse workspace\imooc-videos-dev\imooc_common\src\main\java\com\imooc\utils\MD5Util.java
+C:\eclipse project\eclipse workspace\imooc-videos-dev\imooc_common\src\main\java\org\n3r\idworker\strategy\FileLock.java
+C:\eclipse project\eclipse workspace\imooc-videos-dev\imooc_common\src\main\java\com\imooc\utils\TimeStringUtils.java
+C:\eclipse project\eclipse workspace\imooc-videos-dev\imooc_common\src\main\java\org\n3r\idworker\strategy\DefaultRandomCodeStrategy.java
+C:\eclipse project\eclipse workspace\imooc-videos-dev\imooc_common\src\main\java\com\imooc\utils\JsonResult.java
+C:\eclipse project\eclipse workspace\imooc-videos-dev\imooc_common\src\main\java\org\n3r\idworker\strategy\DefaultWorkerIdStrategy.java
+C:\eclipse project\eclipse workspace\imooc-videos-dev\imooc_common\src\main\java\org\n3r\idworker\Test.java
+C:\eclipse project\eclipse workspace\imooc-videos-dev\imooc_common\src\main\java\com\imooc\utils\FileStringUtils.java
+C:\eclipse project\eclipse workspace\imooc-videos-dev\imooc_common\src\main\java\org\n3r\idworker\utils\Props.java

@@ -72,7 +72,8 @@ public class WebMvcConfig extends WebMvcConfigurationSupport{
 		.addPathPatterns("/user/**", "/video/upload", "/video/uploadCover",
 	   					"/video/userLike", "/video/userUnLike",
 	   					"/video/saveComment","/bgm/**")
-		.excludePathPatterns("/user/queryPublisher");
+		.excludePathPatterns("/user/queryPublisher")
+		.excludePathPatterns("/video/upload");
 		super.addInterceptors(registry);
 	}
 	
