@@ -9,10 +9,14 @@
     <result column="to_user_id" property="toUserId" jdbcType="VARCHAR" />
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
     <result column="nickname" property="nickname" jdbcType="VARCHAR" />
+    <result column="face_image" property="faceImage" jdbcType="VARCHAR" />
     <result column="toNickname" property="toNickname" jdbcType="VARCHAR" />
   </resultMap>
   <select id="queryAllComments" parameterType="String" resultMap="BaseResultMap">
-  	select cs.*, us.nickname as nickname, tus.nickname as toNickname 
+  	select cs.*, 
+  		us.nickname as nickname, 
+  		us.face_image as face_image, 
+  		tus.nickname as toNickname 
 	from comments cs 
 	left join users us on cs.from_user_id = us.id  
 	left join users tus on cs.to_user_id = tus.id 

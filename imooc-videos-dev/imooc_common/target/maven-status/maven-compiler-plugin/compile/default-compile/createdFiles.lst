@@ -19,6 +19,7 @@ com\imooc\utils\MultipartFileConfig.class
 org\n3r\idworker\utils\Props$Silent.class
 org\n3r\idworker\WorkerIdStrategy.class
 org\n3r\idworker\utils\Utils.class
+com\imooc\utils\FileStringUtils.class
 org\n3r\idworker\DayCode.class
 org\n3r\idworker\strategy\DayPrefixRandomCodeStrategy.class
 org\n3r\idworker\IdWorker.class

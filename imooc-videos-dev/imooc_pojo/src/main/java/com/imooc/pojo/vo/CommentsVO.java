@@ -46,12 +46,24 @@ public class CommentsVO {
 	private String nickname;//评论人的昵称
 	
 	@ApiModelProperty
+	private String faceImage;//评论人的头像
+	
+
+	@ApiModelProperty
 	private String toNickname;//被回复者的昵称
 	
 	@ApiModelProperty
-	private String responseTime;//回复的时间
+	private String timeAgoStr;//回复的时间
 
 	@ApiModelProperty
+	public String getFaceImage() {
+		return faceImage;
+	}
+	
+	public void setFaceImage(String faceImage) {
+		this.faceImage = faceImage;
+	}
+	
     public String getId() {
         return id;
     }
@@ -124,11 +136,12 @@ public class CommentsVO {
 		this.toNickname = toNickname;
 	}
 
-	public String getResponseTime() {
-		return responseTime;
+	public String getTimeAgoStr() {
+		return timeAgoStr;
 	}
 
-	public void setResponseTime(String responseTime) {
-		this.responseTime = responseTime;
+	public void setTimeAgoStr(String timeAgoStr) {
+		this.timeAgoStr = timeAgoStr;
 	}
+
 }

@@ -56,7 +56,7 @@ public interface VideoService {
 	/**
 	 * @Description 保存用户评论视频的信息
 	 */
-	void saveComments(Comments comments);
+	void saveComments(Comments comments, String fatherCommentId, String toUserId);
 
 	/**
 	 * @Description 查询所有的评论

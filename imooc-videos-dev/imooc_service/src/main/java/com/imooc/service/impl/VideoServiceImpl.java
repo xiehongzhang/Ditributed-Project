@@ -13,6 +13,7 @@ package com.imooc.service.impl;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
 import org.n3r.idworker.Sid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -40,6 +41,7 @@ import com.imooc.pojo.vo.CommentsVO;
 import com.imooc.pojo.vo.VideoVO;
 import com.imooc.service.VideoService;
 import com.imooc.utils.PageResult;
+import com.imooc.utils.TimeStringUtils;
 
 /**
  * @author xhz
@@ -162,7 +164,15 @@ public class VideoServiceImpl implements VideoService{
 
 	@Transactional(propagation=Propagation.REQUIRED)
 	@Override
-	public void saveComments(Comments comments) {
+	public void saveComments(Comments comments, String fatherCommentId, String toUserId) {
+		//当父评论id和被回复者的id不为空时，保存
+		if (StringUtils.isNotBlank(fatherCommentId) && StringUtils.isNotBlank(toUserId)) {
+			comments.setParentCommentId(fatherCommentId);
+			comments.setToUserId(toUserId);
+		}else{
+			comments.setParentCommentId(null);
+			comments.setToUserId(null);
+		}
 		String id=sid.nextShort();
 		comments.setId(id);
 		comments.setCreateTime(new Date());
@@ -176,11 +186,16 @@ public class VideoServiceImpl implements VideoService{
 		//进行分页查询
 		PageHelper.startPage(pageNum, pageSize);
 		List<CommentsVO> commentslist=commentsCustomMapper.queryAllComments(videoId);
+		//将查询的时间进行格式化
+		for(CommentsVO c : commentslist){
+			String timeAgoStr=TimeStringUtils.format(c.getCreateTime());
+			c.setTimeAgoStr(timeAgoStr);		
+		}
 		PageInfo<CommentsVO> pageInfo=new PageInfo<CommentsVO>(commentslist);
 		PageResult pageResult=new PageResult();
 		pageResult.setPage(pageNum);
-		pageResult.setRecords(pageInfo.getPages());
-		pageResult.setTotal((int)pageInfo.getTotal());
+		pageResult.setRecords(pageInfo.getTotal());
+		pageResult.setTotal((int)pageInfo.getPages());
 		pageResult.setRows(commentslist);
 		return pageResult;
 	}

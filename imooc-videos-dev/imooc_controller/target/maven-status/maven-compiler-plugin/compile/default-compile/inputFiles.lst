@@ -1,12 +1,12 @@
-E:\EclipseSpring\imooc-videos-dev\imooc_controller\src\main\java\com\imooc\config\ResourceProp.java
-E:\EclipseSpring\imooc-videos-dev\imooc_controller\src\main\java\com\imooc\WarApplication.java
-E:\EclipseSpring\imooc-videos-dev\imooc_controller\src\main\java\com\imooc\ZKCurator.java
-E:\EclipseSpring\imooc-videos-dev\imooc_controller\src\main\java\com\imooc\WebMvcConfig.java
-E:\EclipseSpring\imooc-videos-dev\imooc_controller\src\main\java\com\imooc\Application.java
-E:\EclipseSpring\imooc-videos-dev\imooc_controller\src\main\java\com\imooc\controller\UserController.java
-E:\EclipseSpring\imooc-videos-dev\imooc_controller\src\main\java\com\imooc\controller\VideoController.java
-E:\EclipseSpring\imooc-videos-dev\imooc_controller\src\main\java\com\imooc\BasicController.java
-E:\EclipseSpring\imooc-videos-dev\imooc_controller\src\main\java\com\imooc\controller\BbmController.java
-E:\EclipseSpring\imooc-videos-dev\imooc_controller\src\main\java\com\imooc\controller\LoginRegisterController.java
-E:\EclipseSpring\imooc-videos-dev\imooc_controller\src\main\java\com\imooc\SwaggerConfig.java
-E:\EclipseSpring\imooc-videos-dev\imooc_controller\src\main\java\com\imooc\controller\interceptor\AuthInterceptor.java
+C:\eclipse project\eclipse workspace\imooc-videos-dev\imooc_controller\src\main\java\com\imooc\controller\VideoController.java
+C:\eclipse project\eclipse workspace\imooc-videos-dev\imooc_controller\src\main\java\com\imooc\BasicController.java
+C:\eclipse project\eclipse workspace\imooc-videos-dev\imooc_controller\src\main\java\com\imooc\controller\interceptor\AuthInterceptor.java
+C:\eclipse project\eclipse workspace\imooc-videos-dev\imooc_controller\src\main\java\com\imooc\controller\LoginRegisterController.java
+C:\eclipse project\eclipse workspace\imooc-videos-dev\imooc_controller\src\main\java\com\imooc\controller\UserController.java
+C:\eclipse project\eclipse workspace\imooc-videos-dev\imooc_controller\src\main\java\com\imooc\controller\BbmController.java
+C:\eclipse project\eclipse workspace\imooc-videos-dev\imooc_controller\src\main\java\com\imooc\SwaggerConfig.java
+C:\eclipse project\eclipse workspace\imooc-videos-dev\imooc_controller\src\main\java\com\imooc\WebMvcConfig.java
+C:\eclipse project\eclipse workspace\imooc-videos-dev\imooc_controller\src\main\java\com\imooc\Application.java
+C:\eclipse project\eclipse workspace\imooc-videos-dev\imooc_controller\src\main\java\com\imooc\WarApplication.java
+C:\eclipse project\eclipse workspace\imooc-videos-dev\imooc_controller\src\main\java\com\imooc\ZKCurator.java
+C:\eclipse project\eclipse workspace\imooc-videos-dev\imooc_controller\src\main\java\com\imooc\config\ResourceProp.java

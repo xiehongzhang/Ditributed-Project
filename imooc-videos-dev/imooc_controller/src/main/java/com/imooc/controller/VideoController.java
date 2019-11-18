@@ -346,8 +346,8 @@ public class VideoController extends BasicController{
 	 */
 	@ApiOperation(value="评论视频", notes="用户进行评论视频")
 	@PostMapping("/saveComment")
-	public JsonResult saveComment(@RequestBody Comments comments){
-		videoService.saveComments(comments);
+	public JsonResult saveComment(@RequestBody Comments comments, String fatherCommentId, String toUserId){
+		videoService.saveComments(comments, fatherCommentId, toUserId);
 		return JsonResult.ok();
 	}
 	
