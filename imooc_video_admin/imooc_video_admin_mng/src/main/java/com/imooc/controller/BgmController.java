@@ -45,11 +45,8 @@ public class BgmController {
     
     @GetMapping("/showBgm")
     public String showBgm(ModelMap modelMap){
-    	System.out.println(1);
     	List<Bgm> lists=bgmService.queryAllBgm();
-    	System.out.println(1);
     	modelMap.put("lists",lists);
-    	System.out.println(1);
     	return "bgm/list";		
     }
 }

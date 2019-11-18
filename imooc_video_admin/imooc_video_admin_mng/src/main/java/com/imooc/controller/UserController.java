@@ -27,7 +27,7 @@ import com.imooc.utils.PageResult;
 
 /**
  * @author xhz
- * @description  用户控制类
+ * @description 用户控制类
  */
 @Controller
 @RequestMapping("user")
