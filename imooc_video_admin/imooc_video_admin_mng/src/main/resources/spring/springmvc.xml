@@ -44,7 +44,7 @@
 			<bean class="com.imooc.interceptor.LoginInterceptor">
 				<property name="unCheckUrls">
 					<list>
-						<value>users/login.action</value>
+						<value>/users/login.action</value>
 					</list>
 				</property>
 			</bean>			

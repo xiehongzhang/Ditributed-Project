@@ -13,6 +13,7 @@ package com.imooc.service;
 import java.util.List;
 
 import com.imooc.pojo.Bgm;
+import com.imooc.utils.PageResult;
 
 /**
  * @author xhz
@@ -23,7 +24,7 @@ public interface BgmService {
 	/**
 	 * @Description 查询所有的BGM
 	 */
-	List<Bgm> queryAllBgm();
+	PageResult queryAllBgm(Integer page,Integer pageSize);
 
 	/**
 	 * @Description 通过id查询bgm

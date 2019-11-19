@@ -35,6 +35,7 @@ import com.imooc.pojo.Video;
 import com.imooc.service.BgmService;
 import com.imooc.service.VideoService;
 import com.imooc.utils.JsonResult;
+import com.imooc.utils.PageResult;
 
 /**
  * @author xhz
@@ -150,4 +151,31 @@ public class VideoController {
 		modelMap.put("lists", lists);
 		return "video/list";
 	}
+	
+	/**
+	 * @name showBgmList
+	 * @Description 显示BGM列表
+	 * @param 
+	 * @return 
+	 */
+	@GetMapping("/showBgmList")
+    public String showBgmList(){
+    	return "video/bgmList";		
+    }
+	
+	/**
+	 * @name queryBgmList
+	 * @Description 显示BGM列表
+	 * @param 
+	 * @return 
+	 */
+	@PostMapping("/queryBgmList")
+    public JsonResult queryBgmList(Integer page){
+		if (page == null) {
+			page=1;
+		}
+    	PageResult pageResult=bgmService.queryAllBgm(page,10);
+    	return JsonResult.ok(pageResult);		
+    }
+	
 }

@@ -20,6 +20,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.imooc.enums.BGMOperatorEnum;
 import com.imooc.mapper.BgmMapper;
 import com.imooc.pojo.Bgm;
@@ -27,6 +29,7 @@ import com.imooc.pojo.BgmExample;
 import com.imooc.service.BgmService;
 import com.imooc.service.utils.ZKCurator;
 import com.imooc.utils.JsonUtils;
+import com.imooc.utils.PageResult;
 
 /**
  * @author xhz
@@ -46,9 +49,17 @@ public class BgmServiceImpl implements BgmService {
 	private Sid sid;
 	
 	@Override
-	public List<Bgm> queryAllBgm() {
-		BgmExample bgmExample=new BgmExample();
-		return bgmMapper.selectByExample(bgmExample);
+	public PageResult queryAllBgm(Integer page,Integer pageSize) {
+		PageHelper.startPage(page, pageSize);
+		BgmExample example=new BgmExample();
+		List<Bgm> bgmLists=bgmMapper.selectByExample(example);
+		PageInfo<Bgm> pageInfo=new PageInfo<>(bgmLists);
+		PageResult pageResult=new PageResult();
+		pageResult.setPage(page);
+		pageResult.setTotal((int)pageInfo.getTotal());
+		pageResult.setRecords(pageInfo.getPages());
+		pageResult.setRows(bgmLists);
+		return pageResult;
 	}
 
 	@Override

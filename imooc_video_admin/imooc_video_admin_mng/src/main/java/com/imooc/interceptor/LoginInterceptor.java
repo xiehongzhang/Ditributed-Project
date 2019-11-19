@@ -23,8 +23,31 @@ import org.springframework.web.servlet.ModelAndView;
  * @description 拦截器，拦截用户的请求判断用户是否登录
  */
 public class LoginInterceptor implements HandlerInterceptor{
+	
 	private List<String> unCheckUrls;
 
+	@Override
+	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object obj) throws Exception {
+		//获取用户的请求路径
+		String requestUrl=request.getRequestURI();
+		requestUrl=requestUrl.replaceAll(request.getContextPath(), "");
+		if (unCheckUrls.contains(requestUrl)) {
+			return true;
+		}else if(null == request.getSession().getAttribute("sessionUser")){
+			response.sendRedirect(request.getContextPath()+"users/login.action");
+			return false;
+		}
+		return true;
+	} 
+	
+
+	@Override
+	public void postHandle(HttpServletRequest arg0, HttpServletResponse arg1, Object arg2, ModelAndView mav)
+			throws Exception {
+		
+		
+	}
+	
 	@Override
 	public void afterCompletion(HttpServletRequest arg0, HttpServletResponse arg1, Object arg2, Exception arg3)
 			throws Exception {
@@ -32,17 +55,16 @@ public class LoginInterceptor implements HandlerInterceptor{
 		
 	}
 
-	@Override
-	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object obj, ModelAndView mav)
-			throws Exception {
-		
-		
+
+	public List<String> getUnCheckUrls() {
+		return unCheckUrls;
 	}
 
-	@Override
-	public boolean preHandle(HttpServletRequest arg0, HttpServletResponse arg1, Object arg2) throws Exception {
-		// TODO Auto-generated method stub
-		return false;
+
+	public void setUnCheckUrls(List<String> unCheckUrls) {
+		this.unCheckUrls = unCheckUrls;
 	}
+
+
 
 }

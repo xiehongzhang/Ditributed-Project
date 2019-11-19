@@ -50,21 +50,20 @@ public class UserServiceImpl implements UserService {
 		UsersExample example=new UsersExample();
 		Criteria criteria =example.createCriteria();
 		if (StringUtils.isNotBlank(username)) {
-			criteria.andUsernameEqualTo(username);
+			criteria.andUsernameLike("%" + username + "%");
 		}
 		if (StringUtils.isNotBlank(nickname)) {
-			criteria.andUsernameEqualTo(nickname);
+			criteria.andNicknameLike("%" + nickname + "%" );
 		}
 		//如果都为空则进行全表查询
 		List<Users> userList=usersMapper.selectByExample(example);
 		PageInfo<Users> pageInfo=new PageInfo<>(userList);
 		//封装页面信息
 		PageResult pageResult=new PageResult();
-		pageResult.setPageSize(pageInfo.getPageSize());
-		pageResult.setPageNum(pageInfo.getPageNum());
-		pageResult.setPages(pageInfo.getPages());
-		pageResult.setSizes(pageInfo.getSize());
-		pageResult.setList(userList);
+		pageResult.setPage(pageNum);
+		pageResult.setTotal(pageInfo.getPages());
+		pageResult.setRecords((int)pageInfo.getTotal());
+		pageResult.setRows(userList);
 		return pageResult;
 	}
 
