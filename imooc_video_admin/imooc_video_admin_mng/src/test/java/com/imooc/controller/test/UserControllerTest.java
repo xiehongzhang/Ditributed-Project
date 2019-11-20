@@ -26,6 +26,8 @@ import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.context.WebApplicationContext;
@@ -60,8 +62,14 @@ public class UserControllerTest {
 		mockMvc=MockMvcBuilders.webAppContextSetup(context).build();
 	}
 	
+	/**
+	 * @name testUserList 
+	 * @Description 测试查询用户列表
+	 * @param 
+	 * @return 
+	 */
 	@Test
-	public void test() throws Exception{
+	public void testUserList() throws Exception{
 		Users user=new Users();
 		user.setUsername("1三");
 		user.setNickname("9");
@@ -77,5 +85,20 @@ public class UserControllerTest {
 				)
 				.andReturn();
 		        
+	}
+	
+	/**
+	 * @name testShowList
+	 * @Description 测试跳到用户列表
+	 * @param 
+	 * @return 
+	 * @throws Exception 
+	 */
+	@Test 
+	public void testShowList() throws Exception{
+		this.mockMvc.perform(MockMvcRequestBuilders.get("/users/showList"))
+			.andDo(MockMvcResultHandlers.print())
+			.andExpect(MockMvcResultMatchers.status().isOk())
+			.andReturn();
 	}
 }

@@ -31,6 +31,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.alibaba.druid.util.StringUtils;
 import com.github.pagehelper.StringUtil;
 import com.imooc.pojo.Bgm;
+import com.imooc.pojo.UserReport;
 import com.imooc.pojo.Video;
 import com.imooc.service.BgmService;
 import com.imooc.service.VideoService;
@@ -43,7 +44,7 @@ import com.imooc.utils.PageResult;
  */
 @RequestMapping("video")
 @Controller
-public class VideoController {
+public class VideoController extends BasicController{
 
 	@Autowired
 	private VideoService videoService;
@@ -53,12 +54,23 @@ public class VideoController {
 	
 	/**
 	 * @name showAddBgm
+	 * @Description 跳到添加BGM页面
+	 * @param 
+	 * @return 
+	 */
+	@GetMapping("/showAddBgm")
+	public String showAddBgm(){
+		return "video/addBgm";
+	}
+	
+	/**
+	 * @name showAddBgm
 	 * @Description 上传BGM文件
 	 * @param file
 	 * @return 
 	 * @throws IOException 
 	 */
-	@PostMapping("/showAddBgm")
+	@PostMapping("/bgmUpload")
 	@ResponseBody
 	public JsonResult showAddBgm(@RequestParam("file") MultipartFile[] file) throws IOException{
 		//文件上传的命名空间
@@ -170,12 +182,39 @@ public class VideoController {
 	 * @return 
 	 */
 	@PostMapping("/queryBgmList")
+	@ResponseBody
     public JsonResult queryBgmList(Integer page){
 		if (page == null) {
 			page=1;
 		}
-    	PageResult pageResult=bgmService.queryAllBgm(page,10);
+    	PageResult pageResult=bgmService.queryAllBgm(page,PAGE_SIZE);
     	return JsonResult.ok(pageResult);		
     }
 	
+	/**
+	 * @name showReportList
+	 * @Description 跳转到reportList
+	 * @param 
+	 * @return 
+	 */
+	@GetMapping("/showReportList")
+	public String showReportList(){
+		return "video/reportList";
+	}
+	
+	/**
+	 * @name reportList
+	 * @Description 查询用户的举报列表
+	 * @param 
+	 * @return 
+	 */
+	@PostMapping("/reportList")
+	@ResponseBody
+	public JsonResult reportList(UserReport userReport, Integer page){
+		if (page == null) {
+			page=1;
+		}
+		PageResult pageResult=videoService.queryReportList(userReport, page, PAGE_SIZE);
+		return JsonResult.ok(pageResult);
+	}
 }

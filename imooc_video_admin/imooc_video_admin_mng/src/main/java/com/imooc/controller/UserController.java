@@ -10,6 +10,7 @@
  */
 package com.imooc.controller;
 
+import java.io.IOException;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
@@ -35,7 +36,7 @@ import com.imooc.utils.PageResult;
  */
 @Controller
 @RequestMapping("users")
-public class UserController {
+public class UserController extends BasicController{
 	
 	@Autowired
 	private UserService userService;
@@ -68,19 +69,37 @@ public class UserController {
 		
 		return JsonResult.errorMsg("登录失败，请重新登录");
 	}
-
+	
 	/**
 	 * @name userList
+	 * @Description 跳到用户列表
+	 * @param 
+	 * @return 
+	 */
+	@GetMapping("/showList")
+	public String showList(){
+		return "users/usersList";
+	}
+	
+	/**
+	 * @name list
 	 * @Description 分页查询查询用户列表：1：当没有查询条件的时候，进行全表查询   2：如果有条件，就根据给定的条件进行条件查询
 	 * @param user
 	 * @param pageNum
 	 * @return 
 	 */
-	@GetMapping("/showList")
+	@PostMapping("/list")
 	@ResponseBody
-	public JsonResult userList(Users user, Integer pageNum){
-		PageResult pageResult=userService.queryUser(user,pageNum == null ? 1 : pageNum, 10);
+	public JsonResult list(Users user, Integer pageNum){
+		PageResult pageResult=userService.queryUser(user,pageNum == null ? 1 : pageNum, PAGE_SIZE);
 		return JsonResult.ok(pageResult);
+	}
+
+	
+	@GetMapping("/logout")
+	public void logout(HttpServletRequest request,HttpServletResponse response) throws IOException{
+		request.getSession().setAttribute("sessionToken", null);
+		response.sendRedirect("/center.action");
 	}
 	
 }

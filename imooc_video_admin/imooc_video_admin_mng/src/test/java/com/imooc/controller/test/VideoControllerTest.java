@@ -25,6 +25,9 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
@@ -112,5 +115,20 @@ public class VideoControllerTest {
 		System.out.println("This is a method of deleteBgm");
 	}
 	
+	/**
+	 * @name testQueryReportList
+	 * @Description 测试查询用户举报列表
+	 * @param 
+	 * @return 
+	 * @throws Exception 
+	 */
+	@Test
+	public void testQueryReportList() throws Exception{
+		this.mockMvc.perform(MockMvcRequestBuilders.post("/video/reportList")
+				.accept(MediaType.APPLICATION_JSON))
+		.andDo(MockMvcResultHandlers.print())
+		.andExpect(MockMvcResultMatchers.status().isOk())
+		.andReturn();
+	}
 	
 }

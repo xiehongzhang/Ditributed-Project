@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.imooc.mapper.UserReportMapperCustom" >
+  <resultMap id="BaseResultMap" type="com.imooc.pojo.vo.UserReportVO" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="deal_username" property="dealUsername" jdbcType="VARCHAR" />
+    <result column="deal_video_id" property="dealVideoId" jdbcType="VARCHAR" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="content" property="content" jdbcType="VARCHAR" />
+    <result column="username" property="submitUsername" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="status" property="status" jdbcType="VARCHAR" />
+    <result column="video_path" property="videoPath" jdbcType="VARCHAR" />
+  </resultMap>
+  <select id="queryReportList" resultMap="BaseResultMap">
+  	select ur.* , 
+  		u.username as username ,
+  		du.username as deal_username,
+  		v.id as deal_video_id,
+  		v.status as status,
+  		v.video_path as video_path
+  	from user_report ur
+  	left join users u
+  		on u.id = ur.user_id
+  	left join users du
+  		on du.id =ur.deal_user_id
+  	left join video v
+  		on v.id = ur.deal_video_id
+  	order by ur.create_time desc
+  	 
+  </select>
+</mapper>
