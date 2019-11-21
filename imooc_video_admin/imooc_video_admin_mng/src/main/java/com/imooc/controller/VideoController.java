@@ -15,21 +15,21 @@ import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.List;
 
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.alibaba.druid.util.StringUtils;
 import com.github.pagehelper.StringUtil;
+import com.imooc.enums.VideoStatusEnum;
 import com.imooc.pojo.Bgm;
 import com.imooc.pojo.UserReport;
 import com.imooc.pojo.Video;
@@ -53,18 +53,64 @@ public class VideoController extends BasicController{
 	private BgmService bgmService;
 	
 	/**
+	 * @name showVideo
+	 * @Description 跳转到视频列表页
+	 * @param 
+	 * @return 
+	 */
+	@GetMapping("/showVideo")
+	public ModelAndView showVideo(){
+		ModelAndView modelAndView =new ModelAndView();
+		modelAndView.setViewName("video/list");
+		return modelAndView;
+//		return "video/list";
+	}
+	
+	/**
+	 * @name showVideo
+	 * @Description 显示视频列表
+	 * @param 
+	 * @return 
+	 */
+	@PostMapping("/queryVideoList")
+	@ResponseBody
+	public PageResult showAllVideo(Video video , Integer page){
+		if (page == null) {
+			page = 1;
+		}
+		PageResult pageResult=videoService.queryVideo(video , page , PAGE_SIZE);
+		return pageResult;
+	} 
+	
+	/**
+	 * @name forbidVideo
+	 * @Description 禁止视频播放
+	 * @param videoId
+	 * @return 
+	 */
+	@PostMapping("/forbidVideo")
+	@ResponseBody
+	public JsonResult forbidVideo(String videoId){
+		videoService.updateVideoStatus(videoId,VideoStatusEnum.FORBID.value);
+		return JsonResult.ok();
+	}
+	
+	/**
 	 * @name showAddBgm
 	 * @Description 跳到添加BGM页面
 	 * @param 
 	 * @return 
 	 */
 	@GetMapping("/showAddBgm")
-	public String showAddBgm(){
-		return "video/addBgm";
+	public ModelAndView showAddBgm(){
+		ModelAndView modelAndView =new ModelAndView();
+		modelAndView.setViewName("video/addBgm");
+		return modelAndView;
+//		return "video/addBgm";
 	}
 	
 	/**
-	 * @name showAddBgm
+	 * @name bgmUpload
 	 * @Description 上传BGM文件
 	 * @param file
 	 * @return 
@@ -145,7 +191,7 @@ public class VideoController extends BasicController{
 	 * @param bgmId
 	 * @return 
 	 */
-	@PostMapping("/deleteBgm")
+	@PostMapping("/delBgm")
 	@ResponseBody
 	public JsonResult  deleteBgm(String bgmId){
 		if (StringUtils.isEmpty(bgmId)) {
@@ -156,14 +202,6 @@ public class VideoController extends BasicController{
 		return JsonResult.ok();
 	}
 	
-	
-	@GetMapping("/showVideo")
-	public String showAllVideo(ModelMap modelMap){
-		List<Video> lists=videoService.queryVideo();
-		modelMap.put("lists", lists);
-		return "video/list";
-	}
-	
 	/**
 	 * @name showBgmList
 	 * @Description 显示BGM列表
@@ -171,8 +209,11 @@ public class VideoController extends BasicController{
 	 * @return 
 	 */
 	@GetMapping("/showBgmList")
-    public String showBgmList(){
-    	return "video/bgmList";		
+    public ModelAndView showBgmList(){
+		ModelAndView modelAndView=new ModelAndView();
+		modelAndView.setViewName("video/bgmList");
+		return modelAndView;
+//    	return "video/bgmList";		
     }
 	
 	/**
@@ -183,12 +224,12 @@ public class VideoController extends BasicController{
 	 */
 	@PostMapping("/queryBgmList")
 	@ResponseBody
-    public JsonResult queryBgmList(Integer page){
+    public PageResult queryBgmList(Integer page){
 		if (page == null) {
 			page=1;
 		}
     	PageResult pageResult=bgmService.queryAllBgm(page,PAGE_SIZE);
-    	return JsonResult.ok(pageResult);		
+    	return pageResult;		
     }
 	
 	/**
@@ -198,8 +239,11 @@ public class VideoController extends BasicController{
 	 * @return 
 	 */
 	@GetMapping("/showReportList")
-	public String showReportList(){
-		return "video/reportList";
+	public ModelAndView showReportList(){
+		ModelAndView modelAndView =new ModelAndView();
+		modelAndView.setViewName("video/reportList");
+		return modelAndView;
+//		return "video/reportList";
 	}
 	
 	/**
@@ -210,11 +254,11 @@ public class VideoController extends BasicController{
 	 */
 	@PostMapping("/reportList")
 	@ResponseBody
-	public JsonResult reportList(UserReport userReport, Integer page){
+	public PageResult reportList(UserReport userReport, Integer page){
 		if (page == null) {
 			page=1;
 		}
 		PageResult pageResult=videoService.queryReportList(userReport, page, PAGE_SIZE);
-		return JsonResult.ok(pageResult);
+		return pageResult;
 	}
 }

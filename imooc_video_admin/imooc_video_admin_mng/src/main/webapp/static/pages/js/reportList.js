@@ -30,7 +30,6 @@ var UsersReportsList = function () {
 		// 上下文对象路径
 		var hdnContextPath = $("#hdnContextPath").val();
 		var apiServer = $("#apiServer").val();
-		debugger;
 		var jqGrid = $("#usersReportsList");  
         jqGrid.jqGrid({  
             caption: "被举报的视频列表",  
@@ -99,7 +98,7 @@ var UsersReportsList = function () {
     
     return {
         // 初始化各个函数及对象
-        init: function () {debugger;
+        init: function () {
         	handleUsersReportsList();
         }
 
@@ -108,6 +107,6 @@ var UsersReportsList = function () {
 }();
 
 
-jQuery(document).ready(function() {debugger;
+jQuery(document).ready(function() {
 	UsersReportsList.init();
 });

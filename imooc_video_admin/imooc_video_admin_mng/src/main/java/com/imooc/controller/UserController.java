@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.imooc.pojo.AdminUser;
 import com.imooc.pojo.Users;
@@ -48,10 +49,18 @@ public class UserController extends BasicController{
 	 * @return 
 	 */
 	@GetMapping("/login")
-	public String login(){
-		return "login";
+	public ModelAndView login(){
+		ModelAndView modelAndView=new ModelAndView();
+		modelAndView.setViewName("login");
+		return modelAndView;
 	}
 	
+	/**
+	 * @name login
+	 * @Description 用户登录
+	 * @param 
+	 * @return 
+	 */
 	@PostMapping("/login")
 	@ResponseBody
 	public JsonResult userLogin(String username, String password,HttpServletRequest request, HttpServletResponse response){
@@ -77,8 +86,11 @@ public class UserController extends BasicController{
 	 * @return 
 	 */
 	@GetMapping("/showList")
-	public String showList(){
-		return "users/usersList";
+	public ModelAndView showList(){
+		ModelAndView modelAndView=new ModelAndView();
+		modelAndView.setViewName("users/usersList");
+		return modelAndView;
+//		return "users/usersList";
 	}
 	
 	/**
@@ -90,12 +102,18 @@ public class UserController extends BasicController{
 	 */
 	@PostMapping("/list")
 	@ResponseBody
-	public JsonResult list(Users user, Integer pageNum){
+	public PageResult list(Users user, Integer pageNum){
 		PageResult pageResult=userService.queryUser(user,pageNum == null ? 1 : pageNum, PAGE_SIZE);
-		return JsonResult.ok(pageResult);
+		return pageResult;
 	}
 
 	
+	/**
+	 * @name logout
+	 * @Description 退出登录
+	 * @param 
+	 * @return 
+	 */
 	@GetMapping("/logout")
 	public void logout(HttpServletRequest request,HttpServletResponse response) throws IOException{
 		request.getSession().setAttribute("sessionToken", null);

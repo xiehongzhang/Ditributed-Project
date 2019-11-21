@@ -10,8 +10,6 @@
  */
 package com.imooc.service;
 
-import java.util.List;
-
 import com.imooc.pojo.UserReport;
 import com.imooc.pojo.Video;
 import com.imooc.utils.PageResult;
@@ -25,11 +23,16 @@ public interface VideoService {
 	/**
 	 * @Description 
 	 */
-	List<Video> queryVideo();
+	PageResult queryVideo(Video video , Integer page , Integer pageSize);
 
 	/**
 	 * @Description 查询用户举报列表
 	 */
-	PageResult queryReportList(UserReport userReport, Integer page, int pageSize);
+	PageResult queryReportList(UserReport userReport, Integer page, Integer pageSize);
+
+	/**
+	 * @Description 改变视频的状态
+	 */
+	void updateVideoStatus(String videoId , Integer status);
 
 }
