@@ -46,7 +46,7 @@ public class UserServiceImpl implements UserService {
 			nickname=user.getNickname();
 		}
 		PageHelper.startPage(pageNum, pageSize);
-		//不都为空则进行条件查询
+		//不为空则进行条件查询
 		UsersExample example=new UsersExample();
 		Criteria criteria =example.createCriteria();
 		if (StringUtils.isNotBlank(username)) {

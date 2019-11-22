@@ -70,8 +70,8 @@ public class VideoServiceImpl implements VideoService {
 	@Override
 	public PageResult queryReportList(UserReport userReport, Integer page, Integer pageSize) {
 		PageHelper.startPage(page, pageSize);
-		List<Bgm> list=userReportMapperCustom.queryReportList();
-		PageInfo<Bgm> pageInfo=new PageInfo<>(list);
+		List<UserReport> list=userReportMapperCustom.queryReportList();
+		PageInfo<UserReport> pageInfo=new PageInfo<>(list);
 		PageResult pageResult=new PageResult();
 		pageResult.setPage(page);
 		pageResult.setTotal(pageInfo.getPages());

@@ -10,13 +10,13 @@
  */
 package com.imooc.controller;
 
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.stereotype.Controller;
 
 /**
  * @author xhz
  * @description 基础控制类 
  */
-@RestController
+@Controller
 public class BasicController {
 	
 	//文件保存的空间

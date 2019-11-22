@@ -12,9 +12,6 @@ package com.imooc.controller.test;
 
 
 
-import java.util.HashMap;
-import java.util.Map;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -71,18 +68,16 @@ public class UserControllerTest {
 	@Test
 	public void testUserList() throws Exception{
 		Users user=new Users();
-		user.setUsername("1三");
-		user.setNickname("9");
-		String iString="2";
+//		user.setUsername("1三");
+//		user.setNickname("9");
+//		String iString="2";
 		String uString=JsonUtils.objectToJson(user);	
 		this.mockMvc.perform(
-				MockMvcRequestBuilders.post("/user/userList")
-				.contentType(MediaType.APPLICATION_FORM_URLENCODED)
-//				.contentType(MediaType.APPLICATION_JSON)
-//				.accept(MediaType.APPLICATION_JSON)
-				.param("user",uString)
-				.param("pageNum", iString)
-				)
+				MockMvcRequestBuilders.post("/users/list?page=3")
+				.contentType(MediaType.APPLICATION_JSON)
+				.content(uString))
+				.andDo(MockMvcResultHandlers.print())
+				.andExpect(MockMvcResultMatchers.status().isOk())
 				.andReturn();
 		        
 	}

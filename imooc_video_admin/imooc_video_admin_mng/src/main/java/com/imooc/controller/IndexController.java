@@ -29,6 +29,9 @@ public class IndexController {
 	 */
 	@RequestMapping(value="center", method=RequestMethod.GET)
 	public String center(){
+//		ModelAndView modelAndView=new ModelAndView();
+//		modelAndView.setViewName("center");
+//		return modelAndView;
 		return "center";
 	}
 	

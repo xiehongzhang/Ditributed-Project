@@ -19,7 +19,7 @@ public class UserReportVO {
 	
 	private String videoPath;//被举报视频路径
 	
-	private Date createTime;//举报日期
+	private Date createDate;//举报日期
 	
 	private Integer status;//视频状态
 	
@@ -91,12 +91,13 @@ public class UserReportVO {
         this.content = content == null ? null : content.trim();
     }
 
+	public Date getCreateDate() {
+		return createDate;
+	}
 
-    public Date getCreateTime() {
-        return createTime;
-    }
+	public void setCreateDate(Date createDate) {
+		this.createDate = createDate;
+	}
 
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
-    }
+
 }

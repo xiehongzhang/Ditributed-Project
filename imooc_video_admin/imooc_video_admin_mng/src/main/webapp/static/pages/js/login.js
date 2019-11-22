@@ -40,7 +40,6 @@ var Login = function() {
             },
 
             submitHandler: function(form) {
-            	
             	var loginForm = $('.login-form');
             	var hdnContextPath = $("#hdnContextPath").val();
             	loginForm.ajaxSubmit({

@@ -28,7 +28,7 @@ var BgmList = function() {
 		var bgmServer = $("#bgmServer").val();
 		
 		
-		var jqGrid = $("#bgmList");  
+		var jqGrid = $("#bgmList"); //表格 id
         jqGrid.jqGrid({  
             caption: "所有bgm列表",  
             url: hdnContextPath + "/video/queryBgmList.action",  
@@ -62,7 +62,7 @@ var BgmList = function() {
             rowNum: 10,					// 在grid上显示记录条数，这个参数是要被传递到后台
             rownumbers: true,  			// 如果为ture则会在表格左边新增一列，显示行顺序号，从1开始递增。此列名为'rn'
             autowidth: true,  			// 如果为ture时，则当表格在首次被创建时会根据父元素比例重新调整表格宽度。如果父元素宽度改变，为了使表格宽度能够自动调整则需要实现函数：setGridWidth
-            height: 400,				// 表格高度，可以是数字，像素值或者百分比
+            height: 800,				// 表格高度，可以是数字，像素值或者百分比
             rownumWidth: 36, 			// 如果rownumbers为true，则可以设置行号 的宽度
             pager: "#bgmListPager",		// 分页控件的id  
             subGrid: false				// 是否启用子表格

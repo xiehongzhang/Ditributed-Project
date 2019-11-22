@@ -34,7 +34,7 @@ public class LoginInterceptor implements HandlerInterceptor{
 		if (unCheckUrls.contains(requestUrl)) {
 			return true;
 		}else if(null == request.getSession().getAttribute("sessionUser")){
-			response.sendRedirect(request.getContextPath()+"users/login.action");
+			response.sendRedirect(request.getContextPath()+"/users/login.action");
 			return false;
 		}
 		return true;

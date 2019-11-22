@@ -59,11 +59,11 @@ public class VideoController extends BasicController{
 	 * @return 
 	 */
 	@GetMapping("/showVideo")
-	public ModelAndView showVideo(){
-		ModelAndView modelAndView =new ModelAndView();
-		modelAndView.setViewName("video/list");
-		return modelAndView;
-//		return "video/list";
+	public String showVideo(){
+//		ModelAndView modelAndView =new ModelAndView();
+//		modelAndView.setViewName("video/list");
+//		return modelAndView;
+		return "video/list";
 	}
 	
 	/**
@@ -102,11 +102,11 @@ public class VideoController extends BasicController{
 	 * @return 
 	 */
 	@GetMapping("/showAddBgm")
-	public ModelAndView showAddBgm(){
-		ModelAndView modelAndView =new ModelAndView();
-		modelAndView.setViewName("video/addBgm");
-		return modelAndView;
-//		return "video/addBgm";
+	public String showAddBgm(){
+//		ModelAndView modelAndView =new ModelAndView();
+//		modelAndView.setViewName("video/addBgm");
+//		return modelAndView;
+		return "video/addBgm";
 	}
 	
 	/**
@@ -204,16 +204,16 @@ public class VideoController extends BasicController{
 	
 	/**
 	 * @name showBgmList
-	 * @Description 显示BGM列表
+	 * @Description 跳转BGM列表
 	 * @param 
 	 * @return 
 	 */
 	@GetMapping("/showBgmList")
-    public ModelAndView showBgmList(){
-		ModelAndView modelAndView=new ModelAndView();
-		modelAndView.setViewName("video/bgmList");
-		return modelAndView;
-//    	return "video/bgmList";		
+    public String showBgmList(){
+//		ModelAndView modelAndView=new ModelAndView();
+//		modelAndView.setViewName("video/bgmList");
+//		return modelAndView;
+    	return "video/bgmList";		
     }
 	
 	/**
@@ -239,11 +239,11 @@ public class VideoController extends BasicController{
 	 * @return 
 	 */
 	@GetMapping("/showReportList")
-	public ModelAndView showReportList(){
-		ModelAndView modelAndView =new ModelAndView();
-		modelAndView.setViewName("video/reportList");
-		return modelAndView;
-//		return "video/reportList";
+	public String showReportList(){
+//		ModelAndView modelAndView =new ModelAndView();
+//		modelAndView.setViewName("video/reportList");
+//		return modelAndView;
+		return "video/reportList";
 	}
 	
 	/**

@@ -5,7 +5,7 @@
 	<!-- BEGIN HEAD -->
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-        <title>短视频后台管理系统</title>
+        <title>小慕短视频后台管理系统</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta content="width=device-width, initial-scale=1" name="viewport" />
         
@@ -36,15 +36,14 @@
             <!-- BEGIN HEADER & CONTENT DIVIDER -->
             <div class="clearfix"> </div>
             <!-- END HEADER & CONTENT DIVIDER -->
-            
-            <!-- BEGIN CONTAINER-->	
-           	<div class="page-container">
-           	
-	           	<!-- 菜单 start -->
-	           	<jsp:include page="common/menu.jsp"></jsp:include>
-	           	<!-- 菜单 end -->
-	           	
-	            <!-- BEGIN CONTENT -->
+            	
+            	<div class="page-container">
+            	
+            	<!-- 菜单 start -->
+            	<jsp:include page="common/menu.jsp"></jsp:include>
+            	<!-- 菜单 end -->
+            	
+                <!-- BEGIN CONTENT -->
 				<div class="page-content-wrapper">
 				    <!-- BEGIN CONTENT BODY -->    
 				    <div class="page-content">
@@ -58,10 +57,10 @@
 				    </div>
 				    <!-- END CONTENT BODY -->
 				</div>
-		        <!-- END CONTENT -->
-               
-           </div>
-           <!-- END CONTAINER -->
+				<!-- END CONTENT -->
+                
+            </div>
+            <!-- END CONTAINER -->
         </div>
             
             <!-- 引入footer页面 start -->

@@ -5,7 +5,7 @@
 
 * @author xhz  
 
-* @date 2019年10月24日  
+* @date 2019年11月22日  
  
  */
 package com.imooc.controller;
@@ -49,10 +49,11 @@ public class UserController extends BasicController{
 	 * @return 
 	 */
 	@GetMapping("/login")
-	public ModelAndView login(){
-		ModelAndView modelAndView=new ModelAndView();
-		modelAndView.setViewName("login");
-		return modelAndView;
+	public String login(){
+//		ModelAndView modelAndView=new ModelAndView();
+//		modelAndView.setViewName("login");
+//		return modelAndView;
+		return "login";
 	}
 	
 	/**
@@ -86,11 +87,11 @@ public class UserController extends BasicController{
 	 * @return 
 	 */
 	@GetMapping("/showList")
-	public ModelAndView showList(){
-		ModelAndView modelAndView=new ModelAndView();
-		modelAndView.setViewName("users/usersList");
-		return modelAndView;
-//		return "users/usersList";
+	public String showList(){
+//		ModelAndView modelAndView=new ModelAndView();
+//		modelAndView.setViewName("users/usersList");
+//		return modelAndView;
+		return "users/usersList";
 	}
 	
 	/**
@@ -102,8 +103,8 @@ public class UserController extends BasicController{
 	 */
 	@PostMapping("/list")
 	@ResponseBody
-	public PageResult list(Users user, Integer pageNum){
-		PageResult pageResult=userService.queryUser(user,pageNum == null ? 1 : pageNum, PAGE_SIZE);
+	public PageResult list(Users user, Integer page){
+		PageResult pageResult=userService.queryUser(user,page == null ? 1 : page, PAGE_SIZE);
 		return pageResult;
 	}
 
@@ -115,9 +116,8 @@ public class UserController extends BasicController{
 	 * @return 
 	 */
 	@GetMapping("/logout")
-	public void logout(HttpServletRequest request,HttpServletResponse response) throws IOException{
-		request.getSession().setAttribute("sessionToken", null);
-		response.sendRedirect("/center.action");
+	public String logout(HttpServletRequest request,HttpServletResponse response) throws IOException{
+		request.getSession().setAttribute("sessionUser", null);
+		return "redirect:/index.jsp";
 	}
-	
 }
