@@ -70,7 +70,7 @@ public class ZKCurator {
 					.build();
 			//开启客户端
 			client.start();
-			log.info("init方法被调用！zookeeper的客户端创建成功,状态为：{}",client.isStarted());
+			log.info("dev:init方法被调用！zookeeper的客户端创建成功,状态为：{}",client.isStarted());
 			//测试获取zookeeper的节点数据
 			try {				
 				//监听节点
@@ -101,7 +101,7 @@ public class ZKCurator {
 			public void childEvent(CuratorFramework client, PathChildrenCacheEvent event)
 					throws Exception {
 				if(event.getType().equals(PathChildrenCacheEvent.Type.CHILD_ADDED)){
-					log.info("被监听的事件为：CHILD_ADDED");
+					log.info("dev:被监听的事件为：CHILD_ADDED");
 					//将获取的data字符串数据转换为Map对象
 					Map<String, String> operObj=JsonUtils.jsonToObject(new String(event.getData().getData()),Map.class);
 					//获取节路径，操作的类型和bgmPath

@@ -62,7 +62,7 @@ public class LoginRegisterController extends BasicController{
 		}
 		// 查询用户是否存在
 		boolean usernameIsExists = usersService.queryUsersIsExists(users.getUsername());
-		// 不存在插入用户，存在报错误
+		// 不存在则保存用户，存在报错误
 		try {
 			if (!usernameIsExists) {
 				users.setUsername(users.getUsername());
