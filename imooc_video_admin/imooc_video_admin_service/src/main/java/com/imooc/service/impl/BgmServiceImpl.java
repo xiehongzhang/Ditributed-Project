@@ -56,8 +56,8 @@ public class BgmServiceImpl implements BgmService {
 		PageInfo<Bgm> pageInfo=new PageInfo<>(bgmLists);
 		PageResult pageResult=new PageResult();
 		pageResult.setPage(page);
-		pageResult.setTotal((int)pageInfo.getTotal());
-		pageResult.setRecords(pageInfo.getPages());
+		pageResult.setTotal(pageInfo.getPages());
+		pageResult.setRecords((int)pageInfo.getTotal());
 		pageResult.setRows(bgmLists);
 		return pageResult;
 	}

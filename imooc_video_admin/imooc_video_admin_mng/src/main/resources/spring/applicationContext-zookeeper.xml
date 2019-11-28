@@ -18,7 +18,10 @@
 	</bean>
 	<!-- 创建client -->
 	<bean id="client" class="org.apache.curator.framework.CuratorFrameworkFactory" factory-method="newClient" init-method="start" >
+		<!-- 本机zookeeper -->
 		<constructor-arg index="0" value="192.168.6.101:2181"/>
+		<!-- 服务器zookeeper -->
+		<!-- <constructor-arg index="0" value="49.234.159.164:2181"/> -->
 		<constructor-arg index="1" value="10000"/>
 		<constructor-arg index="2" value="5000"/>
 		<constructor-arg index="3" ref="retryPolicy"/>
