@@ -18,6 +18,7 @@ import java.io.IOException;
 
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -51,6 +52,10 @@ public class VideoController extends BasicController{
 	
 	@Autowired
 	private BgmService bgmService;
+	
+	//注入资源文件sources.properties,文件上传的命名空间
+	@Value("${FILE_NAMESPACE}")
+	private String FILE_NAMESPACE;
 	
 	/**
 	 * @name showVideo
@@ -119,9 +124,9 @@ public class VideoController extends BasicController{
 	@PostMapping("/bgmUpload")
 	@ResponseBody
 	public JsonResult showAddBgm(@RequestParam("file") MultipartFile[] file) throws IOException{
-		//文件上传的命名空间
-//		String fileNamespace=File.separator+"imooc_video_admin";
-		String fileNamespace="C:"+File.separator+"imooc_video_admin";
+//		//文件上传的命名空间
+//		String fileNamespace="imooc_video_admin";
+//		String fileNamespace="C:"+File.separator+"imooc_video_admin";
 		//数据库保存路径
 		String fileDBPath=File.separator+"bgm";
 		//文件名称
@@ -138,7 +143,7 @@ public class VideoController extends BasicController{
 					//判断文件是否为空 
 					if (StringUtil.isNotEmpty(fileName)) {
 						//文件要保存的完整路径
-						String fileString=fileNamespace+fileDBPath+File.separator+fileName;
+						String fileString=FILE_NAMESPACE+fileDBPath+File.separator+fileName;
 						//数据库保存的完整路径
 						fileDBPath +=File.separator+fileName;
 						//新建一个文件
