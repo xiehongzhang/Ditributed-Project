@@ -9,6 +9,8 @@
   	<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <java.version>1.8</java.version>
+    <!-- 打包时跳过测试类 -->
+    <skipTests>true</skipTests>
   </properties>
   <parent>
   	<groupId>org.springframework.boot</groupId>
@@ -21,7 +23,7 @@
 	<module>imooc_dao</module>
 	<module>imooc_service</module>
 	<module>imooc_controller</module>
-	<module>imooc_test</module>
+	<!-- <module>imooc_test</module> -->
   </modules>
   <!-- 设置要上传到maven服务器的路径 -->
 	<distributionManagement>

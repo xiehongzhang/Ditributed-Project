@@ -58,6 +58,7 @@ public class ZKCurator {
 	
 	RetryPolicy retryPolicy=new ExponentialBackoffRetry(1000, 5);
 
+	@SuppressWarnings("deprecation")
 	public void init(){
 		if (client == null) {
 			//创建客户端
@@ -91,6 +92,7 @@ public class ZKCurator {
 	 */
 	public void watchNode(String nodePath) throws Exception{
 		//实例一个Path Node 
+		@SuppressWarnings("resource")
 		final PathChildrenCache cache=new PathChildrenCache(client, nodePath, true);
 		//开启cache
 		cache.start();
@@ -103,6 +105,7 @@ public class ZKCurator {
 				if(event.getType().equals(PathChildrenCacheEvent.Type.CHILD_ADDED)){
 					log.info("dev:被监听的事件为：CHILD_ADDED");
 					//将获取的data字符串数据转换为Map对象
+					@SuppressWarnings("unchecked")
 					Map<String, String> operObj=JsonUtils.jsonToObject(new String(event.getData().getData()),Map.class);
 					//获取节路径，操作的类型和bgmPath
 					String nodePath=event.getData().getPath();

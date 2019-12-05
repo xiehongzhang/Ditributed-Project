@@ -1,3 +1,4 @@
+com\imooc\WarApplication.class
 META-INF\spring-configuration-metadata.json
 com\imooc\controller\VideoController.class
 com\imooc\controller\interceptor\AuthInterceptor.class

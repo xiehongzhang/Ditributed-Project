@@ -7,6 +7,9 @@
   </parent>
   <artifactId>imooc_controller</artifactId>
   <description>controller</description>
+  <packaging>war</packaging>
+  <!-- 默认的打包方式 -->
+  <!-- <packaging>jar</packaging> -->
   <dependencies>
   	<dependency>
   		<groupId>com.xhz</groupId>
@@ -14,20 +17,36 @@
   		<version>0.0.1-SNAPSHOT</version>
   	</dependency>
   	<dependency>
+  		<groupId>javax.servlet</groupId>
+  		<artifactId>javax.servlet-api</artifactId>
+  		<scope>provided</scope>
+  	</dependency>
+  	<dependency>
   		<groupId>org.springframework.boot</groupId>
   		<artifactId>spring-boot-configuration-processor</artifactId>
   		<optional>true</optional>
   	</dependency>
   </dependencies>
-<!--   <build>  
+  <!-- <build>  
   	<plugins>
         <plugin>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-maven-plugin</artifactId>          
 	        <configuration>
-	         <mainClass>com.imooc.controller.Application</mainClass>
+	         <mainClass>com.imooc.Application</mainClass>
 	        </configuration>
-   		</plugin>      
-    </plugins>
+   		</plugin>
+   		<plugin>
+   			<groupId>org.apache.maven.plugins</groupId>
+   			<artifactId>maven-war-plugin</artifactId>
+	        <configuration>
+	        	<encoding>${project.build.sourceEncoding}</encoding>
+	        	<skipTest>true</skipTest>
+	        	<mainClass>${start-class}</mainClass>
+	        	<skip>true</skip>
+	        	<testFailureIgnore>true</testFailureIgnore>
+	        </configuration>
+   		</plugin>   
+    </plugins> 
   </build> -->
 </project>
