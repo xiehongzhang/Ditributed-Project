@@ -81,9 +81,18 @@ public class FFMpegUtils{
 		command.add(videoSource);
 		command.add("-i");
 		command.add(audioSource);
+		command.add("-c:v");
+		command.add("copy");
+		command.add("-c:a");
+		command.add("aac");
+		command.add("-strict");
+		command.add("experimental");
+		command.add("-map");
+		command.add("0:v:0");
+		command.add("-map");
+		command.add("-1:a:0");
 		command.add("-t");
 		command.add(String.valueOf(time));
-		command.add("-y");
 		command.add(target);
 		//创建进程
 		ProcessBuilder processBuilder=new ProcessBuilder();

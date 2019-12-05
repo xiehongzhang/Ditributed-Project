@@ -21,7 +21,7 @@ import org.springframework.context.annotation.PropertySource;
  */
 @Configuration
 @ConfigurationProperties(prefix = "imooc.config")
-@PropertySource(value="classpath:resource/resources.properties")
+@PropertySource(value="classpath:resource/resources-prod.properties")
 public class ResourceProp {
 	private String zookeeperServer;
 	private String downloadNamespace;
