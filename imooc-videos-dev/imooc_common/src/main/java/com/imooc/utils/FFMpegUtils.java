@@ -11,9 +11,14 @@
 package com.imooc.utils;
 
 
+import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Stream;
 
 
 
@@ -26,8 +31,10 @@ import java.util.List;
 
 public class FFMpegUtils{
 	
-	//ffmpeg的安装路径
-	public static final String FFMPEG_PATH="D:\\installed software\\FFMpeg\\bin";
+	//ffmpeg的windows安装路径
+//	public static final String FFMPEG_PATH="D:\\installed software\\FFMpeg\\bin";
+	//ffmpeg 的linux安装路径
+	public static final String FFMPEG_PATH="/usr/local/ffmpeg/bin";
 	
 	/**
 	 * @name fetchVideoCover
@@ -48,7 +55,7 @@ public class FFMpegUtils{
 		 *        target
 		 */
 		List<String> command =new ArrayList<>();
-		command.add(FFMPEG_PATH+"\\"+"ffmpeg");
+		command.add(FFMPEG_PATH+File.separator+"ffmpeg");
 		command.add("-i");
 		command.add(source);
 		command.add("-ss");
@@ -62,8 +69,11 @@ public class FFMpegUtils{
 		command.add("1");
 		command.add(target);
 		//创建进程
-		ProcessBuilder processBuilder=new ProcessBuilder();
-		processBuilder.command(command).start();
+		ProcessBuilder processBuilder=new ProcessBuilder(command);
+		//执行命令
+		Process process=processBuilder.start();
+		//关闭进程
+		closeProcess(process);		
 	}
 	
 	public static void mergeVideoAndAudio(String videoSource, String audioSource, float time, String target) throws IOException{
@@ -76,7 +86,7 @@ public class FFMpegUtils{
 		 *        target
 		 */
 		List<String> command =new ArrayList<>();
-		command.add(FFMPEG_PATH+"\\"+"ffmpeg");
+		command.add(FFMPEG_PATH+File.separator+"ffmpeg");
 		command.add("-i");
 		command.add(videoSource);
 		command.add("-i");
@@ -95,8 +105,10 @@ public class FFMpegUtils{
 		command.add(String.valueOf(time));
 		command.add(target);
 		//创建进程
-		ProcessBuilder processBuilder=new ProcessBuilder();
-		processBuilder.command(command).start();
+		ProcessBuilder processBuilder=new ProcessBuilder(command);
+		Process process=processBuilder.start();
+		//关闭进程
+		closeProcess(process);
 	}
 	
 	//将mp4格式的文件转为avi格式
@@ -107,7 +119,7 @@ public class FFMpegUtils{
 		 *           C:\\imooc_video_dev\\videoAndaudio\\test\\video2.avi
 		 */
 		List<String> command =new ArrayList<>();
-		command.add(FFMPEG_PATH+"\\"+"ffmpeg");
+		command.add(FFMPEG_PATH+File.separator+"ffmpeg");
 		command.add("-i");
 		command.add("C:\\imooc_video_dev\\videoAndaudio\\video\\video2.mp4");
 		command.add("C:\\imooc_video_dev\\videoAndaudio\\test\\video2.avi");
@@ -117,5 +129,25 @@ public class FFMpegUtils{
 		
 	}
 
+	//关闭进程
+	public static void closeProcess(Process process) throws IOException{
+		//获取异常流
+		InputStream is=process.getErrorStream();
+		InputStreamReader isr=new InputStreamReader(is);
+		BufferedReader br=new BufferedReader(isr);
+		
+		Stream<String> line=null;
+		while((line=br.lines())!= null){			
+		}
+		if (br != null) {
+			br.close();
+		}
+		if (isr != null) {
+			br.close();
+		}
+		if (is != null) {
+			br.close();
+		}
+	}
 	
 }

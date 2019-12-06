@@ -29,12 +29,14 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.imooc.BasicController;
+import com.imooc.config.ResourceProp;
 import com.imooc.pojo.UserReport;
 import com.imooc.pojo.Users;
 import com.imooc.pojo.vo.UsersVO;
 import com.imooc.pojo.vo.UsersVideoVO;
 import com.imooc.service.UsersService;
 import com.imooc.utils.JsonResult;
+import com.sun.research.ws.wadl.Resource;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -52,6 +54,10 @@ public class UserController extends BasicController{
 	
 	@Autowired
 	private UsersService usersService;
+	
+	//资源属性
+	@Autowired
+	private ResourceProp resourceProp;
 	
 	/**
 	 * @name query
@@ -97,9 +103,9 @@ public class UserController extends BasicController{
 			return JsonResult.errorMsg("用户为空!");
 		}
 		//文件存放路径c:/imooc_video_dev
-		String fileSpacePath="C:/imooc_video_dev";
+		//String fileSpacePath="C:/imooc_video_dev";
 		//数据库存放路径
-		String fileDBPath="/"+userId+"/face";
+		String fileDBPath=File.separator+userId+File.separator+"face";
 		//文件名称
 		String fileName=null;
 		//字节输入缓冲流
@@ -115,8 +121,8 @@ public class UserController extends BasicController{
 			    fileName=files[0].getOriginalFilename();
 				//判断文件名是否为空
 				if (StringUtils.isNotBlank(fileName)) {
-					//文件最终保存路径
-					String finalName=fileSpacePath+fileDBPath+"/"+fileName;
+					//头像文件路径
+					String finalName=resourceProp.getUploadNamespace()+fileDBPath+File.separator+fileName;
 					//新建一个file对象
 					File outFile=new File(finalName);
 					//判断文件夹是否存在，当文件夹不存在时，创建文件夹
@@ -154,7 +160,7 @@ public class UserController extends BasicController{
 				}			
 			}
 		}
-		fileDBPath += ("/"+fileName);
+		fileDBPath += (File.separator+fileName);
 		Users users =new Users();
 		users.setId(userId);
 		users.setFaceImage(fileDBPath);

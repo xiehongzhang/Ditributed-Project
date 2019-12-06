@@ -106,7 +106,7 @@ public class ZKCurator {
 					log.info("dev:被监听的事件为：CHILD_ADDED");
 					//将获取的data字符串数据转换为Map对象
 					@SuppressWarnings("unchecked")
-					Map<String, String> operObj=JsonUtils.jsonToObject(new String(event.getData().getData()),Map.class);
+					Map<String, String> operObj=JsonUtils.jsonToObject(new String(event.getData().getData(),"UTF-8"),Map.class);
 					//获取节路径，操作的类型和bgmPath
 					String nodePath=event.getData().getPath();
 					String operType=operObj.get("operType");
@@ -128,7 +128,10 @@ public class ZKCurator {
 					//上传BGM文件的路径
 					String uploadFilePath=resourceProp.getUploadNamespace()+fileDBPath;
 					
-					String pathArr[]=fileDBPath.split("\\\\");					
+					//windows系统
+//					String pathArr[]=fileDBPath.split("\\\\");
+					//linux系统
+					String pathArr[]=fileDBPath.split("/");					
 					//文件的相对路径
 					String filePath="";
 					for(int i=0; i<pathArr.length; i++){

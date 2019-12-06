@@ -13,6 +13,7 @@ package com.imooc;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.imooc.config.ResourceProp;
 import com.imooc.utils.RedisUtils;
 
 /**
@@ -28,7 +29,7 @@ public class BasicController {
 	public static final String REDIS_USER_SESSION="redis_user_session";
 	
 	//文件保存的空间
-	public static final String FILE_NAMESPACE="C:/imooc_video_dev";
+//	public static final String FILE_NAMESPACE="C:\\imooc_video_dev";
 	
 //	//ffmpeg的安装路径
 //	public static final String FFMPEG_PATH="D:\\installed software\\FFMpeg\\bin";

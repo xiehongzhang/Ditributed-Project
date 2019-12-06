@@ -16,6 +16,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Date;
+import java.util.UUID;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.StringUtils;
@@ -28,6 +29,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.imooc.BasicController;
+import com.imooc.config.ResourceProp;
 import com.imooc.enums.VideoStatuEnum;
 import com.imooc.pojo.Bgm;
 import com.imooc.pojo.Comments;
@@ -71,6 +73,9 @@ public class VideoController extends BasicController{
 	@Autowired
 	private UsersService usersService;
 	
+	@Autowired
+	private ResourceProp resourceProp;
+	
 	/**
 	 * @name upload
 	 * @Description 用户上传video文件,保存到数据库中去
@@ -102,7 +107,7 @@ public class VideoController extends BasicController{
 			return JsonResult.errorMsg("用户id不能为空");
 		}
 		//文件数据库保存路径
-		String fileDBPath="/"+userId+"/video";
+		String fileDBPath=File.separator+userId+File.separator+"video";
 		//文件完整路径名
 		String filePath=null;
 		//文件名称
@@ -124,13 +129,14 @@ public class VideoController extends BasicController{
 				fileName=file.getOriginalFilename();
 				//判断文件名是否为空，文件大小是否大于0
 				if (StringUtils.isNotEmpty(fileName)) {
-					//拼接字符串
-					filePath=FILE_NAMESPACE+fileDBPath+"/"+fileName;
+					//拼接字符串(视频文件路径)
+					filePath=resourceProp.getUploadNamespace()+fileDBPath+File.separator+fileName;
 					//获取文件名前缀
 					String coverNamePrefix=FileStringUtils.getFileName(fileName);
 					coverName=coverNamePrefix + ".jpg";
-					coverDBPath=fileDBPath+"/"+coverName;
-					coverTarget=FILE_NAMESPACE+coverDBPath;
+					coverDBPath=fileDBPath+File.separator+coverName;
+					//视频封面文件路径
+					coverTarget=resourceProp.getUploadNamespace()+coverDBPath;
 					//创建file
 					File outFile=new File(filePath);
 					//判断outFile的上一级目录是否存在
@@ -176,15 +182,22 @@ public class VideoController extends BasicController{
 		if (StringUtils.isNotEmpty(bgmId)) {
 			//查询背景音乐的所有信息
 			Bgm bgm=bgmService.queryBgmById(bgmId);
+			//视频文件路径
 			String videoSource=filePath;
-			String audioSource=FILE_NAMESPACE+bgm.getPath();
-			String target=FILE_NAMESPACE+fileDBPath+"/"+"new"+"/"+fileName;
+			//背景音乐文件路径
+			String audioSource=resourceProp.getUploadNamespace()+bgm.getPath();
+			//新的视频文件名称
+			fileName=UUID.randomUUID().toString()+".mp4";
+			//新的文件保存路径
+			fileDBPath+=(File.separator+fileName);
+			//合成后的文件路径
+			String target=resourceProp.getUploadNamespace()+fileDBPath;
 			//合并背景音乐和短视频
 			FFMpegUtils.mergeVideoAndAudio(videoSource, audioSource, videoSeconds, target);
 		}
 		//保存视频信息
 		String id=sid.nextShort();
-		fileDBPath += "/"+fileName;
+		fileDBPath += (File.separator+fileName);
 		Video video = new Video();
 		video.setId(id);
 		video.setUserId(userId);

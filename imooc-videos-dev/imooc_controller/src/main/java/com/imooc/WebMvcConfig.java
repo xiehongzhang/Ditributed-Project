@@ -37,7 +37,10 @@ public class WebMvcConfig extends WebMvcConfigurationSupport{
 	protected void addResourceHandlers(ResourceHandlerRegistry registry) {
 		registry.addResourceHandler("/**")
 				.addResourceLocations("classpath:/META-INF/resources/")
-				.addResourceLocations("file:C:/imooc_video_dev/");
+				//windows的tomcat虚拟目录
+//				.addResourceLocations("file:C:/imooc_video_dev/");
+				//linux添加tomcat虚拟目录
+				.addResourceLocations("file:/xhz/imooc_dev");
 	}
 	
 	/**
@@ -69,9 +72,9 @@ public class WebMvcConfig extends WebMvcConfigurationSupport{
 	@Override
 	protected void addInterceptors(InterceptorRegistry registry) {
 		registry.addInterceptor(firstInterceptor())
-		.addPathPatterns("/user/**", "/video/upload", "/video/uploadCover",
-	   					"/video/userLike", "/video/userUnLike",
-	   					"/video/saveComment","/bgm/**")
+//		.addPathPatterns("/user/**", "/video/upload", "/video/uploadCover",
+//	   					"/video/userLike", "/video/userUnLike",
+//	   					"/video/saveComment","/bgm/**")
 		.excludePathPatterns("/user/queryPublisher")
 		.excludePathPatterns("/video/upload");
 		super.addInterceptors(registry);
