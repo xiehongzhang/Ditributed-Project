@@ -40,7 +40,7 @@ public class WebMvcConfig extends WebMvcConfigurationSupport{
 				//windows的tomcat虚拟目录
 //				.addResourceLocations("file:C:/imooc_video_dev/");
 				//linux添加tomcat虚拟目录
-				.addResourceLocations("file:/xhz/imooc_dev");
+				.addResourceLocations("file:/xhz/imooc_video_dev");
 	}
 	
 	/**
@@ -69,15 +69,15 @@ public class WebMvcConfig extends WebMvcConfigurationSupport{
 	 * @Description 重写父类的addResourceHandlers,将拦截器注册到注册中心去,以及需要拦截的路径
 	 * @return 
 	 */
-	@Override
-	protected void addInterceptors(InterceptorRegistry registry) {
-		registry.addInterceptor(firstInterceptor())
+//	@Override
+//	protected void addInterceptors(InterceptorRegistry registry) {
+//		registry.addInterceptor(firstInterceptor())
 //		.addPathPatterns("/user/**", "/video/upload", "/video/uploadCover",
 //	   					"/video/userLike", "/video/userUnLike",
 //	   					"/video/saveComment","/bgm/**")
-		.excludePathPatterns("/user/queryPublisher")
-		.excludePathPatterns("/video/upload");
-		super.addInterceptors(registry);
-	}
+//		.excludePathPatterns("/user/queryPublisher")
+//		.excludePathPatterns("/video/upload");
+//		super.addInterceptors(registry);
+//	}
 	
 }
