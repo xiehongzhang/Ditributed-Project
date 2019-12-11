@@ -103,8 +103,8 @@ public class VideoController extends BasicController{
 								  String desc, float videoSeconds, 
 								  int videoWidth, int videoHeight) throws IOException{
 		//判断用户id是否为空
-		if (StringUtils.isEmpty(userId)) {
-			return JsonResult.errorMsg("用户id不能为空");
+		if (StringUtils.isBlank(userId)) {
+			return JsonResult.errorMsg("用户id为空");
 		}
 		//文件数据库保存路径
 		String fileDBPath=File.separator+userId+File.separator+"video";

@@ -18,7 +18,6 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Stream;
 
 
 
@@ -93,14 +92,10 @@ public class FFMpegUtils{
 		command.add(audioSource);
 		command.add("-c:v");
 		command.add("copy");
-		command.add("-c:a");
-		command.add("aac");
-		command.add("-strict");
-		command.add("experimental");
 		command.add("-map");
-		command.add("0:v:0");
+		command.add("0:v");
 		command.add("-map");
-		command.add("-1:a:0");
+		command.add("1:a");
 		command.add("-t");
 		command.add(String.valueOf(time));
 		command.add(target);
@@ -136,17 +131,17 @@ public class FFMpegUtils{
 		InputStreamReader isr=new InputStreamReader(is);
 		BufferedReader br=new BufferedReader(isr);
 		
-		Stream<String> line=null;
-		while((line=br.lines())!= null){			
+		String line="";
+		while((line=br.readLine())!= null){			
 		}
 		if (br != null) {
 			br.close();
 		}
 		if (isr != null) {
-			br.close();
+			isr.close();
 		}
 		if (is != null) {
-			br.close();
+			is.close();
 		}
 	}
 	
