@@ -188,10 +188,8 @@ public class VideoController extends BasicController{
 			String audioSource=resourceProp.getUploadNamespace()+bgm.getPath();
 			//新的视频文件名称
 			fileName=UUID.randomUUID().toString()+".mp4";
-			//新的文件保存路径
-			fileDBPath+=(File.separator+fileName);
 			//合成后的文件路径
-			String target=resourceProp.getUploadNamespace()+fileDBPath;
+			String target=resourceProp.getUploadNamespace()+fileDBPath+File.separator+fileName;
 			//合并背景音乐和短视频
 			FFMpegUtils.mergeVideoAndAudio(videoSource, audioSource, videoSeconds, target);
 		}

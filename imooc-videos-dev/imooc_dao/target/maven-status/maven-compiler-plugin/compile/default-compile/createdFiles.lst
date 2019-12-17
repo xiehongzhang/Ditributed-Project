@@ -1,0 +1,10 @@
+com\imooc\dao\SearchRecordsMapper.class
+com\imooc\dao\VideoMapperCustom.class
+com\imooc\dao\UsersMapper.class
+com\imooc\dao\BgmMapper.class
+com\imooc\dao\UsersLikeVideosMapper.class
+com\imooc\dao\UserReportMapper.class
+com\imooc\dao\CommentsCustomMapper.class
+com\imooc\dao\VideoMapper.class
+com\imooc\dao\CommentsMapper.class
+com\imooc\dao\UsersFansMapper.class
