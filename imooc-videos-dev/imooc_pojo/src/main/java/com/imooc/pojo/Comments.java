@@ -7,26 +7,26 @@ import io.swagger.annotations.ApiModelProperty;
 
 @ApiModel(value="举报信息实体", description="举报信息实体类")
 public class Comments {
-	@ApiModelProperty
-    private String id;
+	@ApiModelProperty(hidden=true)
+    private String id;//評論id
 
 	@ApiModelProperty
-    private String videoId;
+    private String videoId;//視頻id
 
 	@ApiModelProperty
-    private String fromUserId;
+    private String fromUserId;//評論者id
+
+	@ApiModelProperty(hidden=true)
+    private String parentCommentId;//父評論id
+
+	@ApiModelProperty(hidden=true)
+    private String toUserId;//被評論者id
+
+	@ApiModelProperty(hidden=true)
+    private Date createTime;//創建時間
 
 	@ApiModelProperty
-    private String parentCommentId;
-
-	@ApiModelProperty
-    private String toUserId;
-
-	@ApiModelProperty
-    private Date createTime;
-
-	@ApiModelProperty
-    private String comment;
+    private String comment;//評論內容
 
 	@ApiModelProperty
     public String getId() {

@@ -21,9 +21,14 @@ import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
@@ -49,7 +54,7 @@ import io.swagger.annotations.ApiOperation;
  */
 @Api(value = "用户接口", tags = { "用户操作接口" })
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/users")
 public class UserController extends BasicController{
 	
 	@Autowired
@@ -67,11 +72,11 @@ public class UserController extends BasicController{
 	 */
 	@ApiOperation(value="查询用户信息", notes="查询用户信息操作")
 	@ApiImplicitParams({
-		@ApiImplicitParam(value="用户id", name="userId", paramType="query", dataType="String", required=true),
-		@ApiImplicitParam(value="被关注者id", name="fanId", paramType="query", dataType="String", required=false)
+		@ApiImplicitParam(value="用户id", name="userId", paramType="path", dataType="String", required=true),
+		@ApiImplicitParam(value="被关注者id", name="fanId", paramType="query", dataType="String", required=true)
 	})
-	@PostMapping("/query")
-	public JsonResult query(String userId, String fanId){
+	@GetMapping(value="/user_info/{userId}")
+	public JsonResult query(@PathVariable(value="userId") String userId, String fanId){
 		if (StringUtils.isBlank(userId)) {
 			return JsonResult.errorMsg("用户id不能为空");
 		}
@@ -95,9 +100,9 @@ public class UserController extends BasicController{
 	 * @throws IOException 
 	 */
 	@ApiOperation(value="头像上传", notes="用户进行头像上传操作")
-	@ApiImplicitParam(value="用户id", name="userId", paramType="query", dataType="String", required=true)
-	@PostMapping(value="/uploadFace" , headers="content-type=multipart/form-data")
-	public JsonResult uploadFace(String userId, @RequestParam("file") MultipartFile[] files){
+	@ApiImplicitParam(value="用户id", name="userId", paramType="path", dataType="String", required=true)
+	@PostMapping(value="/user_icons/{userId}" , headers="content-type=multipart/form-data")
+	public JsonResult uploadFace(@PathVariable(value="userId") String userId, @RequestParam("file") MultipartFile[] files){
 		//判断用户id是否为空
 		if (StringUtils.isBlank(userId)) {
 			return JsonResult.errorMsg("用户为空!");
@@ -188,11 +193,11 @@ public class UserController extends BasicController{
 	@ApiOperation(value="用户查询视频发布者信息", notes="用户进查询视频发布者的信息操作")
 	@ApiImplicitParams({
 		@ApiImplicitParam(value="用户id", name="loginUserId", paramType="query", dataType="String", required=false),
-		@ApiImplicitParam(value="视频id", name="videoId", paramType="query", dataType="String", required=true),
+		@ApiImplicitParam(value="视频id", name="videoId", paramType="path", dataType="String", required=true),
 		@ApiImplicitParam(value="发布者id", name="publishUserId", paramType="query", dataType="String", required=true),
 	})
-	@PostMapping("/queryPublisher")
-	public JsonResult queryPublisher(String loginUserId, String videoId, String publishUserId){
+	@GetMapping("/video_user_info/{videoId}")
+	public JsonResult queryPublisher(String loginUserId, @PathVariable(value="videoId") String videoId, String publishUserId){
 		//判断发布者的id和视频ID是否为空
 		if (StringUtils.isBlank(videoId) || StringUtils.isBlank(publishUserId)) {
 			return JsonResult.errorMsg("");
@@ -218,11 +223,11 @@ public class UserController extends BasicController{
 	 */
 	@ApiOperation(value="关注用户操作", notes="用户进行关注其他用户")
 	@ApiImplicitParams({
-		@ApiImplicitParam(value="用户id", name="userId", paramType="query", dataType="String", required=true),
+		@ApiImplicitParam(value="用户id", name="userId", paramType="path", dataType="String", required=true),
 		@ApiImplicitParam(value="被关注者id", name="fanId", paramType="query", dataType="String", required=true)
 	})
-	@PostMapping("/beyourfans")
-	public JsonResult beyourfans(String userId, String fanId){
+	@PostMapping("/follow_user/{userId}")
+	public JsonResult beyourfans(@PathVariable(value="userId") String userId, String fanId){
 		if (StringUtils.isBlank(userId) || StringUtils.isBlank(fanId)) {
 			return JsonResult.errorMsg("");
 		}
@@ -239,11 +244,11 @@ public class UserController extends BasicController{
 	 */
 	@ApiOperation(value="取消关注用户操作", notes="用户进行取消关注其他用户")
 	@ApiImplicitParams({
-		@ApiImplicitParam(value="用户id", name="userId", paramType="query", dataType="String", required=true),
+		@ApiImplicitParam(value="用户id", name="userId", paramType="path", dataType="String", required=true),
 		@ApiImplicitParam(value="被关注者id", name="fanId", paramType="query", dataType="String", required=true)
 	})
-	@PostMapping("/dontbeyourfans")
-	public JsonResult dontbeyourfans(String userId, String fanId){
+	@PostMapping("/un_follow_user/{userId}")
+	public JsonResult dontbeyourfans(@PathVariable(value="userId") String userId, String fanId){
 		if (StringUtils.isBlank(userId) || StringUtils.isBlank(fanId)) {
 			return JsonResult.errorMsg("");
 		}
@@ -257,10 +262,14 @@ public class UserController extends BasicController{
 	 * @param userReport
 	 * @return 
 	 */
-	@ApiOperation(value="举报视频", notes="用户进行举报操作")
-	@PostMapping("/reportUser")
+	@ApiOperation(value="举报视频", notes="用户进行举报視頻操作")
+	@PostMapping("/report_video")
 	public JsonResult reportUser(@RequestBody  UserReport userReport){
-		usersService.saveUserReport(userReport);
-		return JsonResult.ok();
+		if(StringUtils.isBlank(userReport.getDealVideoId()) || StringUtils.isBlank(userReport.getDealUserId()) || StringUtils.isBlank(userReport.getUserId())){
+			return JsonResult.errorMsg("舉報不成功...");
+		}else{
+			usersService.saveUserReport(userReport);
+			return JsonResult.ok();
+		}
 	}
 }

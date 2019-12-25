@@ -7,41 +7,41 @@ import io.swagger.annotations.ApiModelProperty;
 
 @ApiModel(value="视频实体", description="视频实体类")
 public class Video {
-	@ApiModelProperty
-    private String id;
+	@ApiModelProperty(hidden=true)
+    private String id;//視頻id
 
-	@ApiModelProperty
-    private String userId;
+	@ApiModelProperty(hidden=true)
+    private String userId;//用戶id
 
-	@ApiModelProperty
-    private String audioId;
+	@ApiModelProperty(hidden=true)
+    private String audioId;//BGM id
 
 	@ApiModelProperty
     private String videoDesc;
 
-	@ApiModelProperty
-    private Float videoSeconds;
+	@ApiModelProperty(hidden=true)
+    private Float videoSeconds;//視頻秒數
 
-	@ApiModelProperty
-    private Integer videoWidth;
+	@ApiModelProperty(hidden=true)
+    private Integer videoWidth;//視頻的寬度
 
-	@ApiModelProperty
-    private Integer videoHeight;
+	@ApiModelProperty(hidden=true)
+    private Integer videoHeight;//視頻的高度
 
-	@ApiModelProperty
-    private String videoPath;
+	@ApiModelProperty(hidden=true)
+    private String videoPath;//視頻保存路徑
 
-	@ApiModelProperty
-    private String coverPath;
+	@ApiModelProperty(hidden=true)
+    private String coverPath;//封面路徑
 
-	@ApiModelProperty
-    private Long likeCounts;
+	@ApiModelProperty(hidden=true)
+    private Long likeCounts;//點讚數
 
-	@ApiModelProperty
-    private Integer status;
+	@ApiModelProperty(hidden=true)
+    private Integer status;//狀態
 
-	@ApiModelProperty
-    private Date createTime;
+	@ApiModelProperty(hidden=true)
+    private Date createTime;//日期
 
     public String getId() {
         return id;

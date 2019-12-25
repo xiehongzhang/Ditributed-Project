@@ -16,6 +16,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.imooc.pojo.Bgm;
@@ -31,7 +32,6 @@ import io.swagger.annotations.ApiOperation;
  */
 @Api(value="Bgm接口",tags={"背景音乐操作接口"})
 @RestController
-@RequestMapping("/bgm")
 public class BbmController {
 	@Autowired
 	private BgmService bgmService;
@@ -43,7 +43,7 @@ public class BbmController {
 	 * @return 
 	 */
 	@ApiOperation(value="查询bgm列表",notes="查询BGM列表操作")
-	@PostMapping("/list")
+	@RequestMapping(value="/bgms",method=RequestMethod.GET)
 	public JsonResult list(){
 		List<Bgm> bgm=bgmService.queryBgmList();
 		return JsonResult.ok(bgm);

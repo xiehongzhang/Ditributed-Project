@@ -32,9 +32,9 @@ import com.imooc.pojo.UserReport;
 import com.imooc.pojo.Users;
 import com.imooc.pojo.UsersFans;
 import com.imooc.pojo.UsersFansExample;
+import com.imooc.pojo.UsersFansExample.Criteria;
 import com.imooc.pojo.UsersLikeVideos;
 import com.imooc.pojo.UsersLikeVideosExample;
-import com.imooc.pojo.UsersLikeVideosExample.Criteria;
 import com.imooc.service.UsersService;
 import com.imooc.utils.MD5Util;
 
@@ -113,12 +113,12 @@ public class UsersSeriveceImpl implements UsersService {
 	@Transactional(propagation=Propagation.SUPPORTS)
 	@Override
 	public Boolean isLike(String userId, String videoId) {
-		if (StringUtils.isBlank(videoId)) {
+		if (StringUtils.isBlank(videoId) || StringUtils.isBlank(userId)) {
 			return false;
 		}
 		//根据用户id和视频id查询是否存在关系
 		UsersLikeVideosExample example=new UsersLikeVideosExample();
-		Criteria criteria=example.createCriteria();
+		com.imooc.pojo.UsersLikeVideosExample.Criteria criteria=example.createCriteria();
 		criteria.andUserIdEqualTo(userId);
 		criteria.andVideoIdEqualTo(videoId);
 		List<UsersLikeVideos> list=usersLikeVideosMapper.selectByExample(example);
@@ -164,7 +164,7 @@ public class UsersSeriveceImpl implements UsersService {
 	public Boolean isFollow(String userId, String followerId) {
 		//查询是否存在这样的记录
 		UsersFansExample example=new UsersFansExample();
-		com.imooc.pojo.UsersFansExample.Criteria criteria=example.createCriteria();
+        Criteria criteria=example.createCriteria();
 		criteria.andFanIdEqualTo(userId);
 		criteria.andUserIdEqualTo(followerId);
 		List<UsersFans> list = usersFansMapper.selectByExample(example);

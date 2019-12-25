@@ -7,26 +7,26 @@ import io.swagger.annotations.ApiModelProperty;
 
 @ApiModel(value="举报视频信息实体", description="举报视频的信息实体类")
 public class UserReport {
-	@ApiModelProperty
-    private String id;
+	@ApiModelProperty(hidden=true)
+    private String id;//id
 
 	@ApiModelProperty
-    private String dealUserId;
+    private String dealUserId;//被舉報的用戶
 
 	@ApiModelProperty
-    private String dealVideoId;
+    private String dealVideoId;//被舉報的視頻
 
 	@ApiModelProperty
-    private String title;
+    private String title;//標題
 
 	@ApiModelProperty
-    private String content;
+    private String content;//內容
 
 	@ApiModelProperty
-    private String userId;
+    private String userId;//舉報者
 
 	@ApiModelProperty
-    private Date createTime;
+    private Date createTime;//創建時間
 
     public String getId() {
         return id;

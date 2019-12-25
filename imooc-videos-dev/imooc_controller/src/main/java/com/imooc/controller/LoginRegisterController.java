@@ -16,6 +16,9 @@ import java.util.UUID;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -51,9 +54,6 @@ public class LoginRegisterController extends BasicController{
 	 * @return 返回一个操作状态
 	 */
 	@ApiOperation(value = "用户注册方法", notes = "用户进行注册操作")
-	@ApiImplicitParams({
-			@ApiImplicitParam(value = "用户名", name = "username", paramType = "query", dataType = "String", required = true),
-			@ApiImplicitParam(value = "密码", name = "password", paramType = "query", dataType = "String", required = true) })
 	@PostMapping("/regist")
 	public JsonResult regist(@RequestBody Users users) {
 		// 判断用户名和密码是否为空
@@ -92,10 +92,6 @@ public class LoginRegisterController extends BasicController{
 	 * @return Json数据
 	 */
 	@ApiOperation(value="用户登录操作",notes="用户进行登录操作")
-	@ApiImplicitParams({
-		@ApiImplicitParam(value="用户名", name="username", paramType="query", dataType="String", required=true),
-		@ApiImplicitParam(value="密码", name="password", paramType="query", dataType="String", required=true)
-	})
 	@PostMapping("/login")
 	public JsonResult login(@RequestBody Users users) {
 		// 1: 判断用户名和密码是否为空
@@ -125,9 +121,9 @@ public class LoginRegisterController extends BasicController{
 	 * @return 
 	 */
 	@ApiOperation(value = "用户注销操作",notes="用户进行注销操作" )
-	@ApiImplicitParam(value="用户id",name="userId",paramType="query",dataType="String",required=true)
-	@PostMapping("/logout")
-	public  JsonResult logout(String userId){
+	@ApiImplicitParam(value="用户id",name="userId",paramType="path",dataType="String",required=true)
+	@DeleteMapping("/logout/{userId}")
+	public  JsonResult logout(@PathVariable(value="userId") String userId){
 		if (StringUtils.isBlank(userId) ) {
 			return JsonResult.errorMsg("用户id不能为空");
 		}else{
