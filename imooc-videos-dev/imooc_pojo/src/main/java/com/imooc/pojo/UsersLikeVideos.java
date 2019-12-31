@@ -1,40 +1,39 @@
 package com.imooc.pojo;
 
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import java.io.Serializable;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.experimental.Accessors;
 
-@ApiModel(value="用户和视频的关系实体", description="用户和视频关系实体类")
-public class UsersLikeVideos {
-	@ApiModelProperty
+/**
+ * <p>
+ * 
+ * </p>
+ *
+ * @author xhz
+ * @since 2019-12-27
+ */
+@Data
+@EqualsAndHashCode(callSuper = false)
+@Accessors(chain = true)
+public class UsersLikeVideos implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+
+    /**
+     * ID
+     */
     private String id;
 
-	@ApiModelProperty
+    /**
+     * 用户ID
+     */
     private String userId;
 
-	@ApiModelProperty
+    /**
+     * 视频ID
+     */
     private String videoId;
 
-    public String getId() {
-        return id;
-    }
 
-    public void setId(String id) {
-        this.id = id == null ? null : id.trim();
-    }
-
-    public String getUserId() {
-        return userId;
-    }
-
-    public void setUserId(String userId) {
-        this.userId = userId == null ? null : userId.trim();
-    }
-
-    public String getVideoId() {
-        return videoId;
-    }
-
-    public void setVideoId(String videoId) {
-        this.videoId = videoId == null ? null : videoId.trim();
-    }
 }

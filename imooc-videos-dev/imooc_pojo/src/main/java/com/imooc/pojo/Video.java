@@ -1,141 +1,85 @@
 package com.imooc.pojo;
 
-import java.util.Date;
+import java.time.LocalDateTime;
+import java.io.Serializable;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.experimental.Accessors;
 
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+/**
+ * <p>
+ * 
+ * </p>
+ *
+ * @author xhz
+ * @since 2019-12-27
+ */
+@Data
+@EqualsAndHashCode(callSuper = false)
+@Accessors(chain = true)
+public class Video implements Serializable {
 
-@ApiModel(value="视频实体", description="视频实体类")
-public class Video {
-	@ApiModelProperty(hidden=true)
-    private String id;//視頻id
+    private static final long serialVersionUID = 1L;
 
-	@ApiModelProperty(hidden=true)
-    private String userId;//用戶id
+    /**
+     * ID
+     */
+    private String id;
 
-	@ApiModelProperty(hidden=true)
-    private String audioId;//BGM id
+    /**
+     * 用户ID
+     */
+    private String userId;
 
-	@ApiModelProperty
+    /**
+     * BgmID
+     */
+    private String audioId;
+
+    /**
+     * 视频描述
+     */
     private String videoDesc;
 
-	@ApiModelProperty(hidden=true)
-    private Float videoSeconds;//視頻秒數
+    /**
+     * 视频时长
+     */
+    private Float videoSeconds;
 
-	@ApiModelProperty(hidden=true)
-    private Integer videoWidth;//視頻的寬度
+    /**
+     * 视频宽度
+     */
+    private Integer videoWidth;
 
-	@ApiModelProperty(hidden=true)
-    private Integer videoHeight;//視頻的高度
+    /**
+     * 视频高度
+     */
+    private Integer videoHeight;
 
-	@ApiModelProperty(hidden=true)
-    private String videoPath;//視頻保存路徑
+    /**
+     * 视频路径
+     */
+    private String videoPath;
 
-	@ApiModelProperty(hidden=true)
-    private String coverPath;//封面路徑
+    /**
+     * 封面路径
+     */
+    private String coverPath;
 
-	@ApiModelProperty(hidden=true)
-    private Long likeCounts;//點讚數
+    /**
+     * 被点赞的数量
+     */
+    private Long likeCounts;
 
-	@ApiModelProperty(hidden=true)
-    private Integer status;//狀態
+    /**
+     * 状态 “0”正常播放 “1”禁播
+     */
+    private Integer status;
 
-	@ApiModelProperty(hidden=true)
-    private Date createTime;//日期
+    /**
+     * 创建时间
+     */
+    private LocalDateTime createTime;
 
-    public String getId() {
-        return id;
-    }
 
-    public void setId(String id) {
-        this.id = id == null ? null : id.trim();
-    }
-
-    public String getUserId() {
-        return userId;
-    }
-
-    public void setUserId(String userId) {
-        this.userId = userId == null ? null : userId.trim();
-    }
-
-    public String getAudioId() {
-        return audioId;
-    }
-
-    public void setAudioId(String audioId) {
-        this.audioId = audioId == null ? null : audioId.trim();
-    }
-
-    public String getVideoDesc() {
-        return videoDesc;
-    }
-
-    public void setVideoDesc(String videoDesc) {
-        this.videoDesc = videoDesc == null ? null : videoDesc.trim();
-    }
-
-    public Float getVideoSeconds() {
-        return videoSeconds;
-    }
-
-    public void setVideoSeconds(Float videoSeconds) {
-        this.videoSeconds = videoSeconds;
-    }
-
-    public Integer getVideoWidth() {
-        return videoWidth;
-    }
-
-    public void setVideoWidth(Integer videoWidth) {
-        this.videoWidth = videoWidth;
-    }
-
-    public Integer getVideoHeight() {
-        return videoHeight;
-    }
-
-    public void setVideoHeight(Integer videoHeight) {
-        this.videoHeight = videoHeight;
-    }
-
-    public String getVideoPath() {
-        return videoPath;
-    }
-
-    public void setVideoPath(String videoPath) {
-        this.videoPath = videoPath == null ? null : videoPath.trim();
-    }
-
-    public String getCoverPath() {
-        return coverPath;
-    }
-
-    public void setCoverPath(String coverPath) {
-        this.coverPath = coverPath == null ? null : coverPath.trim();
-    }
-
-    public Long getLikeCounts() {
-        return likeCounts;
-    }
-
-    public void setLikeCounts(Long likeCounts) {
-        this.likeCounts = likeCounts;
-    }
-
-    public Integer getStatus() {
-        return status;
-    }
-
-    public void setStatus(Integer status) {
-        this.status = status;
-    }
-
-    public Date getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
-    }
 }

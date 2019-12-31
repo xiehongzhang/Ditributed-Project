@@ -12,9 +12,9 @@ package com.imooc.service;
 
 import java.util.List;
 
-import com.imooc.pojo.Comments;
-import com.imooc.pojo.Video;
-import com.imooc.pojo.vo.VideoVO;
+import com.imooc.pojo1.Comments;
+import com.imooc.pojo1.Video;
+import com.imooc.pojo1.vo.VideoVO;
 import com.imooc.utils.PageResult;
 
 /**

@@ -1,32 +1,16 @@
 package com.imooc.dao;
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.imooc.pojo.UserReport;
-import com.imooc.pojo.UserReportExample;
-import java.util.List;
 
-import org.apache.ibatis.annotations.Param;
-import org.springframework.stereotype.Repository;
-@Repository
-public interface UserReportMapper {
-    int countByExample(UserReportExample example);
+/**
+ * <p>
+ *  Mapper 接口
+ * </p>
+ *
+ * @author xhz
+ * @since 2019-12-27
+ */
+public interface UserReportMapper extends BaseMapper<UserReport> {
 
-    int deleteByExample(UserReportExample example);
-
-    int deleteByPrimaryKey(String id);
-
-    int insert(UserReport record);
-
-    int insertSelective(UserReport record);
-
-    List<UserReport> selectByExample(UserReportExample example);
-
-    UserReport selectByPrimaryKey(String id);
-
-    int updateByExampleSelective(@Param("record") UserReport record, @Param("example") UserReportExample example);
-
-    int updateByExample(@Param("record") UserReport record, @Param("example") UserReportExample example);
-
-    int updateByPrimaryKeySelective(UserReport record);
-
-    int updateByPrimaryKey(UserReport record);
 }

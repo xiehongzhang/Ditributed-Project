@@ -19,7 +19,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.imooc.Application;
-import com.imooc.pojo.Bgm;
+import com.imooc.pojo1.Bgm;
 import com.imooc.service.BgmService;
 
 /**

@@ -38,9 +38,9 @@ public class WebMvcConfig extends WebMvcConfigurationSupport{
 		registry.addResourceHandler("/**")
 				.addResourceLocations("classpath:/META-INF/resources/")
 				//windows的tomcat虚拟目录
-//				.addResourceLocations("file:C:/imooc_video_dev/");
+				.addResourceLocations("file:C:/imooc_video_dev/");
 				//linux添加tomcat虚拟目录
-				.addResourceLocations("file:/xhz/imooc_video_dev");
+//				.addResourceLocations("file:/xhz/imooc_video_dev");
 	}
 	
 	/**

@@ -19,10 +19,10 @@
 		            <groupId>org.springframework.boot</groupId>
 		            <artifactId>spring-boot-starter-logging</artifactId>
         		</exclusion>
-        		<exclusion>
+        		<!-- <exclusion>
 					<groupId>org.springframework.boot</groupId>
 					<artifactId>spring-boot-starter-tomcat</artifactId>
-				</exclusion>
+				</exclusion> -->
 			</exclusions>
 		</dependency>
 		<!--增加log4j2依赖↓-->

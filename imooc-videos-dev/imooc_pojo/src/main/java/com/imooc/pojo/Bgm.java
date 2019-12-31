@@ -1,51 +1,44 @@
 package com.imooc.pojo;
 
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import java.io.Serializable;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.experimental.Accessors;
 
-@ApiModel(value="背景音乐实体", description="背景音乐实体类")
-public class Bgm {
-	@ApiModelProperty
+/**
+ * <p>
+ * 
+ * </p>
+ *
+ * @author xhz
+ * @since 2019-12-27
+ */
+@Data
+@EqualsAndHashCode(callSuper = false)
+@Accessors(chain = true)
+public class Bgm implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+
+    /**
+     * ID
+     */
     private String id;
 
-	@ApiModelProperty
+    /**
+     * 作者
+     */
     private String author;
 
-	@ApiModelProperty
+    /**
+     * 歌名
+     */
     private String name;
 
-	@ApiModelProperty
+    /**
+     * 歌曲路径
+     */
     private String path;
 
-    public String getId() {
-        return id;
-    }
 
-    public void setId(String id) {
-        this.id = id == null ? null : id.trim();
-    }
-
-    public String getAuthor() {
-        return author;
-    }
-
-    public void setAuthor(String author) {
-        this.author = author == null ? null : author.trim();
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name == null ? null : name.trim();
-    }
-
-    public String getPath() {
-        return path;
-    }
-
-    public void setPath(String path) {
-        this.path = path == null ? null : path.trim();
-    }
 }

@@ -1,87 +1,60 @@
 package com.imooc.pojo;
 
-import java.util.Date;
+import java.time.LocalDateTime;
+import java.io.Serializable;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.experimental.Accessors;
 
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+/**
+ * <p>
+ * 
+ * </p>
+ *
+ * @author xhz
+ * @since 2019-12-27
+ */
+@Data
+@EqualsAndHashCode(callSuper = false)
+@Accessors(chain = true)
+public class Comments implements Serializable {
 
-@ApiModel(value="举报信息实体", description="举报信息实体类")
-public class Comments {
-	@ApiModelProperty(hidden=true)
-    private String id;//評論id
+    private static final long serialVersionUID = 1L;
 
-	@ApiModelProperty
-    private String videoId;//視頻id
+    /**
+     * ID
+     */
+    private String id;
 
-	@ApiModelProperty
-    private String fromUserId;//評論者id
+    /**
+     * 视频ID
+     */
+    private String videoId;
 
-	@ApiModelProperty(hidden=true)
-    private String parentCommentId;//父評論id
+    /**
+     * 评论者ID
+     */
+    private String fromUserId;
 
-	@ApiModelProperty(hidden=true)
-    private String toUserId;//被評論者id
+    /**
+     * 父评论ID
+     */
+    private String parentCommentId;
 
-	@ApiModelProperty(hidden=true)
-    private Date createTime;//創建時間
+    /**
+     * 被评论者ID
+     */
+    private String toUserId;
 
-	@ApiModelProperty
-    private String comment;//評論內容
+    /**
+     * 内容
+     */
+    private String comment;
 
-	@ApiModelProperty
-    public String getId() {
-        return id;
-    }
+    /**
+     * 创建时间
+     */
+    private LocalDateTime createTime;
 
-    public void setId(String id) {
-        this.id = id == null ? null : id.trim();
-    }
 
-    public String getVideoId() {
-        return videoId;
-    }
-
-    public void setVideoId(String videoId) {
-        this.videoId = videoId == null ? null : videoId.trim();
-    }
-
-    public String getFromUserId() {
-        return fromUserId;
-    }
-
-    public void setFromUserId(String fromUserId) {
-        this.fromUserId = fromUserId == null ? null : fromUserId.trim();
-    }
-
-    public String getParentCommentId() {
-        return parentCommentId;
-    }
-
-    public void setParentCommentId(String parentCommentId) {
-        this.parentCommentId = parentCommentId == null ? null : parentCommentId.trim();
-    }
-
-    public String getToUserId() {
-        return toUserId;
-    }
-
-    public void setToUserId(String toUserId) {
-        this.toUserId = toUserId == null ? null : toUserId.trim();
-    }
-
-    public Date getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
-    }
-
-    public String getComment() {
-        return comment;
-    }
-
-    public void setComment(String comment) {
-        this.comment = comment == null ? null : comment.trim();
-    }
 }

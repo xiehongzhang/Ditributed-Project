@@ -1,6 +1,4 @@
 com\imooc\service\impl\UsersSeriveceImpl.class
-com\imooc\service\impl\VideoServiceImpl.class
 com\imooc\service\UsersService.class
 com\imooc\service\BgmService.class
-com\imooc\service\impl\BgmServiceImpl.class
 com\imooc\service\VideoService.class

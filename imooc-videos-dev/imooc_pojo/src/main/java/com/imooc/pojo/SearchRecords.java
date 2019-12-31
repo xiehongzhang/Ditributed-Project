@@ -1,29 +1,34 @@
 package com.imooc.pojo;
 
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import java.io.Serializable;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.experimental.Accessors;
 
-@ApiModel(value="热搜词信息实体", description="热搜词实体类")
-public class SearchRecords {
-	@ApiModelProperty
+/**
+ * <p>
+ * 
+ * </p>
+ *
+ * @author xhz
+ * @since 2019-12-27
+ */
+@Data
+@EqualsAndHashCode(callSuper = false)
+@Accessors(chain = true)
+public class SearchRecords implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+
+    /**
+     * ID
+     */
     private String id;
 
-	@ApiModelProperty
+    /**
+     * 热搜内容
+     */
     private String content;
 
-    public String getId() {
-        return id;
-    }
 
-    public void setId(String id) {
-        this.id = id == null ? null : id.trim();
-    }
-
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content == null ? null : content.trim();
-    }
 }

@@ -1,0 +1,9 @@
+com\imooc\test\UserControllerTest.class
+com\imooc\serviceImpl\test\UsersSeriveceImplTest.class
+com\imooc\test\TimeStringUtilsTest.class
+com\imooc\test\JsonUtilTest.class
+com\imooc\mybatisplus\test\QueryWrapperTest.class
+com\imooc\test\BgmControllerTest.class
+com\imooc\test\MD5Test.class
+com\imooc\test\FileTest.class
+com\imooc\controller\test\LoginRegisterControllerTest.class

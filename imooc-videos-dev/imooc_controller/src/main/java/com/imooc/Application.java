@@ -12,7 +12,7 @@ import org.springframework.context.annotation.ComponentScan;
  */
 @SpringBootApplication
 // @EnableAutoConfiguration+@ComponentScan+@Configuration可替代@SpringBootApplication
-@MapperScan(basePackages = { "com.imooc.dao" })
+@MapperScan(basePackages={"com.imooc.dao"})
 @ComponentScan(basePackages = { "com.imooc", "org.n3r.idworker"})
 public class Application {
 	public static void main(String[] args) {

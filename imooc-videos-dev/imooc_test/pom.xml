@@ -13,10 +13,23 @@
   		<artifactId>imooc_controller</artifactId>
   		<version>0.0.1-SNAPSHOT</version>
   	</dependency>
+  	<!-- 测试 -->
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-test</artifactId>
+        <!-- 只在test测试里面运行 -->
+        <scope>test</scope>
+        <exclusions>
+        	<exclusion>
+	            <groupId>org.springframework.boot</groupId>
+	            <artifactId>spring-boot-starter-logging</artifactId>
+        	</exclusion>
+        </exclusions>
+    </dependency>
   </dependencies>
-  <build>
+  <!-- <build>
   	<plugins>
-  		<!-- maven插件，在进行maven install的时候遇到test代码，则跳过 ；注意（maven install的时候会执行测试代码，加上则不会）-->
+  		maven插件，在进行maven install的时候遇到test代码，则跳过 ；注意（maven install的时候会执行测试代码，加上则不会）
 		<plugin>  
 	        <groupId>org.apache.maven.plugins</groupId>  
 	        <artifactId>maven-surefire-plugin</artifactId>
@@ -27,5 +40,5 @@
 	        </configuration> 
         </plugin>
   	</plugins>
-  </build>
+  </build> -->
 </project>

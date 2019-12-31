@@ -12,7 +12,7 @@ package com.imooc.service;
 
 import java.util.List;
 
-import com.imooc.pojo.Bgm;
+import com.imooc.pojo1.Bgm;
 
 /**
  * @author 

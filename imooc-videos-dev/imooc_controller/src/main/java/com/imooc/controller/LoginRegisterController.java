@@ -46,6 +46,11 @@ public class LoginRegisterController extends BasicController{
 
 	@Autowired
 	private UsersService usersService;
+	
+	@PostMapping("/hello")
+	public JsonResult hello(){
+		return JsonResult.ok();
+	}
 
 	/**
 	 * @name register

@@ -41,6 +41,8 @@ import com.imooc.utils.JsonUtils;
  *   3：初始化客户端
  *   4:监听某个节点的变化
  *   5：做出相应的处理
+ *   
+ *   注意：watchNode(String nodePath)方法中存在系统文件分隔符问题
  */  
 @Component
 public class ZKCurator {
@@ -129,9 +131,9 @@ public class ZKCurator {
 					String uploadFilePath=resourceProp.getUploadNamespace()+fileDBPath;
 					
 					//windows系统
-//					String pathArr[]=fileDBPath.split("\\\\");
+					String pathArr[]=fileDBPath.split("\\\\");
 					//linux系统
-					String pathArr[]=fileDBPath.split("/");					
+//					String pathArr[]=fileDBPath.split("/");					
 					//文件的相对路径
 					String filePath="";
 					for(int i=0; i<pathArr.length; i++){
