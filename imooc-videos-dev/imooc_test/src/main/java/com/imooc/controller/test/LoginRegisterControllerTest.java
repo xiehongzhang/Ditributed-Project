@@ -26,6 +26,7 @@ import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.context.WebApplicationContext;
 
 import com.imooc.Application;
@@ -108,4 +109,17 @@ public class LoginRegisterControllerTest {
 		.andExpect(status().isOk())
 		.andDo(print());
 	}	
+	
+	/**
+	 * @description 测试@PostMapping(value="/user_icons/{userId}" , headers="content-type=multipart/form-data")
+	 *   			上传头像
+	 * @param userId
+	 * @param file
+	 */
+	@Test
+	public void testUploadFace(){
+		String userId="191105C7PYKHBSCH";
+		String faceImage="C:\\imooc_video_dev\\videoAndaudio\\Image\\glass.jpg";
+	}
+	
 }

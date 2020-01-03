@@ -12,7 +12,10 @@ package com.imooc.service.impl;
 
 
 import java.security.NoSuchAlgorithmException;
+import java.time.LocalDateTime;
+import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
 import org.n3r.idworker.Sid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,11 +24,15 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.imooc.dao.UserReportMapper;
 import com.imooc.dao.UsersFansMapper;
 import com.imooc.dao.UsersLikeVideosMapper;
 import com.imooc.dao.UsersMapper;
+import com.imooc.pojo.UserReport;
 import com.imooc.pojo.Users;
+import com.imooc.pojo.UsersFans;
+import com.imooc.pojo.UsersLikeVideos;
 import com.imooc.service.UsersService;
 import com.imooc.utils.MD5Util;
 
@@ -89,89 +96,103 @@ public class UsersSeriveceImpl implements UsersService {
 		return usersResult;
 		
 	}
-//
-//	@Transactional(propagation=Propagation.REQUIRED, isolation=Isolation.READ_COMMITTED)
-//	@Override
-//	public void uploadFaceImage(Users users) {
-//		usersMapper.updateByPrimaryKeySelective(users);
-//		
-//	}
-//
-//	@Override
-//	public Users selectByPrimaryKey(String id) {
-//		return usersMapper.selectByPrimaryKey(id);
-//	}
-//
-//	@Override
-//	public Users queryUserInfo(String userId) {
-//		Users users=usersMapper.selectByPrimaryKey(userId);
-//		return users;
-//	}
-//
-//	@Transactional(propagation=Propagation.SUPPORTS)
-//	@Override
-//	public Boolean isLike(String userId, String videoId) {
-//		if (StringUtils.isBlank(videoId) || StringUtils.isBlank(userId)) {
-//			return false;
-//		}
-//		//根据用户id和视频id查询是否存在关系
+
+	@Transactional(propagation=Propagation.REQUIRED, isolation=Isolation.READ_COMMITTED)
+	@Override
+	public void uploadFaceImage(Users users) {
+		//根据id，更新实体
+		usersMapper.updateById(users);
+		
+	}
+
+	@Override
+	public Users selectByPrimaryKey(String id) {
+		return usersMapper.selectById(id);
+	}
+
+	@Override
+	public Users queryUserInfo(String userId) {
+		Users users=usersMapper.selectById(userId);
+		return users;
+	}
+
+	@Transactional(propagation=Propagation.SUPPORTS)
+	@Override
+	public Boolean isLike(String userId, String videoId) {
+		if (StringUtils.isBlank(videoId) || StringUtils.isBlank(userId)) {
+			return false;
+		}
+		//根据用户id和视频id查询是否存在关系
 //		UsersLikeVideosExample example=new UsersLikeVideosExample();
 //		com.imooc.pojo1.UsersLikeVideosExample.Criteria criteria=example.createCriteria();
 //		criteria.andUserIdEqualTo(userId);
 //		criteria.andVideoIdEqualTo(videoId);
 //		List<UsersLikeVideos> list=usersLikeVideosMapper.selectByExample(example);
-//		if (list != null && list.size()>0) {
-//			return true;
-//		}
-//		return false;
-//	}
-//
-//	@Transactional(propagation=Propagation.REQUIRED)
-//	@Override
-//	public void saveFollowUsers(String userId, String followedUserId) {
-//		//保存关注记录
-//		UsersFans usersFans=new UsersFans();
-//		String id=sid.nextShort();
-//		usersFans.setId(id);
-//		usersFans.setUserId(followedUserId);
-//		usersFans.setFanId(userId);
-//		usersFansMapper.insert(usersFans);
-//		//用户本身的关注数加一
-//		usersMapper.addFollowCounts(userId);
-//		//被关注的用户的粉丝数加一
-//		usersMapper.addFansCounts(followedUserId);
-//	}
-//
-//	@Transactional(propagation=Propagation.REQUIRED)
-//	@Override
-//	public void deleteFollowUsers(String userId, String followedUserId) {
-//		//删除关注的记录
+		QueryWrapper<UsersLikeVideos> wrapper=new QueryWrapper<>();
+		wrapper.eq("user_id", userId);
+		wrapper.eq("video_id", videoId);
+		List<UsersLikeVideos> list=usersLikeVideosMapper.selectList(wrapper);
+		if (list != null && list.size()>0) {
+			return true;
+		}
+		return false;
+	}
+
+	@Transactional(propagation=Propagation.REQUIRED)
+	@Override
+	public void saveFollowUsers(String userId, String publisherId) {
+		//保存关注记录
+		UsersFans usersFans=new UsersFans();
+		String id=sid.nextShort();
+		usersFans.setId(id);
+		usersFans.setUserId(publisherId);
+		usersFans.setFanId(userId);
+		//保存用户和粉丝的记录
+		usersFansMapper.insert(usersFans);
+		//用户本身的关注数加一
+		usersMapper.addFollowCounts(userId);
+		//被关注的用户的粉丝数加一
+		usersMapper.addFansCounts(publisherId);
+	}
+
+	@Transactional(propagation=Propagation.REQUIRED)
+	@Override
+	public void deleteFollowUsers(String userId, String publisherId) {
+		//删除关注的记录
 //		UsersFansExample example=new UsersFansExample();
 //		com.imooc.pojo1.UsersFansExample.Criteria criteria=example.createCriteria();
 //		criteria.andFanIdEqualTo(userId);
 //		criteria.andUserIdEqualTo(followedUserId);
-//		usersFansMapper.deleteByExample(example);
-//		//用户的关注数减一
-//		usersMapper.reduceFollowCounts(userId);
-//		//被关注者的粉丝数减一
-//		usersMapper.reduceFansCounts(followedUserId);
-//	}
-//
-//	@Transactional(propagation=Propagation.SUPPORTS)
-//	@Override
-//	public Boolean isFollow(String userId, String followerId) {
+		UpdateWrapper<UsersFans> wrapper=new UpdateWrapper<>();
+		wrapper.eq("user_id", publisherId);
+		wrapper.eq("fan_id", userId);
+		usersFansMapper.delete(wrapper);
+		//用户的关注数减一
+		usersMapper.reduceFollowCounts(userId);
+		//视频发布者粉丝数减一
+		usersMapper.reduceFansCounts(publisherId);
+	}
+
+	@Transactional(propagation=Propagation.SUPPORTS)
+	@Override
+	public Boolean isFollow(String userId, String followerId) {
 //		//查询是否存在这样的记录
 //		UsersFansExample example=new UsersFansExample();
 //        Criteria criteria=example.createCriteria();
 //		criteria.andFanIdEqualTo(userId);
 //		criteria.andUserIdEqualTo(followerId);
 //		List<UsersFans> list = usersFansMapper.selectByExample(example);
-//		if (list != null && list.size()>0) {
-//			return true;
-//		}
-//		return false;
-//	}
-//	
+		//查询是否存在记录
+		QueryWrapper<UsersFans> wrapper=new QueryWrapper<>();
+		wrapper.eq("user_id", userId);
+		wrapper.eq("fan_id", followerId);
+		List<UsersFans> list=usersFansMapper.selectList(wrapper);
+		if (list != null && list.size()>0) {
+			return true;
+		}
+		return false;
+	}
+	
 //	@Transactional(propagation=Propagation.SUPPORTS)
 //	@Override
 //	public List<Users> queryFollowUser(String userId, Integer pageNum, Integer pageSize) {
@@ -180,14 +201,14 @@ public class UsersSeriveceImpl implements UsersService {
 //		List<Users> usersList=usersMapper.queryFollowUser(userId);
 //		return usersList;
 //	}
-//
-//	@Transactional(propagation=Propagation.REQUIRED)
-//	@Override
-//	public void saveUserReport(UserReport userReport) {
-//		String id=sid.nextShort();
-//		userReport.setId(id);
-//		userReport.setCreateTime(new Date());
-//		userReportMapper.insert(userReport);
-//	}
+
+	@Transactional(propagation=Propagation.REQUIRED)
+	@Override
+	public void saveUserReport(UserReport userReport) {
+		String id=sid.nextShort();
+		userReport.setId(id);
+		userReport.setCreateTime(LocalDateTime.now());
+		userReportMapper.insert(userReport);
+	}
 
 }
