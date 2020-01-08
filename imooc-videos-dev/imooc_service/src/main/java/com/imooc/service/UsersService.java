@@ -12,6 +12,7 @@ package com.imooc.service;
 
 import java.util.List;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.imooc.pojo.UserReport;
 import com.imooc.pojo.Users;
 
@@ -72,10 +73,10 @@ public interface UsersService {
 	 */
 	public Boolean isFollow(String userId, String followerId);
 
-//	/**
-//	 * @Description 查询用户关注的所有用户
-//	 */
-//	public List<Users> queryFollowUser(String userId, Integer pageNum, Integer pageSize);
+	/**
+	 * @Description 查询用户关注的所有用户
+	 */
+	public IPage<Users> queryFollowUser(String userId, Integer current, Integer pageSize);
 
 	/**
 	 * @Description 保存用户举报的信息

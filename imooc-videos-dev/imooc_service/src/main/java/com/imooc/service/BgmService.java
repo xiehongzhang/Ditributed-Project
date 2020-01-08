@@ -12,7 +12,7 @@ package com.imooc.service;
 
 import java.util.List;
 
-import com.imooc.pojo1.Bgm;
+import com.imooc.pojo.Bgm;
 
 /**
  * @author 
@@ -20,10 +20,10 @@ import com.imooc.pojo1.Bgm;
  */
 public interface BgmService {
 
-	/**
-	 * @Description 查询背景音乐列表
-	 */
-	public List<Bgm> queryBgmList();
+//	/**
+//	 * @Description 查询背景音乐列表
+//	 */
+//	public List<Bgm> queryBgmList();
 
 	/**
 	 * @Description 通过id查询背景音乐

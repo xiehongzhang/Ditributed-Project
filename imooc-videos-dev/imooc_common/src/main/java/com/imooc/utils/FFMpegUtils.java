@@ -31,9 +31,9 @@ import java.util.List;
 public class FFMpegUtils{
 	
 	//ffmpeg的windows安装路径
-//	public static final String FFMPEG_PATH="D:\\installed software\\FFMpeg\\bin";
-	//ffmpeg 的linux安装路径
-	public static final String FFMPEG_PATH="/usr/local/ffmpeg/bin";
+	public static final String FFMPEG_PATH="D:\\installed software\\FFMpeg\\bin";
+//	//ffmpeg 的linux安装路径
+//	public static final String FFMPEG_PATH="/usr/local/ffmpeg/bin";
 	
 	/**
 	 * @name fetchVideoCover

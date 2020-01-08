@@ -11,6 +11,7 @@
 package com.imooc.service.test;
 
 import java.security.NoSuchAlgorithmException;
+import java.util.List;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -22,6 +23,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.imooc.Application;
 import com.imooc.dao.UsersFansMapper;
 import com.imooc.dao.UsersMapper;
@@ -133,4 +135,25 @@ public class UsersSeriveceTest {
 		boolean isLike=usersService.isLike(userId,videoId);
 		System.out.println(isLike);
 	}
+	
+	/*
+	 * 测试IPage<Users> queryFollowUser(String userId, Integer current, Integer pageSize)
+	 * 查询用户关注的用户信息
+	 */
+	@Test
+	public void testQueryFollowUser() {
+		String userId="190903CHC87ZPXD4";
+		int current=1;
+		int pageSize=5;
+		IPage<Users> iPage=usersService.queryFollowUser(userId, current, pageSize);
+		List<Users> list=iPage.getRecords();
+		for(int i=0; i<list.size();i++){
+			System.out.println(iPage.getRecords());
+		}
+		System.out.println("每页的显示数:"+iPage.getSize());
+		System.out.println("总的记录数:"+iPage.getTotal());
+		System.out.println("当前的页数:"+iPage.getCurrent());
+	}
+	
+	
 }

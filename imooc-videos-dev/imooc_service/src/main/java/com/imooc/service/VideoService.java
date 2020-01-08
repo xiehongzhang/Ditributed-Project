@@ -12,9 +12,7 @@ package com.imooc.service;
 
 import java.util.List;
 
-import com.imooc.pojo1.Comments;
-import com.imooc.pojo1.Video;
-import com.imooc.pojo1.vo.VideoVO;
+import com.imooc.pojo.Video;
 import com.imooc.utils.PageResult;
 
 /**
@@ -33,39 +31,39 @@ public interface VideoService {
 	 */
 	PageResult queryAllVideo(Video video, Integer isSaveRecord, Integer pageNum, Integer pageSize);
 
-	/**
-	 * @Description 查询热搜词
-	 */
-	List<String> queryHotRecords();
-
-	/**
-	 * @Description 保存用户喜欢的视频
-	 */
-	public void saveLikeVideo(String userId, String videoId, String videoOwnerId);
-	
-	/**
-	 * @Description 取消用户喜欢的视频
-	 */
-	public void saveUnlikeVideo(String userId, String videoId, String videoOwnerId);
-
-	/**
-	 * @Description 查询用户收藏的视频（即点赞过的视频）
-	 */
-	PageResult queryLikeVideo(String userId, Integer pageNum, Integer pageSize);
-
-	/**
-	 * @Description 保存用户评论视频的信息
-	 */
-	void saveComments(Comments comments, String fatherCommentId, String toUserId);
-
-	/**
-	 * @Description 查询所有的评论
-	 */
-	PageResult queryAllComments(String videoId, Integer pageNum, Integer pageSize);
-
-	/**
-	 * @Description 查询我关注人发的视频
-	 */
-	PageResult queryMyFollowVideos(String userId, Integer page, Integer pageSize);
+//	/**
+//	 * @Description 查询热搜词
+//	 */
+//	List<String> queryHotRecords();
+//
+//	/**
+//	 * @Description 保存用户喜欢的视频
+//	 */
+//	public void saveLikeVideo(String userId, String videoId, String videoOwnerId);
+//	
+//	/**
+//	 * @Description 取消用户喜欢的视频
+//	 */
+//	public void saveUnlikeVideo(String userId, String videoId, String videoOwnerId);
+//
+//	/**
+//	 * @Description 查询用户收藏的视频（即点赞过的视频）
+//	 */
+//	PageResult queryLikeVideo(String userId, Integer pageNum, Integer pageSize);
+//
+//	/**
+//	 * @Description 保存用户评论视频的信息
+//	 */
+//	void saveComments(Comments comments, String fatherCommentId, String toUserId);
+//
+//	/**
+//	 * @Description 查询所有的评论
+//	 */
+//	PageResult queryAllComments(String videoId, Integer pageNum, Integer pageSize);
+//
+//	/**
+//	 * @Description 查询我关注人发的视频
+//	 */
+//	PageResult queryMyFollowVideos(String userId, Integer page, Integer pageSize);
 
 }

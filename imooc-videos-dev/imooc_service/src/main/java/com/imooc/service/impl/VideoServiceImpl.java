@@ -1,115 +1,111 @@
-///**
-//* Title: VideoServiceImpl.java  
-//
-//* Description   
-//
-//* @author xhz  
-//
-//* @date 2019年9月12日  
-// 
-// */
-//package com.imooc.service.impl;
-//
-//import java.util.Date;
-//import java.util.List;
-//
-//import org.apache.commons.lang.StringUtils;
-//import org.n3r.idworker.Sid;
-//import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.stereotype.Service;
-//import org.springframework.transaction.annotation.Isolation;
-//import org.springframework.transaction.annotation.Propagation;
-//import org.springframework.transaction.annotation.Transactional;
-//
-//import com.github.pagehelper.Page;
-//import com.github.pagehelper.PageHelper;
-//import com.github.pagehelper.PageInfo;
-//import com.imooc.dao1.CommentsCustomMapper;
-//import com.imooc.dao1.CommentsMapper;
-//import com.imooc.dao1.SearchRecordsMapper;
-//import com.imooc.dao1.UsersLikeVideosMapper;
-//import com.imooc.dao1.UsersMapper;
-//import com.imooc.dao1.VideoMapper;
-//import com.imooc.dao1.VideoMapperCustom;
-//import com.imooc.pojo1.Comments;
-//import com.imooc.pojo1.SearchRecords;
-//import com.imooc.pojo1.UsersLikeVideos;
-//import com.imooc.pojo1.UsersLikeVideosExample;
-//import com.imooc.pojo1.Video;
-//import com.imooc.pojo1.UsersLikeVideosExample.Criteria;
-//import com.imooc.pojo1.vo.CommentsVO;
-//import com.imooc.pojo1.vo.VideoVO;
-//import com.imooc.service.VideoService;
-//import com.imooc.utils.PageResult;
-//import com.imooc.utils.TimeStringUtils;
-//
-///**
-// * @author xhz
-// * @description 视频实现类
-// */
-//@Service
-//public class VideoServiceImpl implements VideoService{
-//	
+/**
+* Title: VideoServiceImpl.java  
+
+* Description   
+
+* @author xhz  
+
+* @date 2019年9月12日  
+ 
+ */
+package com.imooc.service.impl;
+
+import java.util.Date;
+import java.util.List;
+
+import org.apache.commons.lang.StringUtils;
+import org.n3r.idworker.Sid;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.imooc.dao.CommentsMapper;
+import com.imooc.dao.SearchRecordsMapper;
+import com.imooc.dao.UsersLikeVideosMapper;
+import com.imooc.dao.UsersMapper;
+import com.imooc.dao.VideoMapper;
+import com.imooc.dao.VideoMapperCustom;
+import com.imooc.pojo.SearchRecords;
+import com.imooc.pojo.Video;
+import com.imooc.pojo.vo.VideoVO;
+import com.imooc.service.VideoService;
+import com.imooc.utils.PageResult;
+import com.imooc.utils.TimeStringUtils;
+
+/**
+ * @author xhz
+ * @description 视频实现类
+ */
+@Service
+public class VideoServiceImpl implements VideoService{
+	
+	@Autowired
+	private Sid sid;
+	
+	@Autowired
+	private VideoMapper videoMapper;
+	
 //	@Autowired
-//	private Sid sid;
-//	
-//	@Autowired
-//	private VideoMapper videoMapper;
-//	
-//	@Autowired
-//	private VideoMapperCustom videoMapperCustom;
-//	
-//	@Autowired
-//	private SearchRecordsMapper searchRecordsMapper;
-//
-//	@Autowired
-//	private UsersLikeVideosMapper usersLikeVideosMapper;
-//	
-//	@Autowired 
-//	private UsersMapper usersMapper;
-//	
-//	@Autowired
-//	private CommentsMapper commentsMapper;
-//	
+	private VideoMapperCustom videoMapperCustom;
+	
+	@Autowired
+	private SearchRecordsMapper searchRecordsMapper;
+
+	@Autowired
+	private UsersLikeVideosMapper usersLikeVideosMapper;
+	
+	@Autowired 
+	private UsersMapper usersMapper;
+	
+	@Autowired
+	private CommentsMapper commentsMapper;
+	
 //	@Autowired
 //	private CommentsCustomMapper commentsCustomMapper;
-//	
-//
-//	@Transactional(propagation=Propagation.REQUIRED, isolation=Isolation.READ_COMMITTED)
-//	@Override
-//	public void saveVideoInfo(Video video) {
-//		videoMapper.insertSelective(video);
-//	}
-//
-//	@Transactional(propagation=Propagation.REQUIRED)
-//	@Override
-//	public PageResult queryAllVideo(Video video, Integer isSaveRecord, Integer pageNum, Integer pageSize) {
-//		String videoDesc=video.getVideoDesc();
-//		String userId=video.getUserId();
-//		//判断isSaveRecords是否不为空并且等于1
-//		if (isSaveRecord != null && isSaveRecord == 1) {
-//			SearchRecords searchRecords=new SearchRecords();
-//			String id=Sid.next();
-//			searchRecords.setId(id);
-//			searchRecords.setContent(videoDesc);
-//			//保存查询记录
-//			searchRecordsMapper.insert(searchRecords);
-//		}
+	
+
+	@Transactional(propagation=Propagation.REQUIRED, isolation=Isolation.READ_COMMITTED)
+	@Override
+	public void saveVideoInfo(Video video) {
+		videoMapper.insert(video);
+	}
+
+	@Transactional(propagation=Propagation.REQUIRED)
+	@Override
+	public PageResult queryAllVideo(Video video, Integer isSaveRecord, Integer pageNum, Integer pageSize) {
+		String videoDesc=video.getVideoDesc();
+		String userId=video.getUserId();
+		//判断isSaveRecords是否不为空并且等于1
+		if (isSaveRecord != null && isSaveRecord == 1 && videoDesc != null) {
+			SearchRecords searchRecords=new SearchRecords();
+			String id=Sid.next();
+			searchRecords.setId(id);
+			searchRecords.setContent(videoDesc);
+			//保存查询记录
+			searchRecordsMapper.insert(searchRecords);
+		}
 //		//准备分页查询
 //		PageHelper.startPage(pageNum, pageSize);
 //		//开始分页查询
 //		List<VideoVO> listVideoVO=videoMapperCustom.queryAllVideo(videoDesc,userId);
 //		//将查询的数据进行封装
 //		PageInfo<VideoVO> pageInfo =new PageInfo<>(listVideoVO);
-//		//实例化一个PageResult对象
-//		PageResult pageResult=new PageResult();
-//		pageResult.setRows(listVideoVO);
-//		pageResult.setPage(pageNum);
-//		pageResult.setRecords(pageInfo.getTotal());
-//		pageResult.setTotal(pageInfo.getPages());
-//		return pageResult;
-//	}
-//
+		//分页查询
+		Page<VideoVO> page=new Page<VideoVO>(pageNum,pageSize);
+		IPage<VideoVO> iPage=videoMapperCustom.queryAllVideo(page,videoDesc, userId);
+		//实例化一个PageResult对象
+		PageResult pageResult=new PageResult();
+		pageResult.setRows(iPage.getRecords());
+		pageResult.setPage(pageNum);
+		pageResult.setRecords(iPage.getTotal());
+		pageResult.setTotal((int) iPage.getPages());
+		return pageResult;
+	}
+
 //	@Transactional(propagation=Propagation.SUPPORTS)
 //	@Override
 //	public List<String> queryHotRecords() {		
@@ -215,6 +211,6 @@
 //		
 //		return pagedResult;
 //	}
-//
-//
-//}
+
+
+}

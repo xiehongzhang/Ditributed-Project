@@ -16,6 +16,7 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
 
+import com.baomidou.mybatisplus.extension.plugins.PaginationInterceptor;
 import com.imooc.controller.interceptor.AuthInterceptor;
 
 /**
@@ -80,4 +81,14 @@ public class WebMvcConfig extends WebMvcConfigurationSupport{
 //		super.addInterceptors(registry);
 //	}
 	
+//	/**
+//	 * @name paginationInterceptor
+//	 * @Description 配置Mybatis-plus的分页插件
+//	 * @return 
+//	 */
+//	@Bean
+//	public PaginationInterceptor paginationInterceptor(){
+//		return new PaginationInterceptor();
+//		
+//	}
 }

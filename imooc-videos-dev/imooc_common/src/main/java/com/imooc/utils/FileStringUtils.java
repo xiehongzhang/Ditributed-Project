@@ -12,7 +12,7 @@ package com.imooc.utils;
 
 /**
  * @author xhz
- * @description 字符串处理工具
+ * @description 文件名字符串处理工具
  */
 public class FileStringUtils {
 

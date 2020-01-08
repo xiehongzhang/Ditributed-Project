@@ -25,6 +25,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.imooc.dao.UserReportMapper;
 import com.imooc.dao.UsersFansMapper;
 import com.imooc.dao.UsersLikeVideosMapper;
@@ -193,14 +195,15 @@ public class UsersSeriveceImpl implements UsersService {
 		return false;
 	}
 	
-//	@Transactional(propagation=Propagation.SUPPORTS)
-//	@Override
-//	public List<Users> queryFollowUser(String userId, Integer pageNum, Integer pageSize) {
-//		//准备分页查询
+	@Transactional(propagation=Propagation.SUPPORTS)
+	@Override
+	public IPage<Users> queryFollowUser(String userId, Integer current, Integer pageSize) {
+		//准备分页查询
 //		PageHelper.startPage(pageNum, pageSize);
-//		List<Users> usersList=usersMapper.queryFollowUser(userId);
-//		return usersList;
-//	}
+		Page<Users> page=new Page<Users>(current,pageSize);
+		IPage<Users> iPage=usersMapper.queryFollowUser(page,userId);
+		return iPage;
+	}
 
 	@Transactional(propagation=Propagation.REQUIRED)
 	@Override

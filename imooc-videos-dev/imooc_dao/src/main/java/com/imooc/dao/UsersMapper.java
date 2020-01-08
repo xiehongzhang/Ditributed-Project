@@ -3,6 +3,8 @@ package com.imooc.dao;
 import org.apache.ibatis.annotations.Param;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.imooc.pojo.Users;
 
 /**
@@ -46,6 +48,14 @@ public interface UsersMapper extends BaseMapper<Users> {
 	 * @return 
 	 */
 	void reduceFansCounts(String publisherId);
+
+	/**
+	 * @name queryFollowUser
+	 * @Description 查询用户关注的用户
+	 * @param userId
+	 * @return 
+	 */
+	IPage<Users> queryFollowUser(Page<Users> page ,@Param(value="userId") String userId);
 
 
 }

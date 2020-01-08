@@ -41,4 +41,13 @@
 		set receive_like_counts=receive_like_counts-1
 		where id=#{publisherId}
 	</update>
+	
+	<!-- 查询用户关注的用户信息 -->
+	<select id="queryFollowUser" parameterType="String" resultMap="BaseResultMap">
+		select * 
+		from users us
+		left join users_fans usf
+		on us.id=usf.user_id
+		where usf.fan_id=#{userId}
+	</select>
 </mapper>
