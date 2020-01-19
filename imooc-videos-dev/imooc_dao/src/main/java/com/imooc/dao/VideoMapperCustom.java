@@ -17,24 +17,26 @@ public interface VideoMapperCustom {
      */
 	IPage<VideoVO> queryAllVideo(Page<VideoVO> page,@Param("videoDesc") String videoDesc, @Param("userId") String userId);
     
-//    /**
-//     * @Description 视频的点赞数加一
-//     */
-//    void addLikeCount(String videoId);
-//    
-//    /**
-//     * @Description 视频的点赞数减一
-//     */
-//    void reduceLikeCount(String videoId);
-//
-//	/**
-//	 * @Description 查询用户点赞过的所有视频
-//	 */
-//	List<VideoVO> queryLikeVideoByUserId(String userId);
-//
-//	
-//	/**
-//	 * @Description 查询我关注人发的视频
-//	 */
-//	List<VideoVO> queryMyFollowVideos(String userId);
+    /**
+     * @Description 视频的点赞数加一
+     */
+    void addLikeCount(String videoId);
+    
+    /**
+     * @Description 视频的点赞数减一
+     */
+    void reduceLikeCount(String videoId);
+
+	/**
+	 * @param page 
+	 * @Description 查询用户点赞过的所有视频
+	 */
+	IPage<VideoVO> queryLikeVideoByUserId(Page<VideoVO> page, String userId);
+
+	
+	/**
+	 * @param page 
+	 * @Description 查询我关注人发的视频
+	 */
+	IPage<VideoVO> queryMyFollowVideos(Page<VideoVO> page, String userId);
 }

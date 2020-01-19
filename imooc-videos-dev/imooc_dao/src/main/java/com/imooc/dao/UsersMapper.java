@@ -1,6 +1,7 @@
 package com.imooc.dao;
 
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
@@ -15,6 +16,7 @@ import com.imooc.pojo.Users;
  * @author xhz
  * @since 2019-12-27
  */
+@Repository
 public interface UsersMapper extends BaseMapper<Users> {
 
 	/**
@@ -56,6 +58,22 @@ public interface UsersMapper extends BaseMapper<Users> {
 	 * @return 
 	 */
 	IPage<Users> queryFollowUser(Page<Users> page ,@Param(value="userId") String userId);
+
+	/**
+	 * @name addReceiveLikeCounts
+	 * @Description 用户的点赞数加一
+	 * @param userId
+	 * @return 
+	 */
+	void addReceiveLikeCounts(@Param(value = "userId") String userId);
+
+	/**
+	 * @name reduceReceiveLikeCounts
+	 * @Description 删除点赞记录
+	 * @param String userId
+	 * @return 
+	 */
+	void reduceReceiveLikeCounts(@Param(value = "userId")String userId);
 
 
 }

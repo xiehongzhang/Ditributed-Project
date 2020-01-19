@@ -10,6 +10,8 @@
  */
 package com.imooc.utils;
 
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 import java.util.Date;
 
 /**
@@ -30,8 +32,8 @@ public class TimeStringUtils {
 	private static final String ONE_YEAR_AGO="年前";
 	
 	//将当前的时间减去发表评论的时间，得到的时间进行格式化
-	public static String format(Date agoDate){
-		long milliseconds=new Date().getTime() - agoDate.getTime();
+	public static String format(LocalDateTime agoDate){
+		long milliseconds=LocalDateTime.now().toEpochSecond(ZoneOffset.UTC) - agoDate.toEpochSecond(ZoneOffset.UTC);
 		System.out.println(milliseconds);
 		if (milliseconds<1L*ONE_MINUTE) {
 			long date=toSecond(milliseconds);

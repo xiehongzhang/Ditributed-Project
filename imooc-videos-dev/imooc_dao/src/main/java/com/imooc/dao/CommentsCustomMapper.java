@@ -8,11 +8,13 @@
 * @date 2019年9月29日  
  
  */
-package com.imooc.dao_1;
+package com.imooc.dao;
 
 import java.util.List;
 
-import com.imooc.pojo1.vo.CommentsVO;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.imooc.pojo.vo.CommentsVO;
+
 
 /**
  * @author xhz
@@ -23,6 +25,6 @@ public interface CommentsCustomMapper {
 	/**
 	 * @Description 查询所有的评论以及相对应的用户昵称
 	 */
-	List<CommentsVO> queryAllComments(String videoId);
+	IPage<CommentsVO> queryAllComments(String videoId);
 
 }

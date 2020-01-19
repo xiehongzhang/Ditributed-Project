@@ -24,7 +24,7 @@
 	<!-- 用户的粉丝数量加一 -->
 	<update id="addFansCounts" parameterType="String">
 		update users
-		set receive_like_counts=receive_like_counts+1
+		set fans_counts=fans_counts+1
 		where id=#{publisherId}
 	</update>
 
@@ -38,7 +38,7 @@
 	<!-- 用户的粉丝数量减一 -->
 	<update id="reduceFansCounts" parameterType="String">
 		update users
-		set receive_like_counts=receive_like_counts-1
+		set fans_counts=fans_counts-1
 		where id=#{publisherId}
 	</update>
 	
@@ -50,4 +50,18 @@
 		on us.id=usf.user_id
 		where usf.fan_id=#{userId}
 	</select>
+	
+	<!-- 用户的点赞数加一 -->
+	<update id="addReceiveLikeCounts" parameterType="String">
+		update users
+		set receive_like_counts=receive_like_counts+1
+		where id=#{userId}
+	</update>
+	
+	<!-- 删除点赞记录 -->
+	<update id="reduceReceiveLikeCounts" parameterType="String">
+		update users
+		set receive_like_counts=receive_like_counts-1
+		where id=#{userId}
+	</update>
 </mapper>

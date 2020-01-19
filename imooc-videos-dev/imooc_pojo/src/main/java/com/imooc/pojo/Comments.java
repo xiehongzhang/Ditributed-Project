@@ -1,6 +1,7 @@
 package com.imooc.pojo;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.io.Serializable;
 import lombok.Data;
 import lombok.EqualsAndHashCode;

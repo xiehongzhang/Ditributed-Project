@@ -17,6 +17,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import java.io.File;
 import java.io.FileInputStream;
 
+import javax.xml.stream.events.Comment;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -28,11 +30,14 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.context.WebApplicationContext;
 
 import com.imooc.Application;
+import com.imooc.pojo.Comments;
 import com.imooc.pojo.Video;
 import com.imooc.utils.JsonUtils;import scala.languageFeature.postfixOps;
 
@@ -124,4 +129,125 @@ public class VideoControllerTest {
 		.andDo(print());
 	}
 
+	/**
+	 * @description 测试@GetMapping("/search_records")
+	 *   			查询热搜词
+	 *              hot()
+	 * @throws Exception 
+	 */
+	@Test
+	public void testHot() throws Exception{
+		this.mockMvc.perform(get("/videos/search_records")
+				.accept(MediaType.APPLICATION_JSON_UTF8))
+		.andExpect(status().isOk())
+		.andDo(print());
+	}
+
+
+	/**
+	 * @description 测试@PostMapping("/like_video/{videoId}")
+	 *   			点赞视频
+	 *              userLike(String userId, @PathVariable(value="videoId") String videoId, String videoCreaterId)
+	 * @param String userId
+	 * @param String videoId
+	 * @param String videoCreaterId
+	 * @throws Exception 
+	 */
+	@Test
+	public void testUserLike() throws Exception{
+		String userId="190903CHC87ZPXD4";
+		String videoId="191112D0MAN77X1P";
+		String videoCreaterId="191112D07KXN6PBC";
+		this.mockMvc.perform(post("/videos/like_video/" + videoId + "?userId=" + userId + "&videoCreaterId=" + videoCreaterId) 
+				.contentType(MediaType.APPLICATION_JSON_UTF8)
+				.accept(MediaType.APPLICATION_JSON_UTF8))
+		.andExpect(status().isOk())
+		.andDo(print());
+	}
+	
+	/**
+	 * @description 测试@PostMapping("/un_like_video/{videoId}")
+	 *   			取消点赞
+	 *              userUnLike(String userId, @PathVariable(value="videoId") String videoId, String videoCreaterId)
+	 * @param String userId
+	 * @param String videoId
+	 * @param String videoCreaterId
+	 * @throws Exception 
+	 */
+	@Test
+	public void testUserUnLike() throws Exception{
+		String userId="190903CHC87ZPXD4";
+		String videoId="191112D0MAN77X1P";
+		String videoCreaterId="191112D07KXN6PBC";
+		this.mockMvc.perform(post("/videos/un_like_video/" + videoId + "?userId=" + userId + "&videoCreaterId=" + videoCreaterId) 
+				.contentType(MediaType.APPLICATION_JSON_UTF8)
+				.accept(MediaType.APPLICATION_JSON_UTF8))
+		.andExpect(status().isOk())
+		.andDo(print());
+	}
+	
+
+
+	/**
+	 * @description 测试@GetMapping("/show_like_video/{userId}")
+	 *   			查询用户点赞的视频
+	 *              showMyLike(@PathVariable(value="userId") String userId, Integer page, Integer pageSize)
+	 * @param String userId
+	 * @param Integer page
+	 * @param Integer pageSize
+	 * @throws Exception 
+	 */
+	@Test
+	public void testShowMyLike() throws Exception{
+		String userId="190903CHC87ZPXD4";
+		this.mockMvc.perform(get("/videos/show_like_video/" + userId) 
+				.accept(MediaType.APPLICATION_JSON_UTF8))
+		.andExpect(status().isOk())
+		.andDo(print());
+	}
+	
+	/**
+	 * @description 测试@GetMapping("/show_follow_video/{userId}")
+	 *   			查询用户关注的视频
+	 *              showMyFollow(@PathVariable(value="userId") String userId, Integer page, Integer pageSize)
+	 * @param String userId
+	 * @param Integer page
+	 * @param Integer pageSize
+	 * @throws Exception 
+	 */
+	@Test
+	public void testShowMyFollow() throws Exception{
+		String userId="190903CHC87ZPXD4";
+		this.mockMvc.perform(get("/videos/show_follow_video/" + userId) 
+				.accept(MediaType.APPLICATION_JSON_UTF8))
+		.andExpect(status().isOk())
+		.andDo(print());
+	}
+
+	/**
+	 * @description 测试@PostMapping("/comments")
+	 *   			评论视频
+	 *              saveComment(@RequestBody Comments comments, String fatherCommentId, String toUserId)
+	 * @param Comments comments
+	 * @param String fatherCommentId
+	 * @param String toUserId
+	 * @throws Exception 
+	 */
+	@Test
+	public void testSaveComment() throws Exception{
+		Comments comments=new Comments();
+		String fatherCommentId="";
+		String toUserId="";
+		comments.setComment("我不会唱歌！");
+		comments.setVideoId("200110D0Y5RF95YW");
+		comments.setFromUserId("190903CHC87ZPXD4");
+		String commentsString=JsonUtils.objectToJson(comments);
+		this.mockMvc.perform(post("/videos/comments") 
+				.content(commentsString)
+				.contentType(MediaType.APPLICATION_JSON_UTF8)
+				.accept(MediaType.APPLICATION_JSON_UTF8))
+		.andExpect(status().isOk())
+		.andDo(print());
+	}
+	
 }

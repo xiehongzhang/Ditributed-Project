@@ -36,6 +36,7 @@ import com.imooc.BasicController;
 import com.imooc.config.ResourceProp;
 import com.imooc.enums.VideoStatuEnum;
 import com.imooc.pojo.Bgm;
+import com.imooc.pojo.Comments;
 import com.imooc.pojo.Video;
 import com.imooc.service.BgmService;
 import com.imooc.service.UsersService;
@@ -248,159 +249,159 @@ public class VideoController extends BasicController{
 		return JsonResult.ok(pageResult);
 	}
 	
-//	/**
-//	 * @name hot
-//	 * @Description 查询热搜词
-//	 * @param 
-//	 * @return 
-//	 */
-//	@ApiOperation(value="查询热搜词", notes="查询热搜词")
-//	@GetMapping("/search_records")
-//	public JsonResult hot(){ 
-//		return JsonResult.ok(videoService.queryHotRecords());
-//	} 
-//	
-//	/**
-//	 * @name likeVideo
-//	 * @Description 用户进行点赞
-//	 * @param userId
-//	 * @param videoId
-//	 * @param videoCreaterId
-//	 * @return 
-//	 */
-//	@ApiOperation(value="点赞视频", notes="用户进行点赞")
-//	@ApiImplicitParams({
-//		@ApiImplicitParam(value="用户id", name="userId", paramType="path", dataType="String", required=true ),
-//		@ApiImplicitParam(value="视频id", name="videoId", paramType="query", dataType="String", required=true ),
-//		@ApiImplicitParam(value="视频发布者id", name="videoCreaterId", paramType="query", dataType="String", required=true ),
-//	})
-//	@PostMapping("/like_video/{videoId}")
-//	public JsonResult userLike(String userId, @PathVariable(value="videoId") String videoId, String videoCreaterId){
-//		videoService.saveLikeVideo(userId, videoId, videoCreaterId);
-//		return JsonResult.ok();
-//	}
-//	
-//	/**
-//	 * @name userUnLike
-//	 * @Description 用户取消点赞
-//	 * @param userId
-//	 * @param videoId
-//	 * @param videoCreaterId
-//	 * @return 
-//	 */
-//	@ApiOperation(value="取消点赞", notes="用户进行取消点赞")
-//	@ApiImplicitParams({
-//		@ApiImplicitParam(value="用户id", name="userId", paramType="query", dataType="String", required=true ),
-//		@ApiImplicitParam(value="视频id", name="videoId", paramType="path", dataType="String", required=true ),
-//		@ApiImplicitParam(value="视频发布者id", name="videoCreaterId", paramType="query", dataType="String", required=true ),
-//	})
-//	@PostMapping("/un_like_video/{videoId}")
-//	public JsonResult userUnLike(String userId, @PathVariable(value="videoId") String videoId, String videoCreaterId){
-//		videoService.saveUnlikeVideo(userId, videoId, videoCreaterId);
-//		return JsonResult.ok();
-//	}
-//	
-//	/**
-//	 * @name showMyLike
-//	 * @Description 按条件查询用户收藏的视频
-//	 * @param userId
-//	 * @param page
-//	 * @param pageSize
-//	 * @return 
-//	 */
-//	@ApiOperation(value="查询收藏的视频", notes="查询用户收藏的所有视频")
-//	@ApiImplicitParams({
-//		@ApiImplicitParam(value="用户id", name="userId", paramType="path", dataType="String", required=true),
-//		@ApiImplicitParam(value="当前页页数", name="page", paramType="query", dataType="String", required=false),
-//		@ApiImplicitParam(value="每页显示的记录数", name="pageSize", paramType="query", dataType="String", required=false)
-//	})
-//	@GetMapping("/show_like_video/{userId}")
-//	public JsonResult showMyLike(@PathVariable(value="userId") String userId, Integer page, Integer pageSize){
-//		if (page == null) {
-//			page=1;
-//		}
-//		if (pageSize == null) {
-//			pageSize=PAGE_SIZE;
-//		}
-//		PageResult videoVOList=videoService.queryLikeVideo(userId, page, pageSize);
-//		return JsonResult.ok(videoVOList);
-//	}
-//	
-//	/**
-//	 * @name showMyFollow
-//	 * @Description 按条件查询用户关注过的所有用户
-//	 * @param userId
-//	 * @param page
-//	 * @param pageSize
-//	 * @return 
-//	 */
-//	@ApiOperation(value="查询关注的用户发的视频", notes="查询关注的所有用户发的视频")
-//	@ApiImplicitParams({
-//		@ApiImplicitParam(value="用户id", name="userId", paramType="path", dataType="String", required=true),
-//		@ApiImplicitParam(value="当前页页数", name="page", paramType="query", dataType="String", required=false),
-//		@ApiImplicitParam(value="每页显示的记录数", name="pageSize", paramType="query", dataType="String", required=false)
-//	})
-//	@GetMapping("/show_follow_video/{userId}")
-//	public JsonResult showMyFollow(@PathVariable(value="userId") String userId, Integer page, Integer pageSize){
-//		if(StringUtils.isBlank(userId)) {
-//			return JsonResult.errorMsg("用户ID为空" );
-//		}
-//		if (page == null) {
-//			page=1;
-//		}
-//		if (pageSize == null) {
-//			pageSize=PAGE_SIZE;
-//		}
-//		PageResult videoList=videoService.queryMyFollowVideos(userId, page, pageSize);
-//		return JsonResult.ok(videoList);
-//	}
-//	
-//	
-//	
-//	/**
-//	 * @name commentVideo
-//	 * @Description 评论视频操作
-//	 * @param comments
-//	 * @return List<CommentsVO>
-//	 */
-//	@ApiOperation(value="评论视频", notes="用户进行评论视频")
-//	@ApiImplicitParams({
-//		@ApiImplicitParam(name="fatherCommentId", value="父評論id", dataType="string", paramType="query", required=false),
-//		@ApiImplicitParam(name="toUserId", value="被評論者id", dataType="string", paramType="query", required=false)
-//	})
-//	@PostMapping("/comments")
-//	public JsonResult saveComment(@RequestBody Comments comments, String fatherCommentId, String toUserId){
-//		videoService.saveComments(comments, fatherCommentId, toUserId);
-//		return JsonResult.ok();
-//	}
-//	
-//	/**
-//	 * @name getVideoComments
-//	 * @Description 查询所有的评论以及相关的用户昵称
-//	 * @param comments
-//	 * @param page
-//	 * @param pageSize
-//	 * @return 
-//	 */
-//	@ApiOperation(value="查询评论", notes="用户进行查询所有的评论")
-//	@ApiImplicitParams({
-//		@ApiImplicitParam(value="当前视频id", name="videoId", paramType="path", dataType="String", required=false),
-//		@ApiImplicitParam(value="当前页码", name="page", paramType="query", dataType="String", required=false),
-//		@ApiImplicitParam(value="每页显示的记录数", name="pageSize", paramType="query", dataType="String", required=true)
-//	})
-//	@GetMapping("/comments/{videoId}")
-//	public JsonResult getVideoComments(@PathVariable(value="videoId") String videoId, Integer page, Integer pageSize){
-//		if(StringUtils.isBlank(videoId)){
-//			return JsonResult.errorMsg("视频id为空");
-//		}
-//		if (page == null) {
-//			page = 1;
-//		}
-//		if (pageSize == null) {
-//			pageSize = PAGE_SIZE;
-//		}
-//		//查询所有评论
-//		PageResult pageResult=videoService.queryAllComments(videoId, page, pageSize);
-//		return  JsonResult.ok(pageResult);
-//	}
+	/**
+	 * @name hot
+	 * @Description 查询热搜词
+	 * @param 
+	 * @return 
+	 */
+	@ApiOperation(value="查询热搜词", notes="查询热搜词")
+	@GetMapping("/search_records")
+	public JsonResult hot(){ 
+		return JsonResult.ok(videoService.queryHotRecords());
+	} 
+	
+	/**
+	 * @name likeVideo
+	 * @Description 用户进行点赞
+	 * @param userId
+	 * @param videoId
+	 * @param videoCreaterId
+	 * @return 
+	 */
+	@ApiOperation(value="点赞视频", notes="用户进行点赞")
+	@ApiImplicitParams({
+		@ApiImplicitParam(value="用户id", name="userId", paramType="path", dataType="String", required=true ),
+		@ApiImplicitParam(value="视频id", name="videoId", paramType="query", dataType="String", required=true ),
+		@ApiImplicitParam(value="视频发布者id", name="videoCreaterId", paramType="query", dataType="String", required=true ),
+	})
+	@PostMapping("/like_video/{videoId}")
+	public JsonResult userLike(String userId, @PathVariable(value="videoId") String videoId, String videoCreaterId){
+		videoService.saveLikeVideo(userId, videoId, videoCreaterId);
+		return JsonResult.ok();
+	}
+	
+	/**
+	 * @name userUnLike
+	 * @Description 用户取消点赞
+	 * @param userId
+	 * @param videoId
+	 * @param videoCreaterId
+	 * @return 
+	 */
+	@ApiOperation(value="取消点赞", notes="用户进行取消点赞")
+	@ApiImplicitParams({
+		@ApiImplicitParam(value="用户id", name="userId", paramType="query", dataType="String", required=true ),
+		@ApiImplicitParam(value="视频id", name="videoId", paramType="path", dataType="String", required=true ),
+		@ApiImplicitParam(value="视频发布者id", name="videoCreaterId", paramType="query", dataType="String", required=true ),
+	})
+	@PostMapping("/un_like_video/{videoId}")
+	public JsonResult userUnLike(String userId, @PathVariable(value="videoId") String videoId, String videoCreaterId){
+		videoService.saveUnlikeVideo(userId, videoId, videoCreaterId);
+		return JsonResult.ok();
+	}
+	
+	/**
+	 * @name showMyLike
+	 * @Description 按条件查询用户收藏的视频
+	 * @param userId
+	 * @param page
+	 * @param pageSize
+	 * @return 
+	 */
+	@ApiOperation(value="查询收藏的视频", notes="查询用户收藏的所有视频")
+	@ApiImplicitParams({
+		@ApiImplicitParam(value="用户id", name="userId", paramType="path", dataType="String", required=true),
+		@ApiImplicitParam(value="当前页页数", name="page", paramType="query", dataType="String", required=false),
+		@ApiImplicitParam(value="每页显示的记录数", name="pageSize", paramType="query", dataType="String", required=false)
+	})
+	@GetMapping("/show_like_video/{userId}")
+	public JsonResult showMyLike(@PathVariable(value="userId") String userId, Integer page, Integer pageSize){
+		if (page == null) {
+			page=1;
+		}
+		if (pageSize == null) {
+			pageSize=PAGE_SIZE;
+		}
+		PageResult videoVOList=videoService.queryLikeVideo(userId, page, pageSize);
+		return JsonResult.ok(videoVOList);
+	}
+	
+	/**
+	 * @name showMyFollow
+	 * @Description 按条件查询用户关注过的所有用户
+	 * @param userId
+	 * @param page
+	 * @param pageSize
+	 * @return 
+	 */
+	@ApiOperation(value="查询关注的用户发的视频", notes="查询关注的所有用户发的视频")
+	@ApiImplicitParams({
+		@ApiImplicitParam(value="用户id", name="userId", paramType="path", dataType="String", required=true),
+		@ApiImplicitParam(value="当前页页数", name="page", paramType="query", dataType="String", required=false),
+		@ApiImplicitParam(value="每页显示的记录数", name="pageSize", paramType="query", dataType="String", required=false)
+	})
+	@GetMapping("/show_follow_video/{userId}")
+	public JsonResult showMyFollow(@PathVariable(value="userId") String userId, Integer page, Integer pageSize){
+		if(StringUtils.isBlank(userId)) {
+			return JsonResult.errorMsg("用户ID为空" );
+		}
+		if (page == null) {
+			page=1;
+		}
+		if (pageSize == null) {
+			pageSize=PAGE_SIZE;
+		}
+		PageResult videoList=videoService.queryMyFollowVideos(userId, page, pageSize);
+		return JsonResult.ok(videoList);
+	}
+	
+	
+	
+	/**
+	 * @name commentVideo
+	 * @Description 评论视频操作
+	 * @param comments
+	 * @return List<CommentsVO>
+	 */
+	@ApiOperation(value="评论视频", notes="用户进行评论视频")
+	@ApiImplicitParams({
+		@ApiImplicitParam(name="fatherCommentId", value="父評論id", dataType="string", paramType="query", required=false),
+		@ApiImplicitParam(name="toUserId", value="被評論者id", dataType="string", paramType="query", required=false)
+	})
+	@PostMapping("/comments")
+	public JsonResult saveComment(@RequestBody Comments comments, String fatherCommentId, String toUserId){
+		videoService.saveComments(comments, fatherCommentId, toUserId);
+		return JsonResult.ok();
+	}
+	
+	/**
+	 * @name getVideoComments
+	 * @Description 查询所有的评论以及相关的用户昵称
+	 * @param comments
+	 * @param page
+	 * @param pageSize
+	 * @return 
+	 */
+	@ApiOperation(value="查询评论", notes="用户进行查询所有的评论")
+	@ApiImplicitParams({
+		@ApiImplicitParam(value="当前视频id", name="videoId", paramType="path", dataType="String", required=false),
+		@ApiImplicitParam(value="当前页码", name="page", paramType="query", dataType="String", required=false),
+		@ApiImplicitParam(value="每页显示的记录数", name="pageSize", paramType="query", dataType="String", required=true)
+	})
+	@GetMapping("/comments/{videoId}")
+	public JsonResult getVideoComments(@PathVariable(value="videoId") String videoId, Integer page, Integer pageSize){
+		if(StringUtils.isBlank(videoId)){
+			return JsonResult.errorMsg("视频id为空");
+		}
+		if (page == null) {
+			page = 1;
+		}
+		if (pageSize == null) {
+			pageSize = PAGE_SIZE;
+		}
+		//查询所有评论
+		PageResult pageResult=videoService.queryAllComments(videoId, page, pageSize);
+		return  JsonResult.ok(pageResult);
+	}
 }
