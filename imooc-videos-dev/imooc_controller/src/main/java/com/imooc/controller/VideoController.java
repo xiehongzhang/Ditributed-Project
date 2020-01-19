@@ -56,10 +56,6 @@ import io.swagger.annotations.ApiParam;
  * @author xhz
  * @description 主要包括用户对视频的各种操作，上传和下载等；
  */
-/**
- * @author 
- * @description 
- */
 @Api(value="用户操作视频接口",tags="视频操作接口")
 @RestController
 @RequestMapping("/videos")
